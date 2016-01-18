@@ -7,13 +7,7 @@
 #define RELEASE_MUTEX						0x10903964
 #define START_EXCEPTION_HANDLER				0x10907409
 #define START_EXCEPTION_HANDLER2			0x1090740E
-#define EXCEPTION_HANDLER_NAME				0x10907711
-#define EXCEPTION_HANDLER_MESSAGE			0x10907716
-#define EXCEPTION_HANDLER_MSGBOX			0x1090771D
-#define EXCEPTION_HANDLER_FUNCTION			0x126FDFC0
-#define EXCEPTION_HANDLER_NAME_STRING		"rAPB"
-#define EXCEPTION_HANDLER_MSG_STRING		"Crashed!"
 #define NULLSTR								"\0"
-#define CONSOLE_NAME_STR					"rAPB Pre-Alpha Client Console | Game version: 1.4.1.555239 | Client date: THU-2nd-JUL"
+#define CONSOLE_NAME_STR					"rAPB Pre-Alpha Client Console | Game version: 1.4.1.555239 | Client date: MON-18th-JAN-2016"
 #define TOKEN_FILE_STR						"token.id"
 #define LOG_FILE_STR						"rapb.log"

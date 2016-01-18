@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Packet.h"
+#include "Patch_APB.h"
 
 Packet::Packet() : MemoryStream()
 {
@@ -23,24 +24,27 @@ int Packet::Handle(Byte opcode)
 			Position = 0;
 			String ^response = ReadS();
 			String ^response2 = ReadS();
+			Packet::loginServerIP = ReadS();
+			Packet::worldServerIP = ReadS();
+			//Packet::dbInfo = ReadS(); //TODO: handle it properly
 			if(response == "t")
 			{
 				Logger(lINFO, "Client", "Correct client version");
 				if(response2 == "t")
 				{
-					Logger(lINFO, "Auth", "Authorization successful");
+					Logger(lSUCCESS, "Auth", "Authorization successful");
 					return 1;
 				}
 				else if(response2 == "f")
 				{
-					Logger(lINFO, "Auth", "Authorization failed");
+					Logger(lERROR, "Auth", "Authorization failed");
 					MessageBox(NULL, "Authorization failed due to invalid token!\n\nPlease make sure you have valid token ID.", "ERROR", NULL);
 					return 0;
 				}
 			}
 			else if(response == "f" && response2 == "f")
 			{
-				Logger(lINFO, "Client", "Wrong client version");
+				Logger(lERROR, "Client", "Wrong client version");
 				MessageBox(NULL, "You don't have the latest client version!\n\nPlease make sure you've downloaded our latest client DLL.", "ERROR", NULL);
 				return 0;
 			}

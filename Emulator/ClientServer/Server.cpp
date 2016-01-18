@@ -20,7 +20,7 @@ Listener::Listener(String ^ip, Int32 port)
 	tcpListener = gcnew TcpListener(address, port);
 	listenThread = gcnew Thread(gcnew ThreadStart(this, &Listener::listenForClients));
 	listenThread->Start();
-	Logger(lDEBUG, "Listener()", "Client listener started");
+	Logger(lSUCCESS, "Listener()", "Client listener started");
 }
 
 void Listener::listenForClients()

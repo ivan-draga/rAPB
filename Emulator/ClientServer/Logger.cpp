@@ -35,7 +35,7 @@ void setColor(unsigned int color)
 void Log_Clear()
 {
 	FILE *file; 
-	file = fopen("Log\\ClientServer.log","w");
+	file = fopen("Logs\\ClientServer.log","w");
 	fprintf(file, "\0");
 }
 
@@ -43,7 +43,7 @@ void Logger(unsigned int lvl, char* caller, char* logline, ...)
 {
 	while(isLogging) Sleep(10);
 	isLogging = true;
-	FILE *file = fopen("Log\\ClientServer.log","a+");
+	FILE *file = fopen("Logs\\ClientServer.log","a+");
 	char timeStr[9];
 	char logOut[1024];
 	_strtime( timeStr );
@@ -56,7 +56,7 @@ void Logger(unsigned int lvl, char* caller, char* logline, ...)
 	if (lvl == lINFO) setColor(WHITE);
 	else if (lvl == lWARN) setColor(YELLOW);
 	else if (lvl == lERROR) setColor(RED);
-	else if (lvl == lDEBUG) setColor(GREEN);
+	else if (lvl == lSUCCESS) setColor(GREEN);
 	va_list argList;
 	va_start(argList, logline);
 	vsnprintf(logOut, 1024, logline, argList);

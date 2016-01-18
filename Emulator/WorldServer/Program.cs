@@ -16,7 +16,6 @@ namespace WorldServer
         static public FileManager FileMgr;
         static public Dictionary<UInt32, Acc> expectingAccounts = new Dictionary<UInt32, Acc>();
         static public Districts.Listener districtsListener;
-        public static List<Group> groups = new List<Group>();
         static public List<WorldClient> clients = new List<WorldClient>();
         static public Dictionary<UInt32, District> Districts
         {

@@ -11,5 +11,5 @@
 class Patch_APB
 {
 public:
-	static void* HOOK();
+	static void* Hook();
 };

@@ -12,10 +12,10 @@
 	</Database>
 
 	<Address>
-		<IP1>192</IP1>
-		<IP2>168</IP2>
-		<IP3>1</IP3>
-		<IP4>253</IP4>
+		<IP1>127</IP1>
+		<IP2>0</IP2>
+		<IP3>0</IP3>
+		<IP4>1</IP4>
 		<Port>2112</Port>
 	</Address>
 
@@ -25,13 +25,13 @@
         </ClientServer>
 
 	<Lobby>
-		<Ip>192.168.1.253</Ip>
+		<Ip>127.0.0.1</Ip>
 		<Port>2101</Port>
 		<Password>pass</Password>
 	</Lobby>
 
 	<Districts>
-		<Ip>192.168.1.253</Ip>
+		<Ip>127.0.0.1</Ip>
 		<Port>2108</Port>
 		<Password>pass</Password>
 	</Districts>

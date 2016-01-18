@@ -13,4 +13,7 @@ public:
 	Packet();
 	String ^ReadS();
 	int Handle(Byte opcode);
+	static String ^loginServerIP;
+	static String ^worldServerIP;
+	//static String ^dbInfo = nullptr;
 };

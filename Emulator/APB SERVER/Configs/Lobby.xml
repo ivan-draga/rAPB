@@ -18,7 +18,7 @@
 	</ClientServer>
 	
 	<Worlds>
-		<Ip>192.168.1.253</Ip>
+		<Ip>127.0.0.1</Ip>
 		<Port>2101</Port>
 	</Worlds>
 </root>

@@ -74,12 +74,12 @@ namespace DistrictServer
 
             #endregion
 
-            Log.Info("World.Client", "Connecting to world at 192.168.1.253:2108...");
+            Log.Info("World.Client", "Connecting to world at 127.0.0.1:2108...");
             Password = "pass";
             ID = EasyServer.GetConfValue<Byte>("District", "District", "Id");
             IP = GetPublicIP();
             if (IP == null) { System.Threading.Thread.Sleep(500); Environment.Exit(2); }
-            World = new World.Client("192.168.1.253", 2108);
+            World = new World.Client("127.0.0.1", 2108);
             EasyServer.StartConsole();
         }
 
@@ -94,8 +94,5 @@ namespace DistrictServer
             }
             catch { Log.Error("GetPublicIP", "IP retreival failed!"); return null; }
         }
-
-        //GetWorldIPFromFile -> FTP, return string IP
-        //GetWorldPortFromFile -> FTP, return int port
     }
 }

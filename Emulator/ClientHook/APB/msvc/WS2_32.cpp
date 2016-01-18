@@ -1,7 +1,7 @@
 #include "WS2_32.h"
 #include "StdAfx.h"
 
-//#define DISABLE_ADVANCED_LOGGING
+#define DISABLE_ADVANCED_LOGGING
 
 typedef struct hostent* (WINAPI __stdcall* gethostbyname_t)(const char* name);
 gethostbyname_t realgethostbyname = (gethostbyname_t)gethostbyname;

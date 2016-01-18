@@ -42,6 +42,9 @@ int Packet::Handle(Client ^client, Byte opcode)
 					packet->WriteByte(1);
 					packet->WriteS("t");
 					packet->WriteS("t");
+					packet->WriteS("127.0.0.1:2106"); //Login server IP
+					packet->WriteS("127.0.0.1:2107"); //World server IP
+					//packet->WriteS("DB_INFO_HERE"); //TODO: proper database info passing
 					client->Send(packet);
 					Logger(lINFO, "PerformLogin()", "Authorization successful for client token %s", ftoken);
 					client->token = ftoken;
@@ -52,6 +55,9 @@ int Packet::Handle(Client ^client, Byte opcode)
 					packet->WriteByte(1);
 					packet->WriteS("t");
 					packet->WriteS("f");
+					packet->WriteS("0.0.0.0:0");
+					packet->WriteS("0.0.0.0:0");
+					//packet->WriteS("(null)"); //null for DB info
 					client->Send(packet);
 					Logger(lERROR, "PerformLogin()", "Authorization failed for client token %s", ftoken);
 				}
@@ -63,6 +69,9 @@ int Packet::Handle(Client ^client, Byte opcode)
 				packet->WriteByte(1);
 				packet->WriteS("f");
 				packet->WriteS("f");
+				packet->WriteS("0.0.0.0:0");
+				packet->WriteS("0.0.0.0:0");
+				//packet->WriteS("(null)"); //null for DB info
 				client->Send(packet);
 				Logger(lERROR, "Handle()", "Client version mismatch for token %s", ftoken);
 				return 0;

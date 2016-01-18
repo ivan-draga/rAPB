@@ -18,7 +18,7 @@ void Client::connect(IPEndPoint ^serverEndPoint)
 	try
 	{
 		client->Connect(serverEndPoint);
-		Logger(lDEBUG, "Server", "Connected to main server");
+		Logger(lSUCCESS, "Server", "Connected to main server");
 	}
 	catch (SocketException ^ex)
 	{

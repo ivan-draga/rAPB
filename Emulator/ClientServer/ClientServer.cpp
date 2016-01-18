@@ -23,7 +23,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	Console::Title = "rAPB Client Authorization Server";
 	Log_Clear();
-	Listener ^list = gcnew Listener("192.168.1.253", 2255);
+	Listener ^list = gcnew Listener("127.0.0.1", 2255);
     return 0;
 }
 

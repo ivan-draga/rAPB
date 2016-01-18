@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_DEPRECATE
+
 #pragma warning(disable : 4996)
 #pragma warning(disable : 4099)
 #pragma warning(disable : 4800)
@@ -15,15 +16,15 @@
 #include <Windows.h>
 #include <string>
 #include <sys/stat.h>
-#include <cstdio>
-#include <ctime>
+#include <stdio.h>
 #include "buildnumber.h"
 #include <detours.h>
+#include <time.h>
 
 #define lINFO 0
 #define lWARN 1
 #define lERROR 2
-#define lDEBUG 4
+#define lSUCCESS 4
 
 void Logger(unsigned int lvl, char* caller, char* logline, ...);
 void Log_Clear();

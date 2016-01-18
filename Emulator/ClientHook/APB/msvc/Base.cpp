@@ -31,6 +31,7 @@
 #include "CPatcher.h"
 #include "CSDK.h"
 #include "Addresses.h"
+#include "Packet.h"
 
 namespace APB
 {
@@ -63,17 +64,16 @@ namespace APB
 				MessageBox(NULL, "Token file not found!", "ERROR", NULL);
 				Logger(lWARN, "APB", "Process stopped");
 				exit(2);
-				Environment::Exit(2);
 			}
 			else 
 			{
 				
 				Logger(lINFO, "InitHooks()", "Starting APB");
-				//Client^ client = gcnew Client("192.168.1.253", DEFAULT_PORT_INT);
-				Patch_APB::HOOK();
-				//CSDK::Patch();
+				Client^ client = gcnew Client("127.0.0.1", DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
+				//CSDK::Patch(); //not ready for usage
 				CXmlLite::Patch();
 				WS2_32::Patch();
+				Patch_APB::Hook();
 				#pragma region Loop
 				#ifdef USE_END_KEY
 				while(true)

@@ -16,7 +16,6 @@ int Auth::PerformLogin(String ^token)
 
 int Auth::PerformLogout(String ^token)
 {
-	//get this working for beta release
 	/*char query[256];
 	sprintf(query, "UPDATE `accounts` SET `extrn_login` = '0' WHERE `token` = '%s'", token);
 	MYSQL mysql;

@@ -8,7 +8,7 @@
 #define lINFO 0
 #define lWARN 1
 #define lERROR 2
-#define lDEBUG 4
+#define lSUCCESS 4
 
 void Logger(unsigned int lvl, char* caller, char* logline, ...);
 void Log_Clear();
