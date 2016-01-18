@@ -8,5 +8,4 @@ Here you can find variety of tools, source codes, executables, information, etc.
 
 Despite this project being open-source, GNU License v3.0 is present!
 
-
 DO NOT FORGET TO GIVE CREDITS TO ME, fiki574, THE ACTUAL FOUNDER OF THIS PROJECT
