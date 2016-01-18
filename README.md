@@ -6,10 +6,7 @@ You CANNOT enter districts yet.
 
 Here you can find variety of tools, source codes, executables, information, etc. that can and will help you in researching/developing rAPB (if you wonder what rAPB means, it's short form of rebornAPB).
 
---
+Despite this project being open-source, GNU License v3.0 is present!
+
 
 DO NOT FORGET TO GIVE CREDITS TO ME, fiki574, THE ACTUAL FOUNDER OF THIS PROJECT
-
---
-
-Despite this project being open-source, GNU License v3.0 is present!
