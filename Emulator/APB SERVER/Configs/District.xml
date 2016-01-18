@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="yes"?>
+<root>	
+	<District>
+		<Id>1</Id>
+		<Language>en</Language>
+		<Type>social</Type>
+		<Hardcore>false</Hardcore>
+		<Password>pass</Password>
+	</District>
+</root>

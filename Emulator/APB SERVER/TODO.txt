@@ -1,0 +1,7 @@
+TODO:
+- Optimize client DLL (taking too much memory atm)
+- Add new DB system
+- District status database saving/loading/removing - used for groups and client stuff
+- Enter district
+- Finish all other opcodes
+
