@@ -2,7 +2,7 @@
 #include <WinSock2.h>
 
 #include "Utils.h"
-#include "detours.h"
+#include <detours\detours.h>
 
 #ifndef BASE_H
 #define BASE_H

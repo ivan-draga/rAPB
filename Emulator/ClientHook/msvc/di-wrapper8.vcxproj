@@ -50,8 +50,6 @@
     <LinkIncremental>false</LinkIncremental>
     <TargetName>dinput8</TargetName>
     <IntDir>$(ProjectName)\</IntDir>
-    <IncludePath>C:\Program Files\Microsoft SDKs\Windows\v7.0A\Include;C:\Users\Bruno\Downloads\APBX\APBX\Client\Hook\Dependencies\include\sdk;C:\Users\Bruno\Downloads\APBX\APBX\Client\Hook\Dependencies\include\curl;C:\Users\Bruno\Downloads\APBX\APBX\Client\Hook\Dependencies\include;C:\Program Files\Microsoft Research\Detours Express 3.0\src;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Bruno\Downloads\APBX\APBX\Client\Hook\Dependencies\lib;C:\Program Files\Microsoft Research\Detours Express 3.0;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -79,7 +77,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>DI_WRAPPER8;WIN32;_WINDOWS;_USRDLL;DIWRAPPER8_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Dependencies\include\curl;$(ProjectDir)\Dependencies\include\sdk;$(ProjectDir)\Dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -90,7 +88,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>$(SolutionDir)..\dinput8.def</ModuleDefinitionFile>
       <AdditionalDependencies>detours.lib;ws2_32.lib;dxguid.lib;libcurl.lib;libeay32.lib;ssleay32.lib;zlib.lib;cprot.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libcmt</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>

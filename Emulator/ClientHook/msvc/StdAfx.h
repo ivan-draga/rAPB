@@ -18,7 +18,7 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include "buildnumber.h"
-#include <detours.h>
+
 #include <time.h>
 
 #define lINFO 0

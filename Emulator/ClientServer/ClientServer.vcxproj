@@ -42,7 +42,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Bruno\Downloads\APBX\APBX\Client\ClientServer\mysql_include;C:\Users\Bruno\Downloads\APB\APB Private Server\APB Reborn\ClientServer\mysql_include;$(IncludePath)</IncludePath>
     <IntDir>.\Debug</IntDir>
     <TargetName>
     </TargetName>
@@ -58,6 +57,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\mysql_include\mysql;$(ProjectDir)\mysql_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
