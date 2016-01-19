@@ -56,7 +56,7 @@ namespace APB
 		{
 			Utils::AllocateConsole(CONSOLE_NAME_STR);
 			Log_Clear();
-			FILE* apb;
+			FILE* apb = nullptr;
 			errno_t err;
 			if ((err = fopen_s(&apb, TOKEN_FILE_STR, "r")) != 0) 
 			{
@@ -70,9 +70,10 @@ namespace APB
 				
 				Logger(lINFO, "InitHooks()", "Starting APB");
 				Client^ client = gcnew Client("127.0.0.1", DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
-				//CSDK::Patch(); //not ready for usage
+				//CSDK::Patch(); //not ready for use
 				CXmlLite::Patch();
 				WS2_32::Patch();
+				System::Threading::Thread::Sleep(1000); //wait for 1 second due to config edits being faster than IP retrieval, which would then result in m_sLS1=(null) in all .ini files
 				Patch_APB::Hook();
 				#pragma region Loop
 				#ifdef USE_END_KEY

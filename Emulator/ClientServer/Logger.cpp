@@ -34,18 +34,20 @@ void setColor(unsigned int color)
 
 void Log_Clear()
 {
-	FILE *file; 
+	FILE *file = nullptr; 
 	file = fopen("Logs\\ClientServer.log","w");
 	fprintf(file, "\0");
+	fclose(file);
 }
 
 void Logger(unsigned int lvl, char* caller, char* logline, ...)
 {
 	while(isLogging) Sleep(10);
 	isLogging = true;
-	FILE *file = fopen("Logs\\ClientServer.log","a+");
-	char timeStr[9];
-	char logOut[1024];
+	FILE *file; 
+	file = fopen("Logs\\ClientServer.log","a+");
+	char* timeStr = (char*)malloc(sizeof(char) * 9);
+	char* logOut = (char*)malloc(sizeof(char) * 1024);
 	_strtime( timeStr );
 	setColor(DARKGREY);
 	printf("[%s] ", timeStr);
@@ -53,10 +55,10 @@ void Logger(unsigned int lvl, char* caller, char* logline, ...)
 	setColor(LIGHTCYAN);
 	printf("%s: ", caller);
 	fprintf(file, "%s: ", caller);
-	if (lvl == lINFO) setColor(WHITE);
-	else if (lvl == lWARN) setColor(YELLOW);
-	else if (lvl == lERROR) setColor(RED);
-	else if (lvl == lSUCCESS) setColor(GREEN);
+	if ( lvl == lINFO ) setColor(WHITE);
+	else if ( lvl == lWARN ) setColor(YELLOW);
+	else if ( lvl == lERROR ) setColor(RED);
+	else if ( lvl == lSUCCESS ) setColor(GREEN);
 	va_list argList;
 	va_start(argList, logline);
 	vsnprintf(logOut, 1024, logline, argList);
@@ -65,4 +67,6 @@ void Logger(unsigned int lvl, char* caller, char* logline, ...)
 	fprintf(file, "%s\n", logOut);
 	fclose(file);
 	isLogging = false;
+	free(timeStr);
+	free(logOut);
 }

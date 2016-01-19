@@ -1,4 +1,3 @@
-- Optimize client DLL
 - Add support for command arguments that will be read from "args.txt" file (because already tried through the shortcut handling, but seems like the game decides to crash right before it's supposed to load up splash screen)
 - Add new database system
 - Finish stuff regarding client server and client DLL - some sort of auto-IP retrieval from web file

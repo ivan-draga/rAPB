@@ -31,9 +31,10 @@ void setColor(unsigned int color)
 
 void Log_Clear()
 {
-	FILE *file; 
+	FILE *file = nullptr; 
 	file = fopen(LOG_FILE_STR, "w");
 	fprintf(file, "\0");
+	fclose(file);
 }
 
 void Logger(unsigned int lvl, char* caller, char* logline, ...)
@@ -42,8 +43,8 @@ void Logger(unsigned int lvl, char* caller, char* logline, ...)
 	isLogging = true;
 	FILE *file; 
 	file = fopen(LOG_FILE_STR,"a+");
-	char timeStr[9];
-	char logOut[1024];
+	char* timeStr = (char*)malloc(sizeof(char) * 9);
+	char* logOut = (char*)malloc(sizeof(char) * 1024);
 	_strtime( timeStr );
 	setColor(DARKGREY);
 	printf("[%s] ", timeStr);
@@ -63,4 +64,6 @@ void Logger(unsigned int lvl, char* caller, char* logline, ...)
 	fprintf(file, "%s\n", logOut);
 	fclose(file);
 	isLogging = false;
+	free(timeStr);
+	free(logOut);
 }
