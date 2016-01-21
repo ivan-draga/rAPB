@@ -4,4 +4,5 @@
 - District status database saving/loading/removing - used for groups and client stuff
 - Enter Social district
 - Finish all other opcodes/packets/whatever
+- Find remaining french strings in framework.dll and translate them back to english (contact luna if you see any in console)
 
