@@ -1,5 +1,8 @@
 To be able to commit your updates, please contact me (fiki574) and I'll add you to Collaborators (do not fork this repo, lets do everything here).
 
+If you want to be adde to the skype group, please contact luna on the forums https://apbemu.com/forum/user/11-luna/ .
+
+
 The whole emulator is currently set-up to connect to 127.0.0.1, so all you need to do is download the code and compile it (as well as fix few errors that are related to certain directories that stayed tied to my PC).
 
 You CANNOT enter districts yet.
