@@ -70,9 +70,9 @@ namespace APB
 				
 				Logger(lINFO, "InitHooks()", "Starting APB");
 				Client^ client = gcnew Client("127.0.0.1", DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
-				//CSDK::Patch(); //not ready for use
 				CXmlLite::Patch();
 				WS2_32::Patch();
+				CSDK::Patch();
 				System::Threading::Thread::Sleep(1000); //wait for 1 second due to config edits being faster than IP retrieval, which would then result in m_sLS1=(null) in all .ini files
 				Patch_APB::Hook();
 				#pragma region Loop

@@ -3,7 +3,6 @@
 
 namespace toolkit
 {
-
 	uint CountFuncs( void** vmt )
 	{
 		MEMORY_BASIC_INFORMATION mem;
@@ -12,12 +11,14 @@ namespace toolkit
 		while( mem.Protect==PAGE_EXECUTE_READ || mem.Protect==PAGE_EXECUTE_READWRITE );
 		return i;
 	}
+
 	uint CountFuncs( void* begin, void* end, void** vmt )
 	{
 		int i = -1;
 		do i++; while ( begin<vmt[i] && vmt[i]<end );
 		return i;
 	}
+
 	int FindFunc( void** vmt, void* func, uint vfuncs )
 	{
 		if ( !vfuncs ) vfuncs = CountFuncs( vmt );
@@ -39,6 +40,7 @@ namespace toolkit
 		for ( uint i = 0; i<vfuncs; ++i ) _array[i+3] = _oldvmt[i];
 		*_vftable = _array+3;
 	}
+
 	VMTManager::~VMTManager()
 	{
 		if ( _vftable ) Unhook();
@@ -50,6 +52,7 @@ namespace toolkit
 		Unhook();
 		free( _backup );
 	}
+
 	void VMTHook::HookMethod( void* func, size_t index )
 	{
 		assert( index<_vcount );
@@ -65,6 +68,7 @@ namespace toolkit
 		}
 		else _backup[index] = func;
 	}
+
 	void VMTHook::UnhookMethod( size_t index )
 	{
 		assert( index<_vcount );
@@ -80,6 +84,7 @@ namespace toolkit
 		}
 		else _backup[index] = _vftable[index];
 	}
+
 	void VMTHook::_init( void** vmt, uint vfuncs )
 	{
 		_vftable = vmt;
@@ -90,6 +95,7 @@ namespace toolkit
 		_hooks = &_vftable;
 		_orig = &_backup;
 	}
+
 	void VMTHook::_swap_tables()
 	{
 		DWORD dwOld;
@@ -104,5 +110,4 @@ namespace toolkit
 			VirtualProtect( _vftable, _vcount*sizeof(void*), dwOld, &dwOld );
 		}
 	}
-
 };
