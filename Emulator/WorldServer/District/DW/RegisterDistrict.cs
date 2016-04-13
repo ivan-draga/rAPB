@@ -70,6 +70,7 @@ namespace WorldServer.Districts.DW
                     Program.districtsListener.Districts.Add(code, district);
                 }
                 Log.Succes("RegisterDistrict", district + " was registered! (" + IP + ")");
+                
                 district.IP = IP;
                 district.Send(new DBInfo(Database.Connection.connectionString));
             }

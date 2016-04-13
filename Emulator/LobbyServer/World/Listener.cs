@@ -88,6 +88,7 @@ namespace LobbyServer.World
                 {
                     case (Byte)OpCodes.WL_REGISTER_WORLD: packet = new RegisterWorld(); break;
                     case (Byte)OpCodes.WL_SET_DATA: packet = new SetData(); break;
+                    case (Byte)OpCodes.WL_LOGOUT:  packet = new Logout(); break;
                 }
                 packet.Write(message, 1, bytesRead - 1);
                 packet.Handle(world);

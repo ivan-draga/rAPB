@@ -1,8 +1,0 @@
-- Add support for command arguments that will be read from "args.txt" file (because already tried through the shortcut handling, but seems like the game decides to crash right before it's supposed to load up splash screen)
-- Add new database system
-- Finish stuff regarding client server and client DLL - some sort of auto-IP retrieval from web file
-- District status database saving/loading/removing - used for groups and client stuff
-- Enter Social district
-- Finish all other opcodes/packets/whatever
-- Find remaining french strings in framework.dll and translate them back to english (contact luna if you see any in console)
-

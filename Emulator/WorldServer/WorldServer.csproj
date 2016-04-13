@@ -89,6 +89,7 @@
     <Compile Include="Lobby\Client.cs" />
     <Compile Include="Lobby\LW\AccountEnter.cs" />
     <Compile Include="Lobby\LW\IPacket.cs" />
+    <Compile Include="Lobby\WL\Logout.cs" />
     <Compile Include="Lobby\LW\Packet.cs" />
     <Compile Include="Lobby\LW\RegisterSuccess.cs" />
     <Compile Include="Lobby\OpCodes.cs" />

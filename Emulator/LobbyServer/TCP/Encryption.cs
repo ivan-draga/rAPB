@@ -10,7 +10,7 @@ namespace LobbyServer.TCP
     {
         private ARC4 encryption;
         private ARC4 decryption;
-        public readonly byte[] Key;
+        public byte[] Key;
 
         private string DumpData(byte[] buffer)
         {
@@ -47,9 +47,7 @@ namespace LobbyServer.TCP
         public byte[] Encrypt(PacketOut packet)
         {
             byte[] data = packet.ToArray();
-
             Log.Info("[SERVER PRE-ENCRYPT]", this.DumpData(data));
-
             encryption.Process(data, 4, data.Length - 4);
             return data;
         }
@@ -61,16 +59,19 @@ namespace LobbyServer.TCP
             PacketIn result = new PacketIn(data, 0, data.Length);
             result.Size = result.GetUint32Reversed();
             result.Opcode = result.GetUint32Reversed();
-
-            /*
-            Console.Write("Dcrptd: ");
-            for (int i = 0; i < result.ToArray().Length; i++) Console.Write(" "+ result.ToArray()[i]);
-            Console.WriteLine();
-            */
-
             Log.Info("[CLIENT POST-ENCRYPT]", this.DumpData(data));
-
             return result;
+        }
+
+        public void SetKey(byte[] key)
+        {
+            Key = key;
+            SHA1 digest = new SHA1CryptoServiceProvider();
+            key = digest.ComputeHash(key);
+            digest.Dispose();
+            Log.Info("[ENCRYPTION-KEY]", DumpData(key));
+            encryption = new ARC4(key);
+            decryption = new ARC4(key);
         }
     }
 }

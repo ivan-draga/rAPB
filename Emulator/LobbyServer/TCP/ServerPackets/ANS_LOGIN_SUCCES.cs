@@ -41,8 +41,6 @@ namespace LobbyServer
             Out.WriteStringBytes("");
             Out.WriteByte(0);
             client.Send(Out);
-            client.ECrypt = new TCP.Encryption(client.SessionId);
-            ANS_CHARACTER_INFO.Send(client);
         }
     }
 }

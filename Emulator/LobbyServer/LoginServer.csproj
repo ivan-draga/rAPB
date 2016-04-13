@@ -116,6 +116,7 @@
     <Compile Include="World\LW\RegisterSuccess.cs" />
     <Compile Include="World\OpCodes.cs" />
     <Compile Include="World\WL\IPacket.cs" />
+    <Compile Include="World\WL\Logout.cs" />
     <Compile Include="World\WL\Packet.cs" />
     <Compile Include="World\WL\RegisterWorld.cs" />
     <Compile Include="World\WL\SetData.cs" />

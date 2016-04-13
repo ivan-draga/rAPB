@@ -31,6 +31,7 @@ namespace WorldServer
     {
         public District Reserved;
         public Byte LFG = 0;
+        public Lobby.Acc account;
 
         #region Client state
 

@@ -22,6 +22,7 @@ namespace WorldServer.TCP.ClientPackets
             }
             catch (MySqlException e) { Log.Error("MySQL", e.ToString()); }
             finally { cmd.Dispose(); }
+            Program.Lobby.Send(new Lobby.WL.Logout(cclient.Email, cclient.account.SessionId));
             PacketOut Out = new PacketOut((UInt32)Opcodes.LOGOUT);
             cclient.Send(Out);
             cclient.Disconnect();

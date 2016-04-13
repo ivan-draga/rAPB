@@ -24,7 +24,7 @@ void CSDK::Patch()
 	DetourTransactionBegin();
     DetourUpdateThread(GetCurrentThread());
     DetourAttach(&(PVOID&)pProcessEvent, hkProcessEvent);
-    if(DetourTransactionCommit() != NO_ERROR) Logger(lERROR, "CSDK::Patch()", "Detour failed for ProcessEvent");
+    if(DetourTransactionCommit() != NO_ERROR) Logger(lERROR, "CSDK", "Detour failed for ProcessEvent");
 	Logger(lINFO, "SDK", "ProcessEvent detoured, SDK usage available");
 }
 

@@ -24,7 +24,13 @@ namespace LobbyServer
             Account account;
             try
             {
-                account = new Account(Email);
+                if (Program.logouts.ContainsKey(Email))
+                {
+                    Program.logouts.TryGetValue(Email, out client.SessionId);
+                    account = new Account(Email);
+                    Log.Info("ASK_LOGIN", "Client " + Email + " is returning to lobby");
+                }
+                else account = new Account(Email);
             }
             catch (ArgumentNullException)
             {

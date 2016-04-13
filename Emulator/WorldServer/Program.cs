@@ -17,11 +17,6 @@ namespace WorldServer
         static public Dictionary<UInt32, Acc> expectingAccounts = new Dictionary<UInt32, Acc>();
         static public Districts.Listener districtsListener;
         static public List<WorldClient> clients = new List<WorldClient>();
-        static public Dictionary<UInt32, District> Districts
-        {
-            get;
-            private set;
-        }
 
         #region WorldData
 

@@ -31,11 +31,29 @@ namespace LobbyServer
             }
             else
             {
-                if (IsValid(cclient)) ANS_LOGIN_SUCCES.Send(cclient);
+                if (IsValid(cclient))
+                {
+                    ANS_LOGIN_SUCCES.Send(cclient);
+                    cclient.ECrypt = new TCP.Encryption(cclient.SessionId);
+                    ANS_CHARACTER_INFO.Send(cclient);
+                }
                 else
                 {
-                    ANS_LOGIN_FAILED.Send(cclient, (int)ResponseCodes.RC_LOGIN_INVALID_ACCOUNT);
-                    cclient.Disconnect();
+                    if (Program.logouts.ContainsKey(cclient.Account.Email))
+                    {
+                        Log.Debug("LOGIN_PROOF", "Auto-logging in user " + cclient.Account.Email);
+                        cclient.Account = new LobbyServer.Database.Account(cclient.Account.Email);
+                        Program.logouts.TryGetValue(cclient.Account.Email, out cclient.SessionId);
+                        ANS_LOGIN_SUCCES.Send(cclient);
+                        cclient.ECrypt.SetKey(cclient.SessionId);
+                        ANS_CHARACTER_INFO.Send(cclient); //fucks up here...
+                        Program.logouts.Remove(cclient.Account.Email);
+                    }
+                    else
+                    {
+                        ANS_LOGIN_FAILED.Send(cclient, (int)ResponseCodes.RC_LOGIN_INVALID_ACCOUNT);
+                        cclient.Disconnect();
+                    }
                 }
             }
             return 0;

@@ -18,6 +18,8 @@ namespace LobbyServer
         static public World.Listener worldListener;
         static public List<Byte> worlds = new List<Byte>();
         static public List<LobbyClient> clients = new List<LobbyClient>();
+        static public Dictionary<String, Byte[]> logouts = new Dictionary<String, Byte[]>();
+
         [STAThread]
         static void Main(string[] args)
         {

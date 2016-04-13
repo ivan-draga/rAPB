@@ -18,8 +18,7 @@ namespace WorldServer
             UInt32 accountId = packet.GetUint32Reversed();
             cclient.AccountId = accountId;
             Log.Debug("AskWorldEnter", "New client! Account = " + accountId);
-            Acc account = null;
-            lock (Program.expectingAccounts) Program.expectingAccounts.TryGetValue(accountId, out account);
+            lock (Program.expectingAccounts) Program.expectingAccounts.TryGetValue(accountId, out cclient.account);
 
             #region Character stuff
 
@@ -27,7 +26,7 @@ namespace WorldServer
             try
             {
                 cmd.Prepare();
-                cmd.Parameters.AddWithValue("@id", account.Character.ToString());
+                cmd.Parameters.AddWithValue("@id", cclient.account.Character.ToString());
                 cmd.ExecuteNonQuery();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 try
@@ -98,26 +97,26 @@ namespace WorldServer
             #endregion
 
             PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_WORLD_ENTER);
-            if (account == null) Out.WriteInt32Reverse((int)ResponseCodes.RC_FAILED);
+            if (cclient.account == null) Out.WriteInt32Reverse((int)ResponseCodes.RC_FAILED);
             else
             {
                 Out.WriteInt32Reverse((int)ResponseCodes.RC_SUCCESS);
-                Out.WriteUInt32Reverse(account.Character);
+                Out.WriteUInt32Reverse(cclient.account.Character);
                 Out.WriteUInt32Reverse(cclient.Points);
                 Out.WriteByte(cclient.isGM);
                 Out.WriteInt64Reverse(TCPManager.GetTimeStamp());
                 Out.WriteFloat(5.00f);
                 Out.WriteByte(0);
                 Out.WriteByte(0);
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 1, false, Program.WorldName, account.Character.ToString()));
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 2, false, Program.WorldName, account.Character.ToString()));
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 3, false, Program.WorldName, account.Character.ToString()));
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 4, false, Program.WorldName, account.Character.ToString()));
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 5, false, Program.WorldName, account.Character.ToString()));
+                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 1, false, Program.WorldName, cclient.account.Character.ToString()));
+                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 2, false, Program.WorldName, cclient.account.Character.ToString()));
+                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 3, false, Program.WorldName, cclient.account.Character.ToString()));
+                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 4, false, Program.WorldName, cclient.account.Character.ToString()));
+                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 5, false, Program.WorldName, cclient.account.Character.ToString()));
                 Out.WriteByte(1);
                 Out.WriteByte(cclient.LFG);
             }
-            cclient.Crypto = new TCP.Encryption(account.SessionId);
+            cclient.Crypto = new TCP.Encryption(cclient.account.SessionId);
             cclient.Send(new DISTRICT_LIST());
             cclient.Send(Out);
             return 0;
