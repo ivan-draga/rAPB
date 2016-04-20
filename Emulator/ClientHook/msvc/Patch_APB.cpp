@@ -5,8 +5,8 @@
 
 void Update_EULAandTOS(char* folderLoc)
 {
-	char* loc = (char*)malloc(1024);
-	char* str = (char*)malloc(50);
+	char* loc = new char[1024];
+	char* str = new char[50];
 	FILE *file = nullptr; 
 
 	char* EULAtext = "Welcome to very first APB: All Points Bulletin private server. It is advised to carefully read all the following content of this message.\n\nBASIC RULES:\n\nNICKNAMES:\na) Mustn't have abused combinations of capital i and lowercase L (i.e. \"IlIlIIIl\")\nb) Mustn't have troll-like form (i.e. \"ChickWithD***\", \"YourMom\", \"Trolololololol\", etc.)\nc) Mustn't have any administrative/adminstration form (i.e. \"Administrator\", \"Admin\", \"Developer\", \"Dev\", \"Owner\", etc.)\nd) Mustn't have any kind swear/insult/hate/racism expression (i.e. \"F***You\", \"SuckMyD***\", \"NoRussians\", \"Ni*a\", \"Nig*r\" etc.)\n\nACCOUNT/PRIVATE INFORMATION:\na) Do not share your account information with anyone - your account can be compromised and used in bad purposes\nb) Do not share your real-world information such as adress, telephone number, real name, etc.\nc) We will never ask you for your account details such as account username and password\n\nLANGUAGES:\na) District chat is mainly for English - if you wish to talk in other language(s), use other ways of messaging (such as whisper, team, clan, group chat)\nb) If you wish to talk privately (whisper chat) to developers/administrators, use English only and do not spam\nc) There are different language instances (FR, IT, RU etc.) so use the correspoding language(s) when playing in there\n\nGAMEMASTERS (<GM>'s):\na) Never ask to become one - GMs will be hand-picked by devs\nb) Become one by following rules, encouraging them and helping new players and then applying\n\nHACKING:\na) Any sort of hacking/cheating where you get advantage over normal players will be punished with ban\nb) Your ban cannot be revoked - it's permanent and you can't get unbanned\n\nEXPLOITING:\na) Exploting game-breaking bugs (e.g. unreachable item spots) will not be tolerated\nb) Your ban can be revoked after certain amount of time\nc) Modifying car files to make cars convertibles is allowed\nd) Modifying and replacing car files (e.g. replace Consenza with Bishada) will not be tolerated\n\nINSULTING:\na) Insulting other players in any language is forbidden\nb) Your ban can be revoked after certain amount of time\n\nSWEARING:\na) Extensive swearing in any language in public is not allowed\nb) If caught and punished, your ban can be revoked after certain amount of time\n\nRACISM:\na) Any kind of racism is strictly prohibited and will not be tolerated\nb) Your ban cannot be revoked - it's permanent and you can't be unbanned";
@@ -179,17 +179,14 @@ void Update_EULAandTOS(char* folderLoc)
 
 	strcpy((char*)loc, "\0");
 	strcpy((char*)str, "\0");
-	
-	free(loc);
-	free(str);
 
 	Logger(lINFO, "Update_EULAandTOS()", "EULA and TOS files updated");
 }
 
 void Update_GameFiles(char* folderLoc)
 {
-	char* loc = (char*)malloc(1024);
-	char* str = (char*)malloc(50);
+	char* loc = new char[1024];
+	char* str = new char[50];
 	FILE* file = nullptr;
 
 	strcpy(loc, folderLoc);
@@ -234,61 +231,15 @@ void Update_GameFiles(char* folderLoc)
 	strcpy((char*)loc, "\0");
 	strcpy((char*)str, "\0");	
 
-	free(loc);
-	free(str);
-
 	Logger(lINFO, "Update_GameFiles()", "Configuration files updated");
 }
 
-void Update_IntroMovie(char* folderLoc)
-{
-	int result;
-	char* loc1 = (char*)malloc(1024);
-	strcpy(loc1, folderLoc);
-	char* loc2 = (char*)malloc(1024);
-	strcpy(loc2, folderLoc);
-	char* oldn = (char*)malloc(33);
-	strcpy((char*)oldn, "\\APBGame\\Movies\\IntroTitles.bik");
-	char* newn = (char*)malloc(27);
-	strcpy((char*)newn, "\\APBGame\\Movies\\intro.bik");
-	strcat(loc1, oldn);
-	strcat(loc2, newn);
-	result = rename(loc1, loc2);
-	if(result == 0) Logger(lINFO, "UpdateIntroMovie()", "Introduction movie removed");
-	else Logger(lINFO, "Update_IntroMovie()", "Introduction movie already removed");
-	free(loc1);
-	free(loc2);
-	free(oldn);
-	free(newn);
-}
-
-void Update_SplashScreenMovie(char* folderLoc)
-{
-	int result;
-	char* loc1 = (char*)malloc(1024);
-	strcpy(loc1, folderLoc);
-	char* loc2 = (char*)malloc(1024);
-	strcpy(loc2, folderLoc);
-	char* oldn = (char*)malloc(34);
-	strcpy((char*)oldn, "\\APBGame\\Movies\\SplashScreen.bik");
-	char* newn = (char*)malloc(28);
-	strcpy((char*)newn, "\\APBGame\\Movies\\splash.bik");
-	strcat(loc1, oldn);
-	strcat(loc2, newn);
-	result = rename(loc1, loc2);
-	if(result == 0) Logger(lINFO, "Update_SplashScreenMovie()", "Splash screen movie removed");
-	else Logger(lINFO, "Update_SplashScreenMovie()", "Splash screen movie already removed");
-	free(loc1);
-	free(loc2);
-	free(oldn);
-	free(newn);	
-}
 
 void Update_ShaderFile(char* folderLoc)
 {
-	char* loc = (char*)malloc(1024);
+	char* loc = new char[1024];
 	strcpy(loc, folderLoc);
-	char* str = (char*)malloc(56);
+	char* str = new char[56];
 	strcpy((char*)str, "\\Engine\\Shaders\\APBUberPostProcessBlendPixelShader.usf");
 	strcat(loc, str);
 	FILE *file = nullptr; 
@@ -300,64 +251,22 @@ void Update_ShaderFile(char* folderLoc)
 		Logger(lINFO, "Update_ShaderFile()", "Shader file updated");
 	}
 	else Logger(lERROR, "Update_ShaderFile()", "Shader file failed to open");
-	free(loc);
-	free(str);
 }
 
-void Update_LoadingMovie(char* folderLoc)
+void Patch_EditorCrash()
 {
-	int result;
-	char* loc1 = (char*)malloc(1024);
-	strcpy(loc1, folderLoc);
-	char* loc2 = (char*)malloc(1024);
-	strcpy(loc2, folderLoc);
-	char* oldn = (char*)malloc(36);
-	strcpy((char*)oldn, "\\APBGame\\Movies\\LoadingMovieV1.bik");
-	char* newn = (char*)malloc(32);
-	strcpy((char*)newn, "\\APBGame\\Movies\\loadingmov.bik");
-	strcat(loc1, oldn);
-	strcat(loc2, newn);
-	result = rename(loc1, loc2);
-	if(result == 0) Logger(lINFO, "UpdateLoadingMovie()", "Loading screen movie removed");
-	else Logger(lINFO, "Update_LoadingMovie()", "Loading screen movie already removed");
-	free(loc1);
-	free(loc2);
-	free(oldn);
-	free(newn);		
-}
-
-void Patch_BugReport()
-{
-	CPatcher::InstallStringPatch(BUGREPORT_EXE, NULLSTR, strlen(NULLSTR));
-	CPatcher::InstallStringPatch(BUGREPORT_PARAMS, NULLSTR, strlen(NULLSTR));
-	CPatcher::InstallStringPatch(BUGREPORT_URL, NULLSTR, strlen(NULLSTR));
-	Logger(lINFO, "Patch_BugReport()", "Bug report patched");
-}
-
-void Patch_PunkBuster()
-{
-	CPatcher::InstallStringPatch(PUNKBUSTER_CLIENT, NULLSTR, strlen(NULLSTR));
-	CPatcher::InstallStringPatch(PUNKBUSTER_AGENT, NULLSTR, strlen(NULLSTR));
-	CPatcher::InstallStringPatch(PUNKBUSTER_SERVER, NULLSTR, strlen(NULLSTR));
-	Logger(lINFO, "Patch_PunkBuster()", "PunkBuster patched");
-}
-
-void Patch_UnrealCrash()
-{
-	CPatcher::InstallNopPatch(RELEASE_MUTEX);
-	CPatcher::InstallNopPatch(START_EXCEPTION_HANDLER);
-	CPatcher::InstallNopPatch(START_EXCEPTION_HANDLER2);
-	Logger(lINFO, "Patch_UnrealCrash()", "Potential game crash patched");
+	CPatcher::InstallNopPatch(0x11BA68C3);
+	CPatcher::InstallNopPatch(0x11BA68C8);
+	CPatcher::InstallRetnPatch(0x1211CB86);
+	Logger(lINFO, "Patch_EditorCrash()", "Editor crash patched");
 }
 
 void* Patch_APB::Hook() 
 {
-	#pragma region Get APB path
-	char* path = (char*)malloc(512);
+	char* path = new char[512];
 	GetModuleFileNameA(NULL, path, 512);
-	path = (char*)realloc((char*)path, strlen(path));
 	Logger(lINFO, "APB path", "%s", path);
-	char* newloc = (char*)malloc(512);
+	char* newloc = new char[512];
 	int count = 0;
 	for(int i = 0; i != strlen(path); i++) 
 	{
@@ -369,20 +278,11 @@ void* Patch_APB::Hook()
 		}
 		newloc[i] = path[i];
 	}
-	#pragma endregion
-	newloc = (char*)realloc((char*)newloc, strlen(newloc));
 	Logger(lINFO, "Game folder", "%s", newloc);
 	Update_EULAandTOS(newloc);
 	Update_GameFiles(newloc);
-	Update_IntroMovie(newloc);
-	Update_SplashScreenMovie(newloc);
 	Update_ShaderFile(newloc);
-	Update_LoadingMovie(newloc);
-	Patch_BugReport();
-	Patch_PunkBuster();
-	Patch_UnrealCrash();
-	free(path);
-	free(newloc);
+	Patch_EditorCrash();
 	Logger(lSUCCESS, "APB", "All patches/updates applied");
 	return 0;
 }
