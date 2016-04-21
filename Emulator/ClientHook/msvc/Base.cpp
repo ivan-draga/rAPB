@@ -10,8 +10,6 @@
 #pragma comment (lib, "user32.lib")
 #pragma comment (lib, "d3d10.lib")
 
-#define NO_SDK_GEN
-//#define USE_END_KEY
 #define DEFAULT_PORT_INT 2255
 
 #include <iostream>
@@ -32,6 +30,15 @@
 #include "CSDK.h"
 #include "Addresses.h"
 #include "Packet.h"
+#include "CustomArgs.h"
+
+bool CustomArgs::allowshadermod = false;
+bool CustomArgs::disableini = false;
+bool CustomArgs::disableeulatos = false;
+bool CustomArgs::fixeditorcrash = false;
+bool CustomArgs::offline = false;
+bool CustomArgs::sdkdump = false;
+bool CustomArgs::advlog = false;
 
 namespace APB
 {
@@ -67,28 +74,28 @@ namespace APB
 			}
 			else 
 			{
-				
 				Logger(lINFO, "InitHooks()", "Starting APB");
-				Client^ client = gcnew Client("127.0.0.1", DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
+				CustomArgs::ProcessArgs(Environment::GetCommandLineArgs());
+				if(CustomArgs::offline == false) Client^ client = gcnew Client("127.0.0.1", DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
 				CXmlLite::Patch();
 				WS2_32::Patch();
+				#ifndef DONT_BUILD_WITH_SDK
 				CSDK::Patch();
+				#endif
 				System::Threading::Thread::Sleep(1000); //wait for 1 second due to config edits being faster than IP retrieval, which would then result in m_sLS1=(null) in all .ini files
 				Patch_APB::Hook();
-				#pragma region Loop
-				#ifdef USE_END_KEY
-				while(true)
+				if(CustomArgs::sdkdump == true)
 				{
-					if(GetKeyState(VK_END) & 1)
+					while(true)
 					{
-						#ifndef NO_SDK_GEN
-						LoadLibrary("SdkGen.dll");
-						#endif
-						Console::Beep();
+						if(GetKeyState(VK_END) & 1)
+						{
+							LoadLibrary("SdkGen.dll");
+							Console::Beep();
+							Logger(lWARN, "SDK", "SDK is generating, please wait for few minutes before exiting the game");
+						}
 					}
 				}
-				#endif
-				#pragma endregion
 			}
 		}
 	}

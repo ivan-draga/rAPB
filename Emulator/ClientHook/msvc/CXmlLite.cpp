@@ -2,8 +2,7 @@
 #include "StdAfx.h"
 #include <detours\detours.h>
 #include <xmllite.h>
-
-#define DISABLE_ADVANCED_LOGGING
+#include "CustomArgs.h"
 
 HRESULT (WINAPI *real_CreateXmlReader)(REFIID riid, void ** ppvObject, IMalloc * pMalloc) = CreateXmlReader;
 HRESULT WINAPI custom_CreateXmlReader(REFIID riid, void ** ppvObject, IMalloc * pMalloc);
@@ -19,33 +18,25 @@ HRESULT WINAPI custom_CreateXmlWriterOutputWithEncodingName(IUnknown *pOutputStr
 
 HRESULT WINAPI custom_CreateXmlReader(REFIID riid, void ** ppvObject, IMalloc * pMalloc)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "XmlLite", "CreateXmlReader()");
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "XmlLite", "CreateXmlReader()");
 	return real_CreateXmlReader(riid, ppvObject, pMalloc);
 }
 
 HRESULT WINAPI custom_CreateXmlReaderInputWithEncodingName(IUnknown * pInputStream, IMalloc * pMalloc, const WCHAR * pwszEncodingName , BOOL fEncodingHint, const WCHAR * pwszBaseUri , IXmlReaderInput ** ppInput)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "XmlLite", "CreateXmlReaderInputWithEncodingName()");
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "XmlLite", "CreateXmlReaderInputWithEncodingName()");
 	return real_CreateXmlReaderInputWithEncodingName(pInputStream, pMalloc, pwszEncodingName, fEncodingHint, pwszBaseUri, ppInput);
 }
 
 HRESULT WINAPI custom_CreateXmlWriter(REFIID riid, void ** ppvObject, IMalloc * pMalloc)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "XmlLite", "CreateXmlWriter()");
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "XmlLite", "CreateXmlWriter()");
 	return real_CreateXmlWriter(riid, ppvObject, pMalloc);
 }
 
 HRESULT WINAPI custom_CreateXmlWriterOutputWithEncodingName(IUnknown *pOutputStream, IMalloc *pMalloc, LPCWSTR pwszEncodingName, IXmlWriterOutput **ppOutput)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "XmlLite", "CreateXmlWriterOutputWithEncodingName()");
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "XmlLite", "CreateXmlWriterOutputWithEncodingName()");
 	return real_CreateXmlWriterOutputWithEncodingName(pOutputStream, pMalloc, pwszEncodingName, ppOutput);
 }
 

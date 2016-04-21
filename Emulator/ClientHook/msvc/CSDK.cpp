@@ -1,4 +1,7 @@
 #include "CSDK.h"
+
+#ifndef DONT_BUILD_WITH_SDK
+
 #include <SdkHeaders.h>
 #include "vmthooks.h"
 #include <detours\detours.h>
@@ -27,5 +30,7 @@ void CSDK::Patch()
     if(DetourTransactionCommit() != NO_ERROR) Logger(lERROR, "CSDK", "Detour failed for ProcessEvent");
 	Logger(lINFO, "SDK", "ProcessEvent detoured, SDK usage available");
 }
+
+#endif
 
 //0xF0 -> ProcessEventIndex ? @ 10FCFAEC

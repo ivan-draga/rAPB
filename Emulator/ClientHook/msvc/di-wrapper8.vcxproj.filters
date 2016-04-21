@@ -88,6 +88,9 @@
     <ClInclude Include="Addresses.h">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="CustomArgs.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">
@@ -125,6 +128,9 @@
       <Filter>Misc</Filter>
     </ClCompile>
     <ClCompile Include="CSDK.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomArgs.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
   </ItemGroup>

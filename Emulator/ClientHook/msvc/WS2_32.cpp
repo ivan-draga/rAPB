@@ -2,6 +2,7 @@
 #include "StdAfx.h"
 #include <detours\detours.h>
 #include "CPatcher.h"
+#include "CustomArgs.h"
 
 #define DISABLE_ADVANCED_LOGGING
 
@@ -58,136 +59,102 @@ int WINAPI custom_getsockname(SOCKET s, struct sockaddr *name, int *namelen);
 
 int WINAPI custom_send(SOCKET s, const char* buf, int len, int flags)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "send()", "%s | %d | %d", buf, len, flags);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "send()", "%s | %d | %d", buf, len, flags);
 	return real_send(s, buf, len, flags);
 }
 
 int WINAPI custom_recv(SOCKET s, char* buf, int len, int flags)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "recv", "%s | %d | %d", buf, len, flags);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "recv", "%s | %d | %d", buf, len, flags);
 	return real_recv(s, buf, len, flags);
 }
 
 struct hostent* WINAPI custom_gethostbyname(const char* name) 
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "gethostbyname()", "Name: %s", name);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "gethostbyname()", "Name: %s", name);
 	return real_gethostbyname(name);
 }
 
 int WINAPI custom_connect(SOCKET s, const struct sockaddr *name, int namelen) 
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "connect()", "Socket: %s | Namelen: %d", s.ToString(), namelen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "connect()", "Socket: %s | Namelen: %d", s.ToString(), namelen);
 	return real_connect(s, name, namelen);
 }
 
 int WINAPI custom_bind(SOCKET s, const struct sockaddr *name, int namelen) 
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "bind()", "Socket: %s | Namelen: %d", s.ToString(), namelen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "bind()", "Socket: %s | Namelen: %d", s.ToString(), namelen);
 	return real_bind(s, name, namelen);
 }
 
 int WINAPI custom_listen(SOCKET s, int backlog) 
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "listen()", "Socket: %s | Backlog: %d", s.ToString(), backlog);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "listen()", "Socket: %s | Backlog: %d", s.ToString(), backlog);
 	return real_listen(s, backlog);
 }
 
 SOCKET WINAPI custom_accept(SOCKET s, sockaddr *addr, int *addrlen) 
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "accept()", "Socket: %s | Addrlen: %d", s.ToString(), addrlen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "accept()", "Socket: %s | Addrlen: %d", s.ToString(), addrlen);
 	return real_accept(s, addr, addrlen);
 }
 
 int WINAPI custom_sendto(SOCKET s, const char *buf, int len, int flags, const struct sockaddr *to, int tolen) 
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "sendto()", "Socket: %s | Len: %d | Flags: %d | Tolen: %d", s.ToString(), len, flags, tolen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "sendto()", "Socket: %s | Len: %d | Flags: %d | Tolen: %d", s.ToString(), len, flags, tolen);
 	return real_sendto(s, buf, len, flags, to, tolen);
 }
 
 int WINAPI custom_recvfrom(SOCKET s, char *buf, int len, int flags, struct sockaddr *from, int *fromlen) 
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "recvfrom()", "Socket: %s | Len: %d | Flags: %d| Fromlen: %d", s.ToString(), len, flags, fromlen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "recvfrom()", "Socket: %s | Len: %d | Flags: %d| Fromlen: %d", s.ToString(), len, flags, fromlen);
 	return real_recvfrom(s, buf, len, flags, from, fromlen);
 }
 
 SOCKET WINAPI custom_socket(int af, int type, int protocol)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "socket()", "af: %d | Type: %d | Protocol: %d", af, type, protocol);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "socket()", "af: %d | Type: %d | Protocol: %d", af, type, protocol);
 	return real_socket(af, type, protocol);
 }
 int WINAPI custom_closesocket(SOCKET s)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "closesocket()", "Socket: %s", s.ToString());
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "closesocket()", "Socket: %s", s.ToString());
 	return real_closesocket(s);
 }
 
 int WINAPI custom_setsockopt(SOCKET s, int level, int optname, const char *optval, int optlen)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "setsockopt()", "Socket: %s | Level: %d | Optname: %d | Optlen: %d", s.ToString(), level, optname, optlen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "setsockopt()", "Socket: %s | Level: %d | Optname: %d | Optlen: %d", s.ToString(), level, optname, optlen);
 	return real_setsockopt(s, level, optname, optval, optlen);
 }
 
 int WINAPI custom_select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, const struct timeval *timeout)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "select()", "nfds: %d", nfds);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "select()", "nfds: %d", nfds);
 	return real_select(nfds, readfds, writefds, exceptfds, timeout);
 }
 
 int WINAPI custom_shutdown(SOCKET s, int how)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "shutdown()", "Socket: %s | How: %d", s.ToString(), how);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "shutdown()", "Socket: %s | How: %d", s.ToString(), how);
 	return real_shutdown(s, how);
 }
 
 int WINAPI custom_gethostname(char *name, int namelen)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "gethostname()", "Namelen: %d", namelen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "gethostname()", "Namelen: %d", namelen);
 	return real_gethostname(name, namelen);
 }
 
 int WINAPI custom_getsockopt(SOCKET s, int level, int optname, char *optval, int *optlen)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "getsockopt()", "Socket: %s | Level: %d | Optname: %d | Optlen: %d", s.ToString(), level, optname, optlen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "getsockopt()", "Socket: %s | Level: %d | Optname: %d | Optlen: %d", s.ToString(), level, optname, optlen);
 	return real_getsockopt(s, level, optname, optval, optlen);
 }
 
 int WINAPI custom_getsockname(SOCKET s, struct sockaddr *name, int *namelen)
 {
-	#ifndef DISABLE_ADVANCED_LOGGING
-	Logger(lINFO, "getsockname()", "Socket: %s | Namelen: %d", s.ToString(), namelen);
-	#endif
+	if(CustomArgs::advlog == true) Logger(lINFO, "getsockname()", "Socket: %s | Namelen: %d", s.ToString(), namelen);
 	return real_getsockname(s, name, namelen);
 }
 

@@ -105,6 +105,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="CPatcher.h" />
     <ClInclude Include="CSDK.h" />
+    <ClInclude Include="CustomArgs.h" />
     <ClInclude Include="CXmlLite.h" />
     <ClInclude Include="Entry.h" />
     <ClInclude Include="Packet.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CPatcher.cpp" />
     <ClCompile Include="CSDK.cpp" />
+    <ClCompile Include="CustomArgs.cpp" />
     <ClCompile Include="CXmlLite.cpp" />
     <ClCompile Include="Packet.cpp" />
     <ClCompile Include="Patch_APB.cpp" />

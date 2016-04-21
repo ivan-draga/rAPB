@@ -1,8 +1,7 @@
 -allocthreadsafe
 -alloccrt       
 -allocdebugcrt  
--allocdebug     
--errorcode \"0x%X\"                                                       
+-allocdebug                                                  
 -quiet                                                                    
 -dxdiag                                                                   
 -botplayer
@@ -30,6 +29,7 @@ COOKFORDEMO
 
 
 USED BY BUG REPORT:
+-errorcode \"0x%X\"  
 -file \"%s\"                                                              
 -log \"%s\"                                                               
 -description \"%s\"                                                       
