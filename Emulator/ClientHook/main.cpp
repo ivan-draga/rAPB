@@ -3,7 +3,6 @@
 #include "msvc\StdAfx.h"
 
 DIRECTINPUT8CREATEPROC				WrapperSystem::DirectInput8Create;
-
 HMODULE								WrapperSystem::dinputDll;
 WrapperList							WrapperSystem::wrappers;
 HHOOK								WrapperSystem::hookHandleGetMessage = 0;
@@ -164,7 +163,6 @@ LRESULT WrapperSystem::WindowHookFuncGetMessage(int nCode, WPARAM wParam, LPARAM
 		raw = (RAWINPUT *)lpb;
 		if(raw->header.dwType == RIM_TYPEMOUSE && !raw->data.mouse.usFlags) 
 		{
-
 			DI_HID_MouseEvent mouseEvent = raw->data.mouse;
 			lastEventTime = GetTickCount();
 			mouseEvent.SetTime(lastEventTime);
@@ -461,16 +459,45 @@ DI_HID_Object * DI_HID_DeviceBase::FetchEvent()
 	}
 	switch(objPtr->GetType()) 
 	{
-		case type_axis_x:	objPtr->SetData(mouseEvent.lLastX);														break;
-		case type_axis_y:	objPtr->SetData(mouseEvent.lLastY);														break;
-		case type_axis_z:	objPtr->SetData((*(short *)&mouseEvent.usButtonData) > 0 ? 1 : -1);					break;
-		case type_button_1:	objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_LEFT_BUTTON_DOWN) ? 0x80 : 0);		break;
-		case type_button_2:	objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_RIGHT_BUTTON_DOWN) ? 0x80 : 0);	break;
-		case type_button_3:	objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_MIDDLE_BUTTON_DOWN) ? 0x80 : 0);	break;
-		case type_button_4:	objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_BUTTON_4_DOWN) ? 0x80 : 0);		break;
-		case type_button_5:	objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_BUTTON_5_DOWN) ? 0x80 : 0);		break;
-		case type_button_6:	objPtr->SetData(mouseEvent.usButtonData ? 0x80 : 0);										break;
-		case type_button_7:	objPtr->SetData(mouseEvent.usButtonData ? 0x80 : 0);										break;
+		case type_axis_x:	
+			objPtr->SetData(mouseEvent.lLastX);														
+			break;
+
+		case type_axis_y:	
+			objPtr->SetData(mouseEvent.lLastY);														
+			break;
+
+		case type_axis_z:	
+			objPtr->SetData((*(short *)&mouseEvent.usButtonData) > 0 ? 1 : -1);						
+			break;
+
+		case type_button_1:	
+			objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_LEFT_BUTTON_DOWN) ? 0x80 : 0);		
+			break;
+
+		case type_button_2:	
+			objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_RIGHT_BUTTON_DOWN) ? 0x80 : 0);	
+			break;
+
+		case type_button_3:	
+			objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_MIDDLE_BUTTON_DOWN) ? 0x80 : 0);	
+			break;
+
+		case type_button_4:	
+			objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_BUTTON_4_DOWN) ? 0x80 : 0);		
+			break;
+
+		case type_button_5:	
+			objPtr->SetData((mouseEvent.usButtonFlags & RI_MOUSE_BUTTON_5_DOWN) ? 0x80 : 0);		
+			break;
+
+		case type_button_6:	
+			objPtr->SetData(mouseEvent.usButtonData ? 0x80 : 0);									
+			break;
+
+		case type_button_7:	
+			objPtr->SetData(mouseEvent.usButtonData ? 0x80 : 0);									
+			break;
 	}
 	objPtr->SetTime(mouseEvent.GetTime() - initTime);
 	return objPtr;

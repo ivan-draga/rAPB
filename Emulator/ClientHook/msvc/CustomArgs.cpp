@@ -41,6 +41,12 @@ void CustomArgs::ProcessArgs(array<String^>^ args)
 				advlog = true;
 				Logger(lINFO, "Log", "Advanced logging of XmlLite and WS2 functions enabled");
 			}
+			else if(s->Contains("+server=") == true)
+			{
+				array<wchar_t> ^id = { '=' };
+				array<String^>^ split = s->Split(id, 2, System::StringSplitOptions::None);
+				serverip = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(split[1]).ToPointer();
+			}
 			else if(s->Contains("+nop=") == true)
 			{
 				array<wchar_t> ^id = { '=' };

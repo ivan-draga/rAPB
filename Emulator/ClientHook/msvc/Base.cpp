@@ -39,6 +39,7 @@ bool CustomArgs::fixeditorcrash = false;
 bool CustomArgs::offline = false;
 bool CustomArgs::sdkdump = false;
 bool CustomArgs::advlog = false;
+char* CustomArgs::serverip = "127.0.0.1";
 
 namespace APB
 {
@@ -76,7 +77,7 @@ namespace APB
 			{
 				Logger(lINFO, "InitHooks()", "Starting APB");
 				CustomArgs::ProcessArgs(Environment::GetCommandLineArgs());
-				if(CustomArgs::offline == false) Client^ client = gcnew Client("127.0.0.1", DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
+				if(CustomArgs::offline == false) Client^ client = gcnew Client(Convert::ToString(CustomArgs::serverip), DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
 				CXmlLite::Patch();
 				WS2_32::Patch();
 				#ifndef DONT_BUILD_WITH_SDK

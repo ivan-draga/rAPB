@@ -11,6 +11,7 @@ public:
 	static bool offline;
 	static bool sdkdump;
 	static bool advlog;
+	static char* serverip;
 };
 
 /*
@@ -30,6 +31,8 @@ Parameter explanation:
 +advlog -> enables advanced logging of detoured functions from "CXmlLite.cpp" and "WS2_32.cpp"
 
 +fixeditorcrash -> enables "Patch_EditorCrash()" that patches certain editor crashes (NOTE: by default it is disabled to avoid possible problems when not using editor mode)
+
++server=SERVERIP -> client will connect to main/client server on SERVERIP address, by default it's set to 127.0.0.1
 
 +nop=0xADDRESS -> installs NOP patch on ADDRESS (0x must be included)
 
