@@ -77,7 +77,8 @@ namespace APB
 			{
 				Logger(lINFO, "InitHooks()", "Starting APB");
 				CustomArgs::ProcessArgs(Environment::GetCommandLineArgs());
-				if(CustomArgs::offline == false) Client^ client = gcnew Client(Convert::ToString(CustomArgs::serverip), DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
+				String ^IP = gcnew String(CustomArgs::serverip);
+				if(CustomArgs::offline == false) Client^ client = gcnew Client(IP, DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
 				CXmlLite::Patch();
 				WS2_32::Patch();
 				#ifndef DONT_BUILD_WITH_SDK

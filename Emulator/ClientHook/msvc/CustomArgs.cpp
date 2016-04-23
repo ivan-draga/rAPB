@@ -4,6 +4,10 @@
 
 void CustomArgs::ProcessArgs(array<String^>^ args)
 {
+	//TODO: read args from "cmdargs.params" file in the same directory where dinput8.dll is
+	//the usual shortcut parameters are causing APB not to be started because it detects
+	//that the custom parameters are not the core ones, thus giving "No commandlet for Release_USER" when in reality it
+	//should just start the game
 	int arglen = ((args->Length)-1);
 	if(arglen > 0)
 	{
