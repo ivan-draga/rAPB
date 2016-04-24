@@ -3,7 +3,7 @@ using namespace System;
 class CustomArgs
 {
 public:
-	static void ProcessArgs(array<String^>^ args);
+	static void ProcessArgs();
 	static bool allowshadermod;
 	static bool disableini;
 	static bool disableeulatos;

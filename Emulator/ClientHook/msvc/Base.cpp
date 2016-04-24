@@ -68,7 +68,7 @@ namespace APB
 			errno_t err;
 			if ((err = fopen_s(&apb, TOKEN_FILE_STR, "r")) != 0) 
 			{
-				Logger(lERROR, "InitHooks()", "File \"%s\" not found", TOKEN_FILE_STR);
+				Logger(lERROR, "InitHooks()", "File '%s' not found", TOKEN_FILE_STR);
 				MessageBox(NULL, "Token file not found!", "ERROR", NULL);
 				Logger(lWARN, "APB", "Process stopped");
 				exit(2);
@@ -76,7 +76,7 @@ namespace APB
 			else 
 			{
 				Logger(lINFO, "InitHooks()", "Starting APB");
-				CustomArgs::ProcessArgs(Environment::GetCommandLineArgs());
+				CustomArgs::ProcessArgs();
 				String ^IP = gcnew String(CustomArgs::serverip);
 				if(CustomArgs::offline == false) Client^ client = gcnew Client(IP, DEFAULT_PORT_INT); //TODO: retrieve client server IP from web
 				CXmlLite::Patch();

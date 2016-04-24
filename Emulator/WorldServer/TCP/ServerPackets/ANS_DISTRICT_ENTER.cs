@@ -17,7 +17,7 @@ namespace WorldServer.TCP.ServerPackets
                 string[] delimiter = new string[] { "." };
                 string[] result = district.IP.Split(delimiter, StringSplitOptions.None);
                 foreach (string s in result) WriteByte(Convert.ToByte(s));
-                WriteUInt16Reverse(2108);
+                WriteUInt16Reverse(2121);
                 WriteInt32Reverse(TcpServer.GetTimeStamp());
             }
             else WriteUInt32Reverse((uint)ResponseCodes.RC_DISTRICT_RESERVE_DISTRICT_OFFLINE);

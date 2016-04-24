@@ -1,14 +1,17 @@
 #include "StdAfx.h"
 #include "CustomArgs.h"
 #include "CPatcher.h"
+#include "Addresses.h"
 
-void CustomArgs::ProcessArgs(array<String^>^ args)
+void CustomArgs::ProcessArgs()
 {
-	//TODO: read args from "cmdargs.params" file in the same directory where dinput8.dll is
-	//the usual shortcut parameters are causing APB not to be started because it detects
-	//that the custom parameters are not the core ones, thus giving "No commandlet for Release_USER" when in reality it
-	//should just start the game
-	int arglen = ((args->Length)-1);
+	if(!System::IO::File::Exists(CMD_LINE_FILE_STR)) return Logger(lINFO, "Warning", "File '%s' not found", CMD_LINE_FILE_STR);
+	System::IO::StreamReader ^file = gcnew System::IO::StreamReader(CMD_LINE_FILE_STR);
+	System::Collections::Generic::List<String^>^ args = gcnew System::Collections::Generic::List<String^>();
+	String^ line;
+	while ((line = file->ReadLine()) != nullptr) args->Add(line);
+	file->Close();
+	int arglen = args->Count;
 	if(arglen > 0)
 	{
 		if(arglen == 1) Logger(lINFO, "Arguments", "Trying to process 1 argument");
@@ -22,8 +25,8 @@ void CustomArgs::ProcessArgs(array<String^>^ args)
 			}
 			else if(s == "+disableinifileupdates") 
 			{
-					disableini = true;
-					Logger(lINFO, "Configuration", "Auto-updating disabled for configuration files");
+				disableini = true;
+				Logger(lINFO, "Configuration", "Auto-updating disabled for configuration files");
 			}
 			else if(s == "+disableeulatosupdates") 
 			{

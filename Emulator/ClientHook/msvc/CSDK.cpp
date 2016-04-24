@@ -32,5 +32,3 @@ void CSDK::Patch()
 }
 
 #endif
-
-//0xF0 -> ProcessEventIndex ? @ 10FCFAEC
