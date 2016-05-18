@@ -3,7 +3,7 @@
 	<District>
 		<Id>1</Id>
 		<Language>en</Language>
-		<Type>social</Type>
+		<Type>financial</Type>
 		<Hardcore>false</Hardcore>
 		<Password>pass</Password>
 	</District>
