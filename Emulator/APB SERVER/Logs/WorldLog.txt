@@ -1,0 +1,194 @@
+[15:03:02] N EasyServer : Logger initialized.
+[15:03:02] N Server : launching APB EMU server...
+[15:03:02] N Server : (c) 2016 APB EMU Team.
+[15:03:02] N Server : Special thanks to: fiki574, Scalexo, Luna & ColdReader
+[15:03:02] N Server : Donators: FlyToha, Luna, Myrothas, aidey, dapanda & schback
+[15:03:02] N Server :  
+[15:03:02] N Server :  
+[15:03:02] N Server :  
+[15:03:02] N Server :            ,ggg, ,ggggggggggg,   ,ggggggggggg,  
+[15:03:02] N Server :           dP''8IdP'''88''''''Y8,dP'''88''''''Y8,
+[15:03:02] N Server :          dP   88Yb,  88      `8bYb,  88      `8b
+[15:03:02] N Server :         dP    88 `'  88      ,8P `'  88      ,8P
+[15:03:02] N Server :        ,8'    88     88aaaad8P'      88aaaad8P'
+[15:03:02] N Server :        d88888888     88'''''         88''''Y8ba 
+[15:03:02] N Server :  __   ,8'     88     88              88      `8b
+[15:03:02] N Server : dP'  ,8P      Y8     88              88      ,8P
+[15:03:02] N Server : Yb,_,dP       `8b,   88              88_____,d8'
+[15:03:02] N Server :  'Y8P'         `Y8   88             88888888P'  
+[15:03:02] N Server :  
+[15:03:02] N Server : ==============================================
+[15:03:02] N Server :    ,ggggggg,                               
+[15:03:02] N Server :  ,dP''''''Y8b                              
+[15:03:02] N Server :  d8'    a  Y8                              
+[15:03:02] N Server :  88     'Y8P'                              
+[15:03:02] N Server :  `8baaaa                                   
+[15:03:02] N Server : ,d8P''''      ,ggg,,ggg,,ggg,   gg      gg 
+[15:03:02] N Server : d8'          ,8' '8P' '8P' '8,  I8      8I 
+[15:03:02] N Server : Y8,          I8   8I   8I   8I  I8,    ,8I 
+[15:03:02] N Server : `Yba,,_____,,dP   8I   8I   Yb,,d8b,  ,d8b,
+[15:03:02] N Server :   `'Y88888888P'   8I   8I   `Y88P''Y88P'`Y8
+[15:03:02] N EasyServer : Logger initialized.
+[15:03:02] I AssemblyManager : Loading Assembly : /Scripts
+[15:03:02] I AssemblyManager : Loading 0 Assembly
+[15:03:02] I TCPManager : Launching...
+[15:03:02] D TCPManager : Buffer pool allocation : 300
+[15:03:02] I TCPManager : Loading Packet Handler
+[15:03:02] D TCPManager : Registering the handler onAskWorldEnter
+[15:03:02] D TCPManager : Registering the handler onAskCharacterFinderInfo
+[15:03:02] D TCPManager : Registering the handler onAskChatWhisper
+[15:03:02] D TCPManager : Registering the handler onAskDistrictEnter
+[15:03:02] D TCPManager : Registering the handler onAskDistrictReserve
+[15:03:02] D TCPManager : Registering the handler onAskFriendListAdd
+[15:03:02] D TCPManager : Registering the handler onAskFriendListRemove
+[15:03:02] D TCPManager : Registering the handler onAskFriendListInfo
+[15:03:02] D TCPManager : Registering the handler onAskGroupInvite
+[15:03:02] D TCPManager : Registering the handler onAskGroupJoin
+[15:03:02] D TCPManager : Registering the handler onAskGroupList
+[15:03:02] D TCPManager : Registering the handler onAskIgnoreListAdd
+[15:03:02] D TCPManager : Registering the handler onAskIgnoreListRemove
+[15:03:02] D TCPManager : Registering the handler onAskInstanceList
+[15:03:02] D TCPManager : Registering the handler onAskMailInfo
+[15:03:02] D TCPManager : Registering the handler onAskNameQuery
+[15:03:02] D TCPManager : Registering the handler onChangeLFG
+[15:03:02] D TCPManager : Registering the handler onLogout
+[15:03:02] I TCPManager : Loading Crypt Handler
+[15:03:02] S TCPManager : Accepting Connections on : 0.0.0.0:2121
+[15:03:02] S Lobby.Client : Connected to the Lobby Server!
+[15:03:02] S Districts.Listener : Expecting districts to connect at 127.0.0.1:2108
+[15:03:02] S RegisterSuccess : Registered with a following ID: 1
+[15:03:03] I RegisterDistrict : Safe-Social-EN-1 tries to register.
+[15:03:03] S RegisterDistrict : Safe-Social-EN-1 was registered! (127.0.0.1)
+[15:03:42] S AccountEnter : Account 1 now can connect to the world!
+[15:03:42] I TCPManager : New connection from : 127.0.0.1:63970
+[15:03:42] P 127.0.0.1:63970 : 
+0000: 20000000 B80B0000 01000000 E6B1A3EA   ...............
+0010: 9AD95F38 D285347D 7B099395 BB4605BA  .._8..4}{....F..
+[15:03:42] D TCPManager : Handeling package 3000
+[15:03:42] D AskWorldEnter : New client! Account = 1
+[15:03:42] I FileManager : GetFileVersion Id =1, CharName =12
+[15:03:42] I FileManager : GetFile Id =1
+[15:03:42] I FileClient : CheckBase: F:\APBEMU Client\rAPB\Emulator\APB SERVER/ClientFiles/1
+[15:03:42] I AccountPersistent3.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent3.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D AccountPersistent3.ini : Version = 0
+[15:03:42] I AccountPersistent4.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent4.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D AccountPersistent4.ini : Version = 0
+[15:03:42] I AccountPersistent5.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent5.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D AccountPersistent5.ini : Version = 0
+[15:03:42] I AccountPersistentUI.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistentUI.ini
+[15:03:42] D FileClient : New block: AcceptDates
+[15:03:42] D AcceptDates : EULA=Hour=9 Min=37 Sec=32 Day=25 Month=7 Year=2010
+[15:03:42] D AcceptDates : TOS=Hour=5 Min=2 Sec=28 Day=2 Month=7 Year=2010
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=40
+[15:03:42] D AccountPersistentUI.ini : Version = 40
+[15:03:42] I AccountTutorialSettings.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountTutorialSettings.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D AccountTutorialSettings.ini : Version = 0
+[15:03:42] I CharacterPersistent1.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent1.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D CharacterPersistent1.ini : Version = 0
+[15:03:42] I CharacterPersistent2.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent2.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D CharacterPersistent2.ini : Version = 0
+[15:03:42] I CharacterPersistent3.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent3.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D CharacterPersistent3.ini : Version = 0
+[15:03:42] I CharacterPersistent4.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent4.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D CharacterPersistent4.ini : Version = 0
+[15:03:42] I CharacterPersistent5.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:42] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent5.ini
+[15:03:42] D FileClient : New block: File
+[15:03:42] D File : version=0
+[15:03:42] D CharacterPersistent5.ini : Version = 0
+[15:03:42] I FileClient : GetConf: CharacterPersistent1.ini, CharName =12
+[15:03:42] I FileManager : GetFileVersion Id =2, CharName =12
+[15:03:42] I FileManager : GetFile Id =2
+[15:03:42] I FileClient : GetConf: CharacterPersistent2.ini, CharName =12
+[15:03:42] I FileManager : GetFileVersion Id =3, CharName =12
+[15:03:42] I FileManager : GetFile Id =3
+[15:03:42] I FileClient : GetConf: CharacterPersistent3.ini, CharName =12
+[15:03:42] I FileManager : GetFileVersion Id =4, CharName =12
+[15:03:42] I FileManager : GetFile Id =4
+[15:03:42] I FileClient : GetConf: CharacterPersistent4.ini, CharName =12
+[15:03:42] I FileManager : GetFileVersion Id =5, CharName =12
+[15:03:42] I FileManager : GetFile Id =5
+[15:03:42] I FileClient : GetConf: CharacterPersistent5.ini, CharName =12
+[15:03:42] P SendTCP : 
+0000: 1E010000 DDA76F37 AB1F55CF 63765592  ......o7..U.cvU.
+0010: 19D47940 B5AE18C5 C412F0A0 12238341  ..y@.........#.A
+0020: 45376ABF 29C10FCA 1543ADAF A329E04E  E7j.)....C...).N
+0030: 39957058 7F64A0FD DEFCECAD 590624CA  9.pXd......Y.$.
+0040: C23903A8 704D9C0E 7426929A FB867F9A  .9..pM..t&.....
+0050: 59CCDA54 BFD2F6E8 74F5E0D7 36EDF5EC  Y..T....t...6...
+0060: F2A4F65E 10B673AE 7B9F2EF1 06E472FD  ...^..s.{.....r.
+0070: F247F16B F6621B80 743EB17E 3849631D  .G.k.b..t>.~8Ic.
+0080: A4EFB105 B1475F89 C3D4F583 3D2CBE1B  .....G_.....=,..
+0090: A285E449 9DD610C0 B3212CB4 CE991EED  ...I.....!,.....
+00A0: DA2E586A 9D50D40E 7C14B545 8C3BA736  ..Xj.P..|..E.;.6
+00B0: A663A0DA 93943B95 775A92BF C3B35FAE  .c....;.wZ...._.
+00C0: BED36495 5C2C8824 A3E44549 B49A9298  ..d.\,.$..EI....
+00D0: 48686F12 6D5CEDC2 E5BDDF1B 5E6F7CFD  Hho.m\......^o|.
+00E0: 4DEB6C00 B6DDAFC8 048F262D ACB4368E  M.l.......&-..6.
+00F0: D6D00A16 73F884C0 43C7FA5C 1DCC490C  ....s...C..\..I.
+0100: 30D11410 4BB57D77 E7E38CE8 15E00D67  0...K.}w.......g
+0110: 186185C6 207FCB1B 815ACD4C A25A        .a.. ...Z.L.Z  
+[15:03:42] P SendTCP : 
+0000: 39000000 BEAF4477 4044050D 3411BF57  9.....Dw@D..4..W
+0010: DC346C29 E2D1FFEA D11549FF FE0BA285  .4l)......I.....
+0020: 04603A1B 4946EF4E 8554C648 E43BB7FB  .`:.IF.N.T.H.;..
+0030: 61539A83 DA214917 57                       aS...!I.W       
+[15:03:42] P 127.0.0.1:63970 : 
+0000: 55000000 87A36F37 AA1F54CF 62762C0E  U.....o7..T.bv,.
+0010: 92A22967 8539FF20 EE59D6D1 30014FF2  ..)g.9. .Y..0.O.
+0020: 70D3C4EE 1FF77D06 DC3224F4 10F6A960  p.....}..2$....`
+0030: 389F7724 F718ED0F 55CEE9AE 1D8650C1  8.w$....U.....P.
+0040: B06BA227 2D54BEEF 8690F888 25C056C7  .k.'-T......%.V.
+0050: 5979D5CF 6E                                   Yy..n           
+[15:03:42] D TCPManager : Handeling package 3068
+[15:03:42] E TCPManager : Opcode no Handler :3068(00000BFC)
+[15:03:42] P 127.0.0.1:63970 : 
+0000: 08000000 44F7E874                           ....D..t        
+[15:03:42] D TCPManager : Handeling package 3002
+[15:03:42] P SendTCP : 
+0000: 19000000 C39FA36F 2F5A18F2 8F3FA7E6  .......o/Z...?..
+0010: 59B4984F 298418CE AF                       Y..O)....       
+[15:03:44] P 127.0.0.1:63970 : 
+0000: 11000000 4E495C5E FFFEECF2 5BCD853B  ....NI\^....[..;
+0010: 88                                               .               
+[15:03:44] D TCPManager : Handeling package 3003
+[15:03:44] N World.DistrictEnter : District port expected to be hosting on port 6969!
+[15:03:44] P SendTCP : 
+0000: 16000000 C0A16964 9C9134A7 3E31F150  ......id..4.>1.P
+0010: 13D38B8C 2507                                ....%.          
+[15:03:44] P SendTCP : 
+0000: 12000000 920D3559 C6C514A8 C3C8DE1D  ......5Y........
+0010: 573D                                            W=              
+[15:03:44] P 127.0.0.1:63970 : 
+0000: 08000000 C2A57B9F                           ......{.        
+[15:03:44] D TCPManager : Handeling package 3005
+[15:03:44] N World.DistrictEnter : District port expected to be hosting on port 6969!
+[15:03:44] P SendTCP : 
+0000: 16000000 3C3EBC9B B31D81B6 E468ECE9  ....<>.......h..
+0010: 91C03936 1B51                                ..96.Q          

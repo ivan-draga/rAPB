@@ -39,7 +39,7 @@ namespace LobbyServer
                 }
                 else
                 {
-                    /*if (Program.logouts.ContainsKey(cclient.Account.Email))
+                    if (Program.logouts.ContainsKey(cclient.Account.Email))
                     {
                         Log.Debug("LOGIN_PROOF", "Auto-logging in user " + cclient.Account.Email);
                         cclient.Account = new LobbyServer.Database.Account(cclient.Account.Email);
@@ -50,10 +50,10 @@ namespace LobbyServer
                         Program.logouts.Remove(cclient.Account.Email);
                     }
                     else
-                    {*/
+                    {
                         ANS_LOGIN_FAILED.Send(cclient, (int)ResponseCodes.RC_LOGIN_INVALID_ACCOUNT);
                         cclient.Disconnect();
-                    //}
+                    }
                 }
             }
             return 0;

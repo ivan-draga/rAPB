@@ -1,0 +1,365 @@
+[15:03:01] N EasyServer : Logger initialized.
+[15:03:01] N Server : launching APB EMU server...
+[15:03:01] N Server : (c) 2016 APB EMU Team.
+[15:03:01] N Server : Special thanks to: fiki574, Scalexo, Luna & ColdReader
+[15:03:01] N Server : Donators: FlyToha, Luna, Myrothas, aidey, dapanda & schback
+[15:03:01] N Server :  
+[15:03:01] N Server :  
+[15:03:01] N Server :  
+[15:03:01] N Server :            ,ggg, ,ggggggggggg,   ,ggggggggggg,  
+[15:03:01] N Server :           dP''8IdP'''88''''''Y8,dP'''88''''''Y8,
+[15:03:01] N Server :          dP   88Yb,  88      `8bYb,  88      `8b
+[15:03:01] N Server :         dP    88 `'  88      ,8P `'  88      ,8P
+[15:03:01] N Server :        ,8'    88     88aaaad8P'      88aaaad8P'
+[15:03:01] N Server :        d88888888     88'''''         88''''Y8ba 
+[15:03:01] N Server :  __   ,8'     88     88              88      `8b
+[15:03:01] N Server : dP'  ,8P      Y8     88              88      ,8P
+[15:03:01] N Server : Yb,_,dP       `8b,   88              88_____,d8'
+[15:03:01] N Server :  'Y8P'         `Y8   88             88888888P'  
+[15:03:01] N Server :  
+[15:03:01] N Server : ==============================================
+[15:03:01] N Server :    ,ggggggg,                               
+[15:03:01] N Server :  ,dP''''''Y8b                              
+[15:03:01] N Server :  d8'    a  Y8                              
+[15:03:01] N Server :  88     'Y8P'                              
+[15:03:01] N Server :  `8baaaa                                   
+[15:03:01] N Server : ,d8P''''      ,ggg,,ggg,,ggg,   gg      gg 
+[15:03:01] N Server : d8'          ,8' '8P' '8P' '8,  I8      8I 
+[15:03:01] N Server : Y8,          I8   8I   8I   8I  I8,    ,8I 
+[15:03:01] N Server : `Yba,,_____,,dP   8I   8I   Yb,,d8b,  ,d8b,
+[15:03:01] N Server :   `'Y88888888P'   8I   8I   `Y88P''Y88P'`Y8
+[15:03:01] I AssemblyManager : Loading Assembly : /Scripts
+[15:03:01] I AssemblyManager : Loading 0 Assembly
+[15:03:01] I TCPManager : Launching...
+[15:03:01] D TCPManager : Buffer pool allocation : 300
+[15:03:01] I TCPManager : Loading Packet Handler
+[15:03:01] D TCPManager : Registering the handler onAskCharacterCreate
+[15:03:01] D TCPManager : Registering the handler onAskCharacterDelete
+[15:03:01] D TCPManager : Registering the handler onAskCharacterInfo
+[15:03:01] D TCPManager : Registering the handler onAskCharacterNameCheck
+[15:03:01] D TCPManager : Registering the handler onAskConfigfileLoad
+[15:03:01] D TCPManager : Registering the handler onAskConfigfileSave
+[15:03:01] D TCPManager : Registering the handler onAskLogin
+[15:03:01] D TCPManager : Registering the handler onAskWorldEnter
+[15:03:01] D TCPManager : Registering the handler onAskWorldList
+[15:03:01] D TCPManager : Registering the handler onLoginProof
+[15:03:01] I TCPManager : Loading Crypt Handler
+[15:03:01] S TCPManager : Accepting Connections on : 0.0.0.0:2106
+[15:03:01] S World.Listener : Expecting worlds to connect at 127.0.0.1:2101
+[15:03:01] S MySql : Database connected!
+[15:03:01] I LobbyServer : Version = 1.1.0 : Build = 534979
+[15:03:01] S LobbyServer : Server initialisation complete!
+[15:03:02] I RegisterWorld : Reborn tries to register.
+[15:03:02] S RegisterWorld : Reborn was registered! World ID: 1
+[15:03:02] S Reborn : Address 127.0.0.1:2121
+[15:03:33] I TCPManager : New connection from : 127.0.0.1:63967
+[15:03:33] I [ENCRYPTION-KEY] : DC FB 09 14 B2 14 17 87 84 A4 38 39 C5 22 FD 5D 
+33 BB 12 EB 
+[15:03:33] P SendTCP : 
+0000: 2D000000 D2070000 01000000 01000000  -...............
+0010: 00000000 C3290800 0598B587 5D1DBE3A  .....)......]..:
+0020: 0A000000 00000000 00000000 00           .............   
+[15:03:34] P 127.0.0.1:63967 : 
+0000: 2A000000 0909AC10 B36B3A78 5A317A17  *........k:xZ1z.
+0010: E79F7FC7 016B9D66 39FFF49D 3C2C0690  ....k.f9...<,..
+0020: 97459602 65F4188D 47F2                    .E..e...G.      
+[15:03:34] I [CLIENT POST-ENCRYPT] : 2A 00 00 00 E8 03 00 00 AB 01 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+74 00 65 00 73 00 74 00 00 00 
+[15:03:34] D TCPManager : Handeling package 1000
+[15:03:34] N ASK_LOGIN : Account: test
+[15:03:34] S ASK_LOGIN : Account exists
+[15:03:34] D LOGIN_SALT : Send to test
+[15:03:34] I [SERVER PRE-ENCRYPT] : 00 00 00 00 D3 07 00 00 01 00 00 00 CA DD 34 AB 
+0F E4 62 12 86 2F D6 45 5C 1B 35 7E 45 CE CA 47 
+23 A8 07 6C 2D D9 39 DF A6 00 38 3B C2 2A 2E 27 
+CB A9 36 E8 EC 10 4A DD B8 1F AD B5 1F EE 5E 3F 
+5D 25 2C AF 69 BF 0F C6 0E C1 EE 0B 40 00 E5 13 
+A1 AE 6A 55 49 9E B6 65 
+[15:03:34] P SendTCP : 
+0000: 58000000 320DAC10 196A3A78 90EC4EBC  X...2....j:x..N.
+0010: E87B1DD5 87444B23 65E4C1E3 79E2CCD7  .{...DK#e...y...
+0020: C0EDF46E 3B2D5552 E1F2EFA8 BFD5BFDC  ...n;-UR........
+0030: D40DE9C6 B6060790 B5E32E68 0880E64C  ...........h...L
+0040: D1AE7EB6 5AF0127B 564191EE AF24271F  ..~.Z..{VA...$'.
+0050: 3798BDF8 2AB05E4F                           7...*.^O        
+[15:03:39] P 127.0.0.1:63967 : 
+0000: 5E000000 3E907DFF 865EFD75 5ADD4437  ^...>.}..^.uZ.D7
+0010: 5D292A1E C590F528 ABC39DBB F7D22250  ])*....(......"P
+0020: EEFA92F8 CA24517A FF90697E 8BA44FCB  .....$Qz..i~..O.
+0030: B3C2E3A2 CEFCD76E 33DD8A8B 31589944  .......n3...1X.D
+0040: E8BF3FF4 ACFF88E6 2A9B4EB7 8D86DB03  ..?.....*.N.....
+0050: 358150F0 24EAA244 7B971BF7 1722        5.P.$..D{...."  
+[15:03:39] I [CLIENT POST-ENCRYPT] : 5E 00 00 00 E9 03 00 00 17 A5 E2 D1 85 F3 1E 21 
+10 64 27 E2 46 4D E2 46 13 B0 11 30 A5 CB 11 1F 
+F3 47 CA 78 B5 C1 BE 5E 3D 9C FF 48 5C 09 2C E5 
+5B E8 21 B4 41 C0 CF 09 D6 92 55 D4 0A 3C A7 A3 
+79 33 56 57 F7 27 8F 9F 40 00 02 BE 55 A8 CE 56 
+EC F2 A6 18 8F 03 44 44 81 29 7F D9 E1 14 
+[15:03:39] D TCPManager : Handeling package 1001
+[15:03:39] I FileManager : GetFileVersion Id =1, CharName =
+[15:03:39] I FileManager : GetFile Id =1
+[15:03:39] I FileClient : CheckBase: F:\APBEMU Client\rAPB\Emulator\APB SERVER/ClientFiles/1
+[15:03:39] I AccountPersistent3.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent3.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D AccountPersistent3.ini : Version = 0
+[15:03:39] I AccountPersistent4.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent4.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D AccountPersistent4.ini : Version = 0
+[15:03:39] I AccountPersistent5.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent5.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D AccountPersistent5.ini : Version = 0
+[15:03:39] I AccountPersistentUI.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistentUI.ini
+[15:03:39] D FileClient : New block: AcceptDates
+[15:03:39] D AcceptDates : EULA=Hour=9 Min=37 Sec=32 Day=25 Month=7 Year=2010
+[15:03:39] D AcceptDates : TOS=Hour=5 Min=2 Sec=28 Day=2 Month=7 Year=2010
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=40
+[15:03:39] D AccountPersistentUI.ini : Version = 40
+[15:03:39] I AccountTutorialSettings.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountTutorialSettings.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D AccountTutorialSettings.ini : Version = 0
+[15:03:39] I CharacterPersistent1.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent1.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D CharacterPersistent1.ini : Version = 0
+[15:03:39] I CharacterPersistent2.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent2.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D CharacterPersistent2.ini : Version = 0
+[15:03:39] I CharacterPersistent3.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent3.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D CharacterPersistent3.ini : Version = 0
+[15:03:39] I CharacterPersistent4.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent4.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D CharacterPersistent4.ini : Version = 0
+[15:03:39] I CharacterPersistent5.ini : Loading+Opening : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10
+[15:03:39] D ConfigFile : Reset : F:\APBEMU Client\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\10/CharacterPersistent5.ini
+[15:03:39] D FileClient : New block: File
+[15:03:39] D File : version=0
+[15:03:39] D CharacterPersistent5.ini : Version = 0
+[15:03:39] I FileClient : GetConf: AccountTutorialSettings.ini
+[15:03:39] I FileManager : GetFileVersion Id =2, CharName =
+[15:03:39] I FileManager : GetFile Id =2
+[15:03:39] I FileClient : GetConf: AccountPersistentUI.ini
+[15:03:39] I FileManager : GetFileVersion Id =3, CharName =
+[15:03:39] I FileManager : GetFile Id =3
+[15:03:39] I FileClient : GetConf: AccountPersistent3.ini
+[15:03:39] I FileManager : GetFileVersion Id =4, CharName =
+[15:03:39] I FileManager : GetFile Id =4
+[15:03:39] I FileClient : GetConf: AccountPersistent4.ini
+[15:03:39] I FileManager : GetFileVersion Id =5, CharName =
+[15:03:39] I FileManager : GetFile Id =5
+[15:03:39] I FileClient : GetConf: AccountPersistent5.ini
+[15:03:39] I [SERVER PRE-ENCRYPT] : 00 00 00 00 D4 07 00 00 57 00 65 00 6C 00 63 00 
+6F 00 6D 00 65 00 20 00 74 00 6F 00 20 00 41 00 
+50 00 42 00 20 00 52 00 65 00 62 00 6F 00 72 00 
+6E 00 00 00 00 00 00 00 00 00 00 00 00 00 0B 9A 
+48 57 00 00 00 00 13 29 12 00 0E 07 0F 27 AA 05 
+00 00 40 42 0F 00 00 00 00 00 28 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 95 7D 
+04 00 50 52 4F 45 55 2E 32 32 37 38 30 31 00 00 
+00 67 52 6C 62 43 31 31 32 56 48 6E 31 41 00 00 
+00 00 00 00 00 
+[15:03:39] P SendTCP : 
+0000: 95000000 16118F3C 4F67804F B35F5864  .......<Og.O._Xd
+0010: 51E7FC8C 0CA37BD8 7379059B 6C09992E  Q.....{.sy..l...
+0020: 45559B73 D6E8F9E9 830098BE 0B2E8436  EU.s...........6
+0030: E31EE651 230ABB55 2E220A5B FCF454A4  ...Q#..U.".[..T.
+0040: 4AFA92CA 1A8D8F46 79A47E82 569F1EB7  J......Fy.~.V...
+0050: BAD6616A 88A1FA2A 55213734 08BAC7E5  ..aj...*U!74....
+0060: EFDDC3E2 55A7CCA0 5E56E6D4 C9F33AA3  ....U...^V....:.
+0070: E1596ACC 14C857AA 15D72AFF 1CF9D92F  .Yj...W...*..../
+0080: 45337B18 763F9DAD 4E26EC51 7A1EFC3B  E3{.v?..N&.Qz..;
+0090: 23867F72 73                                   #.rs           
+[15:03:39] I [ENCRYPTION-KEY] : D9 0B E4 4A 7C 1D 07 B8 77 4C 31 75 88 39 05 51 
+20 F7 97 B1 
+[15:03:39] I [SERVER PRE-ENCRYPT] : 00 00 00 00 D6 07 00 00 03 02 02 01 01 00 00 00 
+52 00 65 00 62 00 6F 00 72 00 6E 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 48 00 65 00 79 00 59 00 6F 00 75 00 54 00 
+75 00 62 00 65 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 01 01 01 01 00 00 00 52 00 65 00 62 
+00 6F 00 72 00 6E 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 6B 00 6B 
+00 61 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 
+01 01 01 00 00 00 52 00 65 00 62 00 6F 00 72 00 
+6E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 4A 00 61 00 63 00 6B 00 
+65 00 74 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+[15:03:39] P SendTCP : 
+0000: EA000000 ADAF6F37 A81D57CE 63765492  ......o7..W.cvT.
+0010: 4BD487AB AEB475C5 B61295FB FECD8041  K.....u........A
+0020: 4537210C FA7D0BCA 1543EABC 3CBCE54E  E7!..}...C..<..N
+0030: 39953C41 D152DFFD 87FC95DD F47577CA  9.<A.R.......uw.
+0040: B7398B75 55A7940E 7426D9CD 8069769A  .9.uU...t&...iv.
+0050: 59CC7BD6 48FFFDE9 74F5420E 5E9BFE8E  Y.{.H...t.B.^...
+0060: F2CB3208 C4E67FAE 7B9F8D5F 57437FFD  ..2....{.._WC.
+0070: F24747FA 4E951580 743E99CE FFB36C76  .GG.N...t>....lv
+0080: A48EA6FA 90214F89 C3D47095 25C6AF1B  .....!O...p.%...
+0090: A2851042 0CC102C0 B321C5CF E2920DEE  ...B.....!......
+00A0: DB2F3D7C B671920E 19149449 7F2DC036  ./=|.q.....I-.6
+00B0: C8637EB0 59BC2D95 775A4E20 2D2D48AE  .c~.Y.-.wZN --H.
+00C0: BED364B6 21FC9024 E9E48F96 F149E098  ..d.!..$.....I..
+00D0: 2D68AEF8 80D4F7C2 E5BD9442 22FC67FD  -h.........B".g.
+00E0: 4DEBB09F 9898B3C8 048F                    M.........      
+[15:03:39] P 127.0.0.1:63967 : 
+0000: 09000000 8AAB6F37 AA                       ......o7.       
+[15:03:39] I [CLIENT POST-ENCRYPT] : 09 00 00 00 F1 03 00 00 01 
+[15:03:39] D TCPManager : Handeling package 1009
+[15:03:39] I FileManager : GetFileByte Id =1
+[15:03:39] I FileClient : GetConf: AccountTutorialSettings.ini, CharName =
+[15:03:39] I [SERVER PRE-ENCRYPT] : 00 00 00 00 DF 07 00 00 00 00 00 00 01 
+[15:03:39] P SendTCP : 
+0000: 0D000000 3B1B50DD 2B8ED6D0 00           ....;.P.+....   
+[15:03:39] P 127.0.0.1:63967 : 
+0000: 09000000 F556CF62 75                       .....V.bu       
+[15:03:39] I [CLIENT POST-ENCRYPT] : 09 00 00 00 EA 03 00 00 03 
+[15:03:39] D TCPManager : Handeling package 1002
+[15:03:39] I [SERVER PRE-ENCRYPT] : 00 00 00 00 D7 07 00 00 00 00 00 00 03 01 00 00 
+00 00 09 00 00 00 01 00 00 00 00 41 00 50 00 42 
+00 2D 00 45 00 4D 00 55 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 78 01 00 00 34 00 90 
+AB E5 05 00 00 03 00 00 00 8F A0 87 90 21 31 B5 
+47 96 A6 66 ED E2 9C E5 8A 71 2E F3 A7 C1 7C 52 
+46 82 FB 98 66 AC 60 BD 40 9F 31 8C B7 EF 8B 44 
+4B A6 F8 B5 B4 55 76 2A A2 78 9C 93 67 60 60 F0 
+8D 77 CA 4F A9 8C 77 4A 2C 4E D5 73 CF CF 49 CD 
+D5 83 8A 80 39 0C C9 FA FE BF 1B 1E 69 6F 2F CB 
+BE 28 E8 C4 79 35 B5 38 56 7C 86 47 D5 E6 E0 65 
+AF 03 1F 1C 3C A8 DB E0 58 F0 FD B0 CB 9A 0D FC 
+53 B2 A3 CA F5 4A 19 D2 A2 9B BF DD 2D 4D 3F E2 
+2A B6 A3 E0 64 BA 20 EF D3 EC F7 3C 0C BC 2A FA 
+47 34 1F 4A BF 95 63 98 D0 B7 57 50 A9 3C FD BE 
+68 54 D7 A2 46 86 5B 05 2C ED 4C 6F DE 31 1F 6A 
+8C 7C 1C FC 60 D3 AE 1B 1F 5A EB B9 14 CF F7 D7 
+9B 44 FE 53 60 B8 BA DC DE C0 FE 87 F5 BD 87 33 
+25 65 D6 75 F6 CC 59 DA 5D 5C FF 5A E4 43 79 BD 
+4C CE C4 7A 9D 8E 6B CB 14 E5 04 A6 D5 2F A8 BF 
+71 B8 31 D2 A1 ED 43 CE CB E6 D6 8A 7B DF 05 17 
+75 38 FF 0F 99 75 9B 7B F9 FF 58 BE CF 05 D9 CB 
+1D 6C 0B 1A 1F 3A E5 2E 6F DF BB 61 A7 48 8D 8F 
+7D F0 76 A6 B4 9E 90 75 3C A2 E6 BB 4E 8B BC 3E 
+7C 3B DF 27 B8 41 D8 7F FF 3D A5 CD 2B 34 58 19 
+3F 8A D4 33 30 3E 63 2D 66 3C C0 FA 9A 81 8D 89 
+79 36 93 32 83 2E 03 13 C3 7F 06 56 86 B4 5F 7A 
+BF 3B 18 0A 18 92 9D D2 18 18 FE FF 87 61 46 74 
+36 2B 03 3A 60 49 2F B0 CD 63 63 E0 65 E0 4D 05 
+86 06 C3 07 20 84 01 6E 85 99 DB D9 18 F8 18 58 
+80 90 0F 08 FF C1 65 58 7F 28 5E 61 0B FE 1C FC 
+35 F8 33 C3 27 A0 0E 84 8C 44 EF 25 7E 56 A0 CC 
+17 B0 49 20 B3 D8 18 91 00 48 09 DB 7F 20 E0 02 
+31 02 8F CC 3D 71 63 D5 DB CD 9F AD E6 44 F8 C7 
+9D 88 F8 B4 2A FF E2 F5 5F 4B 25 3C DD 41 EA F4 
+DD 3E 1E 9D 71 00 E8 3D 06 18 DF 00 CC 67 64 D8 
+EE 06 E1 9B 1F 01 F1 99 E0 F2 82 47 50 E5 8B 0F 
+A1 CA B3 83 F9 CC 70 FE DE 03 20 3E 0B 5C 7D E8 
+3E 10 9F 15 2E 7F 7D 27 AA 79 1B D7 41 CC 03 83 
+FF CE F5 81 F7 CE 6A 45 38 EE DE 6A 36 67 C5 36 
+4F 06 86 34 B3 34 33 90 CC 53 5B 31 0D B1 15 4F 
+6D C1 AA 86 83 5F E5 FF 39 C7 5D FA E8 1A 15 F1 
+D5 7A CA 6A E1 B5 C9 EE 08 BF A6 5A 23 48 98 5F 
+59 7E CA 3F 2D 00 F9 D1 FF 73 C8 D6 92 47 C7 B7 
+1B 7B 83 A4 8D BD 7F 1F 96 3A 0E F2 23 8C 1F 78 
+02 C2 FF EE 00 E2 7F 77 88 DC B7 7B 07 C8 0D BB 
+C1 FC DD 0E 9F 76 C4 EE 00 B9 01 C6 9F 6A 08 E2 
+33 33 04 7A 82 F8 81 9E 8B 0E CA 1E 95 FF C2 C0 
+10 00 E6 07 78 DA 1D 93 01 F3 91 CD 93 FF C2 C8 
+81 6C 9E FC 17 26 0E 64 F3 E4 BF 30 73 40 FD F8 
+FA A2 B8 EB 8C 88 C7 D6 5F 57 2A 6E 5C 84 E4 C7 
+27 D6 08 72 A8 FB F1 5B 80 C1 79 97 88 D6 5D 73 
+2C 36 AF 56 F0 42 F8 D1 D0 AE 59 BB 79 B5 A1 1D 
+CC 8F E0 78 7F FF 63 BA 1D 30 9D 2F BB 58 EA F2 
+3E E2 A1 F5 D2 15 61 1B 0F 20 A5 F3 8B B6 08 12 
+5D CF CE 80 35 67 17 44 7C DB A5 6F 9E BF 09 97 
+1E 06 06 00 A3 02 07 9A 
+[15:03:39] P SendTCP : 
+0000: A8030000 A2A4CF9A C043C704 C3DEBD56  .........C.....V
+0010: 0C30D87F EB6AA75D 77E7E3B3 B0C43A6E  .0..j.]w.....:n
+0020: 67356170 98503EBC 1B815A9A E1B7451D  g5ap.P>...Z...E.
+0030: A0447740 44050D38 11BF579C 766329E2  .Dw@D..8..W.vc).
+0040: DF65A286 1549FFFE 0BA22544 603A1B49  .e...I....%D`:.I
+0050: 46EF4E85 54C648E4 3BCFFA61 53AE834A  F.N.T.H.;..aS..J
+0060: 8AAC1357 6493A36F 2FD5B875 1E1E9753  ...Wd..o/..u...S
+0070: 1E233E29 C466842B 251B809A C35DED66  .#>).f.+%....].f
+0080: E1C3CA69 3786A826 56F261B6 B5DAD282  ...i7..&V.a.....
+0090: 8EB25077 7C8B6A7D 9FEEAD2F FCD37D71  ..Pw|.j}.../..}q
+00A0: 3BECA2A3 4124AC63 801DD305 2FF8E234  ;...A$.c..../..4
+00B0: E9C06D90 0DC6DA00 332359FC 45C7B7B0  ..m.....3#Y.E...
+00C0: 41FE5ED9 4E68CB1B 9B893694 022AAB7A  A.^.Nh....6..*.z
+00D0: DC841189 D94EDDC9 132FF18D FB36AF0F  .....N.../...6..
+00E0: 8FABED81 F6145EBC 4CCC1055 3219EB86  ......^.L..U2...
+00F0: 3F564DCF 93075D9A 6B711CB9 2C6585C4  ?VM...].kq..,e..
+0100: 2682187C 1D1CC480 78A2C976 50AD4CE0  &..|....x..vP.L.
+0110: ECEA5DA0 FAA6BC4D 7A27AFAE EDB00F90  ..]....Mz'......
+0120: 9F9BF2E4 6F4F2138 70C3EE98 F075BEDF  ....oO!8p....u..
+0130: 4D919AD9 7F8F551F E5763516 B6C91826  M....U..v5....&
+0140: 006CF0B3 8663361D 8918606A 6EF0D359  .l...c6...`jn..Y
+0150: 1494058D 3EDE3BC1 BAB4BDD1 76E8C2FF  ....>.;.....v...
+0160: 9771AE77 9C1980B4 796B2F4D 3266ED3D  .q.w....yk/M2f.=
+0170: 597E4A99 07D55544 F082A09B D2662A8C  Y~J...UD.....f*.
+0180: 4BAF917B 56840083 8FF9CB83 7DAC28CC  K..{V.......}.(.
+0190: A9958385 AC426F9F 573A93CC 968C09C4  .....Bo.W:......
+01A0: DD005CE6 ED8B68AE F3AC2CB7 A910B8A9  ..\...h...,.....
+01B0: 5E1253F4 283E1ACB 2373B609 8D25CF80  ^.S.(>..#s...%..
+01C0: 179D775D 00CB84C4 D7BC3EC2 BE4BD805  ..w]......>..K..
+01D0: 83733E8D 4DD20A6E 4CC1084C D2FCC0AB  .s>.M..nL..L....
+01E0: 8689AAC6 229BDA7C 55AB1FA3 A31B99D4  ...."..|U.......
+01F0: 63429F1B 3D3B8FD5 4399E563 8E5A8F71  cB..=;..C..c.Z.q
+0200: 5DB58B1B 00C5FE54 39EFC634 CBAAC8E4  ]......T9..4....
+0210: A53A3508 CD32F6EC 65B44355 19A90B7D  .:5..2..e.CU...}
+0220: 1EE66E51 C72722CC 18A44BA8 9D9841D4  ..nQ.'"...K...A.
+0230: 48BCD8CA CC998F99 DEEF69CB 5CD67D09  H.........i.\.}.
+0240: 986D34D8 0C260258 89C66AFE 53B64A9D  .m4..&.X..j.S.J.
+0250: 5B8C1722 2BD1F118 79CD768D B9440B26  [.."+...y.v..D.&
+0260: 212F0BCD A4495267 13200078 598F7832  !/...IRg. .xY.x2
+0270: 6666BEBB B700F6E5 BA1364A2 1D71B083  ff........d..q..
+0280: E1641D36 A07B5254 83C8AD70 B9E3D585  .d.6.{RT...p....
+0290: 5F1B509D EEF50DAA E80689F2 1B566C05  _.P..........Vl.
+02A0: 3CCB9E4F 7D1663CE DC79A5DF 8D46B13F  <..O}.c..y...F.?
+02B0: 7EA8597A FFE72A5C 0089982C 22C7C994  ~.Yz..*\...,"...
+02C0: C4E437FF 6167A298 C1D01237 7319CF44  ..7.ag.....7s..D
+02D0: 4198BD3B D5BEEDA1 8FF3B118 8FDA7A1F  A..;..........z.
+02E0: 5BDD5F16 8340AC45 ABA16DBA 90395B23  [._..@.E..m..9[#
+02F0: 32969FB9 51CFE7A4 6539BDB6 E0C7B8C4  2...Q...e9......
+0300: E0335A83 D0680455 DC6170F3 506A5A12  .3Z..h.U.ap.PjZ.
+0310: 6FDB378A 05F1F56E 7098DD96 FC75E7BE  o.7....np....u..
+0320: 50C9CBEE 2B62CB1B 5D630055 06290C34  P...+b..]c.U.).4
+0330: 26D98804 60FC3640 F2C2733E 5DFDBC0B  &...`.6@..s>]...
+0340: 040F1BA6 2595B7ED ED735358 2EE2FFF3  ....%....sSX....
+0350: 9D737DE6 5CB6E90A 4355C49D E3B24C09  .s}.\...CU....L.
+0360: D490BDA9 0D7C6463 05F99977 2ECE64F9  .....|dc...w..d.
+0370: BCF7F1B5 EA4D3A50 7CCF21A1 55E8BEEE  .....M:P|.!.U...
+0380: 889CEAEC 0EC734D4 84947C3F 7510E925  ......4...|?u..%
+0390: 2443F026 23E082A7 57D87986 46B87436  $C.&#...W.y.F.t6
+03A0: 18E530C2 0B50DDFA                           ..0..P..        
+[15:03:42] P 127.0.0.1:63967 : 
+0000: 09000000 A49119D4 E1                       .........       
+[15:03:42] I [CLIENT POST-ENCRYPT] : 09 00 00 00 F0 03 00 00 03 
+[15:03:42] D TCPManager : Handeling package 1008
+[15:03:42] I [SERVER PRE-ENCRYPT] : 00 00 00 00 DD 07 00 00 00 00 00 00 7F 00 00 01 
+49 08 0E 9A 48 57 00 00 00 00 
+[15:03:42] P SendTCP : 
+0000: 1A000000 F2D4D6C9 9D0B7FB1 3E0B95D1  ...........>...
+0010: 45745495 EB025C90 8321                    EtT...\..!      
+[15:03:42] D BaseClient : Disconnecting the client (127.0.0.1:63967), received bytes=0
+[15:04:05] I World.Listener : Reborn disconnected!

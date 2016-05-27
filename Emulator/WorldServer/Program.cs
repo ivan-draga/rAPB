@@ -8,6 +8,13 @@ using WorldServer.Districts;
 using WorldServer.Lobby;
 using WorldServer.RpcFile;
 using System.Runtime.InteropServices;
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using FrameWork.Logger;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace WorldServer
 {
@@ -17,6 +24,8 @@ namespace WorldServer
         static public Dictionary<UInt32, Acc> expectingAccounts = new Dictionary<UInt32, Acc>();
         static public Districts.Listener districtsListener;
         static public List<WorldClient> clients = new List<WorldClient>();
+
+        public static ushort districtPort;
 
         #region WorldData
 
@@ -47,6 +56,8 @@ namespace WorldServer
         static void Main(string[] args)
         {
             Log.Info("WorldServer", "Starting...");
+            if (!EasyServer.InitLog("World", "Configs/DistrictLog.conf") || !EasyServer.InitConfig("Configs/District.xml", "District")) return;
+            districtPort = EasyServer.GetConfValue<ushort>("District", "District", "Port");
             if (!EasyServer.InitLog("World", "Configs/WorldLog.conf") || !EasyServer.InitConfig("Configs/World.xml", "World")) return;
             Port = EasyServer.GetConfValue<int>("World", "Address", "Port");
             IP1 = EasyServer.GetConfValue<Byte>("World", "Address", "IP1");
@@ -74,6 +85,7 @@ namespace WorldServer
             }
             EasyServer.StartConsole();
         }
+        
 
         static void ProccessCommand(string command)
         {

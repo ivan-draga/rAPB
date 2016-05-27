@@ -3,8 +3,9 @@
 	<District>
 		<Id>1</Id>
 		<Language>en</Language>
-		<Type>financial</Type>
+		<Type>social</Type>
 		<Hardcore>false</Hardcore>
 		<Password>pass</Password>
+		<Port>6969</Port>
 	</District>
 </root>
