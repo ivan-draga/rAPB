@@ -19,7 +19,7 @@ namespace DistrictServer.World.WD
             Byte canhost = 0;
             try
             {
-                System.IO.StreamReader file = new System.IO.StreamReader("Configs\\token.id");
+                System.IO.StreamReader file = new System.IO.StreamReader("Configs\\Client stuff (put into 'Binaries' folder)\\_rtoken.id");
                 while ((line = file.ReadLine()) != null) token = line;
                 file.Close();
             }

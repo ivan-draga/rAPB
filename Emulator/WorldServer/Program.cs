@@ -25,8 +25,6 @@ namespace WorldServer
         static public Districts.Listener districtsListener;
         static public List<WorldClient> clients = new List<WorldClient>();
 
-        public static ushort districtPort;
-
         #region WorldData
 
         static public Byte ID;
@@ -56,8 +54,6 @@ namespace WorldServer
         static void Main(string[] args)
         {
             Log.Info("WorldServer", "Starting...");
-            if (!EasyServer.InitLog("World", "Configs/DistrictLog.conf") || !EasyServer.InitConfig("Configs/District.xml", "District")) return;
-            districtPort = EasyServer.GetConfValue<ushort>("District", "District", "Port");
             if (!EasyServer.InitLog("World", "Configs/WorldLog.conf") || !EasyServer.InitConfig("Configs/World.xml", "World")) return;
             Port = EasyServer.GetConfValue<int>("World", "Address", "Port");
             IP1 = EasyServer.GetConfValue<Byte>("World", "Address", "IP1");
@@ -149,6 +145,7 @@ namespace WorldServer
                 {
                     count++;
                     Console.WriteLine("IP: " + district.Value.IP);
+                    Console.WriteLine("Port: " + district.Value.Port.ToString());
                     Console.WriteLine("ID: " + district.Value.Id);
                     Console.WriteLine("Type: " + district.Value.Type);
                     Console.WriteLine("Enforcers: " + district.Value.Enforcers);

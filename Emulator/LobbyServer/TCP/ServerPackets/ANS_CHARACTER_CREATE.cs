@@ -16,6 +16,7 @@ namespace LobbyServer
             }
             client.Pending = null;
             client.Send(Out);
+            client.Disconnect(); //temporar fix for hanging after done with char creation
         }
     }
 }

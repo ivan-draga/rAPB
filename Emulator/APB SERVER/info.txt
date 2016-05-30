@@ -1,4 +1,0 @@
-2.0.0:
-
-Server sends client 5 packets rather than 3
-Client sends server 6 packets rather than (unknown)

@@ -121,7 +121,6 @@
     <Compile Include="TCP\ClientPackets\LFG.cs" />
     <Compile Include="TCP\ClientPackets\LOGOUT.cs" />
     <Compile Include="TCP\Encryption.cs" />
-    <Compile Include="TCP\Listener.cs" />
     <Compile Include="TCP\Opcodes.cs" />
     <Compile Include="TCP\ResponseCodes.cs" />
     <Compile Include="TCP\ServerPackets\ANS_CHARACTERFINDER_INFO.cs" />

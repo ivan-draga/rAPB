@@ -4,7 +4,7 @@ namespace DistrictServer.World.DW
 {
     class RegisterDistrict : Packet
     {
-        public RegisterDistrict(Byte type, Byte Id, Byte language, String password, String IP) : base()
+        public RegisterDistrict(Byte type, Byte Id, Byte language, String password, String IP, String Port) : base()
         {
             WriteByte((Byte)OpCodes.WD_REGISTER_DISTRICT);
             WriteByte(type);
@@ -12,6 +12,7 @@ namespace DistrictServer.World.DW
             WriteByte(language);
             WriteS(password);
             WriteS(IP);
+            WriteS(Port);
         }
     }
 }

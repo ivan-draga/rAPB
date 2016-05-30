@@ -88,6 +88,7 @@ namespace WorldServer.Districts
         public UInt16 Criminals = 0;
         public UInt16 Queue = 0;
         public String IP = null;
+        public ushort Port;
         public UInt32 Key = 0;
 
         public Byte isFull()

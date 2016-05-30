@@ -1,6 +1,6 @@
 ﻿﻿using System;
 
-namespace SmartEngine.Network
+namespace DistrictServer
 {
     public static class XTEA
     {

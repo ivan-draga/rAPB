@@ -10,6 +10,8 @@ namespace WorldServer.TCP.ServerPackets
     {
         public ANS_DISTRICT_RESERVE(UInt32 code, UInt32 charUID, Byte group, WorldClient client) : base((UInt32)Opcodes.ANS_DISTRICT_RESERVE)
         {
+            //TODO: make this nicer
+
             UInt32 social = 16777216;
             UInt32 social_2 = 16777217;
             UInt32 financial = 33554432;
@@ -32,6 +34,7 @@ namespace WorldServer.TCP.ServerPackets
                                     client.Reserved.Key = district.Key;
                                     client.Reserved.Id = district.Value.Id;
                                     client.Reserved.IP = district.Value.IP;
+                                    client.Reserved.Port = district.Value.Port;
                                     client.Reserved.Criminals = district.Value.Criminals;
                                     client.Reserved.Enforcers = district.Value.Enforcers;
                                     client.Reserved.Queue = district.Value.Queue;
@@ -55,6 +58,7 @@ namespace WorldServer.TCP.ServerPackets
                                     client.Reserved.Key = district.Key;
                                     client.Reserved.Id = district.Value.Id;
                                     client.Reserved.IP = district.Value.IP;
+                                    client.Reserved.Port = district.Value.Port;
                                     client.Reserved.Criminals = district.Value.Criminals;
                                     client.Reserved.Enforcers = district.Value.Enforcers;
                                     client.Reserved.Queue = district.Value.Queue;
@@ -78,6 +82,7 @@ namespace WorldServer.TCP.ServerPackets
                                     client.Reserved.Key = district.Key;
                                     client.Reserved.Id = district.Value.Id;
                                     client.Reserved.IP = district.Value.IP;
+                                    client.Reserved.Port = district.Value.Port;
                                     client.Reserved.Criminals = district.Value.Criminals;
                                     client.Reserved.Enforcers = district.Value.Enforcers;
                                     client.Reserved.Queue = district.Value.Queue;
@@ -110,6 +115,7 @@ namespace WorldServer.TCP.ServerPackets
                                     client.Reserved.Key = district.Key;
                                     client.Reserved.Id = district.Value.Id;
                                     client.Reserved.IP = district.Value.IP;
+                                    client.Reserved.Port = district.Value.Port;
                                     client.Reserved.Criminals = district.Value.Criminals;
                                     client.Reserved.Enforcers = district.Value.Enforcers;
                                     client.Reserved.Queue = district.Value.Queue;
@@ -133,6 +139,7 @@ namespace WorldServer.TCP.ServerPackets
                                     client.Reserved.Key = district.Key;
                                     client.Reserved.Id = district.Value.Id;
                                     client.Reserved.IP = district.Value.IP;
+                                    client.Reserved.Port = district.Value.Port;
                                     client.Reserved.Criminals = district.Value.Criminals;
                                     client.Reserved.Enforcers = district.Value.Enforcers;
                                     client.Reserved.Queue = district.Value.Queue;
@@ -156,6 +163,7 @@ namespace WorldServer.TCP.ServerPackets
                                     client.Reserved.Key = district.Key;
                                     client.Reserved.Id = district.Value.Id;
                                     client.Reserved.IP = district.Value.IP;
+                                    client.Reserved.Port = district.Value.Port;
                                     client.Reserved.Criminals = district.Value.Criminals;
                                     client.Reserved.Enforcers = district.Value.Enforcers;
                                     client.Reserved.Queue = district.Value.Queue;

@@ -1,69 +1,45 @@
-﻿//#define ENABLE_PACKET_SAVING
-
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using FrameWork.Logger;
 using Unreal.IO;
 using System.IO;
-using SmartEngine.Network;
 using FrameWork;
 
-public class Listener
+namespace DistrictServer
 {
-    
-
-    public static void StartListener()
+    public class Listener
     {
-        bool done = false;
-
-        UdpClient receivingUdpClient = new UdpClient(EasyServer.GetConfValue<int>("District", "District", "Port"));
-        receivingUdpClient.DontFragment = true;
-        receivingUdpClient.EnableBroadcast = true;
-        Log.Notice("Listener", "Starting UDP server on port " + EasyServer.GetConfValue<int>("District", "District", "Port"));
-
-        string file = "Logs\\District Packets\\packets" + ".log";
-        System.IO.StreamWriter f = new System.IO.StreamWriter(file);
-        bool firstpacket = false;
-        while (!done)
+        public static void StartListener()
         {
-            
-            IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-            try
+            bool done = false;
+            UdpClient receivingUdpClient = new UdpClient(Convert.ToInt32(Program.Port));
+            receivingUdpClient.DontFragment = true;
+            receivingUdpClient.EnableBroadcast = true;
+            Log.Notice("Listener", "Starting UDP server on port " + Program.Port);
+            while (!done)
             {
-                Byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
-                string returnData = BitConverter.ToString(receiveBytes);
-                string returnAscii = Encoding.ASCII.GetString(receiveBytes);
-
-                int length = receiveBytes.Length;
-                
-                XTEA.Decrypt(ref receiveBytes, ref length, 0, null);
-
-
-                Log.Dump("Listener", RemoteIpEndPoint.Port.ToString() + ": " + returnData.ToString());
-                if (!firstpacket)
+                IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                try
                 {
-                    f.WriteLine(returnData);
-                    f.Dispose();
-
-                    Log.Notice("Listener", "First packet received...");
+                    Byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
+                    string data1 = BitConverter.ToString(receiveBytes);
+                    string data2 = data1.Replace('-', ' ');
+                    //string ascii = Encoding.ASCII.GetString(receiveBytes);
+                    Console.WriteLine("Data:\n\n" + data2 + "\n\n");
                 }
-                firstpacket = true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             }
         }
+
+        public static int Start()
+        {
+            StartListener();
+            return 0;
+        }
     }
-
-    public static int Start()
-    {
-        StartListener();
-        return 0;
-    }
-    
-
-
 }

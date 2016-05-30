@@ -3,10 +3,10 @@
 	<Database>
 		<ConnectionString>
 			Server=localhost;
-			Port=3306;
+			Port=;
 			Database=apbdb;
 			User Id=root;
-			Password=patdan123;
+			Password=;
 			Treat Tiny As Boolean=False
 		</ConnectionString>
 	</Database>

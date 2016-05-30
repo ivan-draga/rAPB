@@ -22,6 +22,7 @@ namespace WorldServer.Districts.DW
             TcpClient client = district.tcp;
             String regpass = ReadS();
             String IP = ReadS();
+            String Port = ReadS();
             IPEndPoint address = (IPEndPoint)district.tcp.Client.RemoteEndPoint;
             switch ((DistrictTypes)type)
             {
@@ -50,6 +51,8 @@ namespace WorldServer.Districts.DW
             if (ID != 0)
             {
                 district.Id = ID;
+                district.IP = IP;
+                district.Port = Convert.ToUInt16(Port);
                 lock (Program.districtsListener.Districts)
                 {
                     UInt32 code = (UInt32)(district.Type << 24);
@@ -69,9 +72,8 @@ namespace WorldServer.Districts.DW
                     }
                     Program.districtsListener.Districts.Add(code, district);
                 }
-                Log.Succes("RegisterDistrict", district + " was registered! (" + IP + ")");
+                Log.Succes("RegisterDistrict", district + " was registered! (" + IP + ":" + Port + ")");
                 
-                district.IP = IP;
                 district.Send(new DBInfo(Database.Connection.connectionString));
             }
             else

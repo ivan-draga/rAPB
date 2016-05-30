@@ -111,7 +111,7 @@ namespace LobbyServer.Database
             command.Parameters.AddWithValue("@name", character.Name);
             command.Parameters.AddWithValue("@faction", character.Faction);
             command.Parameters.AddWithValue("@gender", character.Gender);
-            command.Parameters.AddWithValue("@rank", 9);
+            command.Parameters.AddWithValue("@rank", 1);
             command.Parameters.AddWithValue("@money", character.Money);
             command.Parameters.AddWithValue("@threat", 1);
             command.Parameters.AddWithValue("@playtime", character.Playtime);

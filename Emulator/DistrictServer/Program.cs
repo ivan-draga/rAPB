@@ -6,7 +6,6 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using FrameWork.Logger;
 using Unreal.IO;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -17,7 +16,6 @@ namespace DistrictServer
     class Program
     {
         public static World.Client World;
-        public static int districtPort;
 
         #region DistrictData
 
@@ -26,6 +24,7 @@ namespace DistrictServer
         public static Byte Language;
         public static Byte ID;
         public static String IP;
+        public static String Port;
 
         #endregion
 
@@ -38,7 +37,6 @@ namespace DistrictServer
             if (!EasyServer.InitLog("World", "Configs/DistrictLog.conf") || !EasyServer.InitConfig("Configs/District.xml", "District")) return;
             switch (EasyServer.GetConfValue<String>("District", "District", "Type"))
             {
-                default:
                 case "social":
                     Type = 1;
                     break;
@@ -55,7 +53,6 @@ namespace DistrictServer
 
             switch (EasyServer.GetConfValue<String>("District", "District", "Language"))
             {
-                default:
                 case "en":
                     Language = 0;
                     break;
@@ -80,14 +77,13 @@ namespace DistrictServer
 
             #endregion
 
-            districtPort = EasyServer.GetConfValue<int>("District", "District", "Port");
             Log.Info("World.Client", "Connecting to world at 127.0.0.1:2108...");
             Password = "pass";
             ID = EasyServer.GetConfValue<Byte>("District", "District", "Id");
+            Port = EasyServer.GetConfValue<String>("District", "District", "Port");
             IP = GetPublicIP();
             if (IP == null) { System.Threading.Thread.Sleep(500); Environment.Exit(2); }
             World = new World.Client("127.0.0.1", 2108);
-            
             EasyServer.StartConsole();
         }
 

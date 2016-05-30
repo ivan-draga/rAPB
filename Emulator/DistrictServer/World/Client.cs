@@ -50,7 +50,7 @@ namespace DistrictServer.World
 
         private void handleLobby()
         {
-            DW.RegisterDistrict initPacket = new DW.RegisterDistrict(Program.Type, Program.ID, Program.Language, Program.Password, Program.IP);
+            DW.RegisterDistrict initPacket = new DW.RegisterDistrict(Program.Type, Program.ID, Program.Language, Program.Password, Program.IP, Program.Port);
             stream.Write(initPacket.ToArray(), 0, initPacket.ToArray().Length);
             stream.Flush();
             Byte[] message = new Byte[4096];

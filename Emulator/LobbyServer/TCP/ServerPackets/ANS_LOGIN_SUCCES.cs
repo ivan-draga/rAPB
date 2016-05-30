@@ -12,7 +12,7 @@ namespace LobbyServer
         static public void Send(LobbyClient client)
         {
             PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_LOGIN_SUCCESS);
-            Out.WriteParsedString("Welcome to APB Reborn", 48);
+            Out.WriteParsedString("Welcome to rebornAPB", 48);
             Out.WriteUInt32Reverse(client.Account.Admin);
             Out.WriteInt64Reverse(TCPManager.GetTimeStamp());
             Out.WriteByte(0x13);
