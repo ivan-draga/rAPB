@@ -71,13 +71,13 @@ namespace WorldServer
             Lobby = new Lobby.Client(EasyServer.GetConfValue<String>("World", "Lobby", "Ip"), EasyServer.GetConfValue<int>("World", "Lobby", "Port"));
             districtsListener = new Districts.Listener(EasyServer.GetConfValue<String>("World", "Districts", "Ip"), EasyServer.GetConfValue<int>("World", "Districts", "Port"));
             clients.Clear();
-            Log.Enter();
-            Console.WriteLine("For available console commands, type /commands");
-            Log.Enter();
             Timer aTimer = new Timer(10000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
+            Log.Enter();
+            Console.WriteLine("For available console commands, type /commands");
+            Log.Enter();
             bool done = false;
             while (!done)
             {

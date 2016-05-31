@@ -60,10 +60,6 @@ namespace LobbyServer
 
         static public void Register(LobbyClient client)
         {
-            //TODO - generate token when registering from site and give user download link for "token.id" file
-            Random getrandom = new Random();
-            String token = getrandom.Next(10000000, 99999999).ToString();
-            client.Account.Token = token;
             String Id = Convert.ToString(client.Account.Index);
             String Pass = client.Account.Password;
             Byte[] salt = new byte[10];
