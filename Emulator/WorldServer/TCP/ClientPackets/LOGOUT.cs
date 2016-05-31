@@ -2,8 +2,7 @@
 using FrameWork.Logger;
 using System;
 using WorldServer.TCP.ServerPackets;
-using MySql.Data.MySqlClient;
-using MySql.Data.Types;
+using MyDB;
 
 namespace WorldServer.TCP.ClientPackets
 {
@@ -13,16 +12,15 @@ namespace WorldServer.TCP.ClientPackets
         public int HandlePacket(BaseClient client, PacketIn packet)
         {
             WorldClient cclient = (WorldClient)client;
-            MySqlCommand cmd = new MySqlCommand("DELETE FROM `clientstatus` WHERE `name` = @name", WorldServer.Database.Connection.Instance);
-            try
-            {
-                cmd.Prepare();
-                cmd.Parameters.AddWithValue("@name", cclient.Name);
-                cmd.ExecuteNonQuery();
-            }
-            catch (MySqlException e) { Log.Error("MySQL", e.ToString()); }
-            finally { cmd.Dispose(); }
-            Program.Lobby.Send(new Lobby.WL.Logout(cclient.Email, cclient.account.SessionId));
+            cclient.Character.IsOnline = 0;
+            cclient.Character.LFG = 0;
+            cclient.Character.DistrictID = 0;
+            cclient.Character.DistrictType = 0;
+            cclient.Character.GroupInvite = 0;
+            cclient.Character.GroupStatus = 0;
+            cclient.Character.IsGroupPublic = 0;
+            Databases.CharacterTable.Update(cclient.Character);
+            Program.Lobby.Send(new Lobby.WL.Logout(cclient.Account.Username, cclient.account.SessionId));
             PacketOut Out = new PacketOut((UInt32)Opcodes.LOGOUT);
             cclient.Send(Out);
             cclient.Disconnect();

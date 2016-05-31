@@ -9,11 +9,13 @@ namespace WorldServer.TCP.ServerPackets
         {
             WriteUInt32((uint)ResponseCodes.RC_SUCCESS);
             WriteByte(1);
-            WriteByte(client.LFG);
-            WriteByte(client.groupStatus);
-            WriteByte(client.groupPublic);
-            WriteByte(client.groupInvite); 
-            WriteUInt32((uint)(client.districtID & client.districtType));
+            WriteByte(client.Character.LFG);
+            WriteByte(client.Character.GroupStatus);
+            WriteByte(client.Character.IsGroupPublic);
+            WriteByte(client.Character.GroupInvite);
+            UInt32 code = (UInt32)(client.Character.DistrictType << 24);
+            code += client.Character.DistrictID;
+            WriteUInt32(code);
             WriteByte(0);
             WriteUInt32Reverse(charUID);
             /*

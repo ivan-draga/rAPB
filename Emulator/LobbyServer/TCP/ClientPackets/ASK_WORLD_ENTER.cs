@@ -1,11 +1,9 @@
 ﻿using FrameWork.Logger;
 using FrameWork.NetWork;
-
-using LobbyServer.Database;
 using LobbyServer.World;
 using LobbyServer.World.LW;
-
 using System;
+using MyDB;
 
 namespace LobbyServer
 {
@@ -16,18 +14,18 @@ namespace LobbyServer
         {
             LobbyClient cclient = (LobbyClient)client;
             Byte slotId = packet.GetUint8();
-            Character character = cclient.Characters.Get(slotId);
-            if (character == null) Log.Error(cclient.Account.Email, "Wrong slot specified!");
+            CharacterEntry character = Databases.CharacterTable.SingleOrDefault(c => c.AccountIndex == cclient.Account.Index && c.Slot == slotId);
+            if (character.Index < 1) Log.Error(cclient.Account.Username, "Wrong slot specified!");
             World.World info = null;
             lock (Program.worldListener.Worlds)
             {
-                Program.worldListener.Worlds.TryGetValue(character.WorldId, out info);
+                Program.worldListener.Worlds.TryGetValue((uint)character.World, out info);
             }
             PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_WORLD_ENTER);
             if (info == null) Out.WriteUInt32Reverse(1);
             else
             {
-                info.Send(new AccountEnter(cclient.Account.Id, character.Id, cclient.SessionId));
+                info.Send(new AccountEnter((uint)cclient.Account.Index, (uint)character.Index, cclient.SessionId));
                 Out.WriteUInt32Reverse((uint)ResponseCodes.RC_SUCCESS);
                 Out.WriteByte(info.IP1);
                 Out.WriteByte(info.IP2);

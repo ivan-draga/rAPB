@@ -25,6 +25,7 @@ namespace DistrictServer
         public static Byte ID;
         public static String IP;
         public static String Port;
+        public static String Token;
 
         #endregion
 
@@ -82,6 +83,19 @@ namespace DistrictServer
             ID = EasyServer.GetConfValue<Byte>("District", "District", "Id");
             Port = EasyServer.GetConfValue<String>("District", "District", "Port");
             IP = GetPublicIP();
+            try
+            {
+                string line = null;
+                System.IO.StreamReader file = new System.IO.StreamReader("Configs\\Client stuff (put into 'Binaries' folder)\\_rtoken.id");
+                while ((line = file.ReadLine()) != null) Token = line;
+                file.Close();
+            }
+            catch (FileNotFoundException)
+            {
+                Log.Error("Token", "\"_rtoken.id\" file not found!");
+                System.Threading.Thread.Sleep(3000);
+                Environment.Exit(2);
+            }
             if (IP == null) { System.Threading.Thread.Sleep(500); Environment.Exit(2); }
             World = new World.Client("127.0.0.1", 2108);
             EasyServer.StartConsole();

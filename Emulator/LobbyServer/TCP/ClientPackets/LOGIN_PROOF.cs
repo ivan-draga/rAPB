@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
 using System.Text;
-
-using FrameWork.Logger;
 using FrameWork.NetWork;
 using LobbyServer.SRP;
 
@@ -61,16 +59,16 @@ namespace LobbyServer
 
         static public bool IsValid(LobbyClient client)
         {
-            if (client.Account == null) return false;
-            Console.WriteLine("Account ID: " + Convert.ToString(client.Account.Id));
-            Byte[] proof = Auth.computeProof(Convert.ToString(client.Account.Id), client.serverModulus, client.clientModulus, client.Verifier, client.Salt, out client.SessionId);
+            if (client.Account.Index < 1) return false;
+            Console.WriteLine("Account ID: " + Convert.ToString(client.Account.Index));
+            Byte[] proof = Auth.computeProof(Convert.ToString(client.Account.Index), client.serverModulus, client.clientModulus, client.Verifier, client.Salt, out client.SessionId);
             for (int i = 0; i < proof.Length; i++) if (proof[i] != client.Proof[i]) return false;
             return true;
         }
 
         static public bool IsBanned(LobbyClient client)
         {
-            if (client.Account.Banned.Equals(1)) return true;
+            if (client.Account.IsBanned.Equals(1)) return true;
             else return false;
         }
     }

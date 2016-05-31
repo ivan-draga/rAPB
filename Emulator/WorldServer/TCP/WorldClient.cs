@@ -2,13 +2,11 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-
 using FrameWork.Logger;
 using FrameWork.NetWork;
-
 using WorldServer.TCP;
 using WorldServer.Districts;
-using WorldServer.Database;
+using MyDB;
 
 namespace WorldServer
 {
@@ -30,7 +28,6 @@ namespace WorldServer
     public class WorldClient : BaseClient
     {
         public District Reserved;
-        public Byte LFG = 0;
         public Lobby.Acc account;
 
         #region Client state
@@ -90,32 +87,10 @@ namespace WorldServer
         }
         #endregion
 
-        #region Account stuff
+        #region Database stuff
 
-        public UInt32 AccountId;
-        public Byte isGM = 0;
-        public Byte isBanned = 0;
-        public String Email;
-        public UInt32 Points;
-
-        #endregion
-
-        #region Character stuff
-
-        public UInt32 CharacterId;
-        public String Name;
-        public Byte Faction;
-        public Byte Gender;
-        public UInt32 Rank;
-        public UInt32 Money;
-        public Byte Threat;
-        public UInt32 Playtime;
-        public String Clan = "APB-EMU";
-        public Byte districtID;
-        public Byte districtType;
-        public Byte groupStatus;
-        public Byte groupInvite;
-        public Byte groupPublic;
+        public AccountEntry Account;
+        public CharacterEntry Character;
 
         #endregion
 

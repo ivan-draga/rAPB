@@ -1,7 +1,6 @@
 ﻿using FrameWork.NetWork;
 using System;
-using MySql.Data.MySqlClient;
-using MySql.Data.Types;
+using MyDB;
 using WorldServer.TCP.ServerPackets;
 
 namespace WorldServer.TCP.ClientPackets
@@ -13,32 +12,16 @@ namespace WorldServer.TCP.ClientPackets
         {
             WorldClient cclient = (WorldClient)client;
             PacketOut Out = new PacketOut((UInt32)Opcodes.LFG);
-            if (cclient.LFG == 0)
+            if (cclient.Character.LFG == 0)
             {
-                MySqlCommand cmd = new MySqlCommand("UPDATE `clientstatus` SET `lfg` = 1 WHERE `name` = @name", WorldServer.Database.Connection.Instance);
-                try
-                {
-                    cmd.Prepare();
-                    cmd.Parameters.AddWithValue("@name", cclient.Name);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (MySqlException e) { FrameWork.Logger.Log.Error("MySQL", e.ToString()); }
-                finally { cmd.Dispose(); }
-                cclient.LFG = 1;
+                cclient.Character.LFG = 1;
+                Databases.CharacterTable.Update(cclient.Character);
                 Out.WriteByte(1);
             }
-            else if (cclient.LFG == 1)
+            else if (cclient.Character.LFG == 1)
             {
-                MySqlCommand cmd = new MySqlCommand("UPDATE `clientstatus` SET `lfg` = 0 WHERE `name` = @name", WorldServer.Database.Connection.Instance);
-                try
-                {
-                    cmd.Prepare();
-                    cmd.Parameters.AddWithValue("@name", cclient.Name);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (MySqlException e) { FrameWork.Logger.Log.Error("MySQL", e.ToString()); }
-                finally { cmd.Dispose(); }
-                cclient.LFG = 0;
+                cclient.Character.LFG = 0;
+                Databases.CharacterTable.Update(cclient.Character);
                 Out.WriteByte(0);
             }
             cclient.Send(Out);

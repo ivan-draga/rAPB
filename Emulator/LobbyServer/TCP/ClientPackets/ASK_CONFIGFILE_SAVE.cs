@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using FrameWork.NetWork;
 using FrameWork.Logger;
 using FrameWork.zlib;
@@ -21,7 +20,7 @@ namespace LobbyServer
             packet.Read(File, 0, File.Length);
             File = ZlibMgr.Decompress(File);
             Log.Debug("ConfigSave", "Config saved : fileid=" + FileId + ", Version=" + Version + ",Size=" + File.Length);
-            Program.FileMgr.SaveInfo((int)cclient.Account.Id, FileId, File);
+            Program.FileMgr.SaveInfo((int)cclient.Account.Index, FileId, File);
             PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_CONFIGFILE_SAVE);
             Out.WriteUInt32Reverse((uint)ResponseCodes.RC_SUCCESS);
             Out.WriteByte(FileId);

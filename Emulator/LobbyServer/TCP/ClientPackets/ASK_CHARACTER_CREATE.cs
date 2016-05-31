@@ -1,9 +1,6 @@
-﻿using FrameWork.Logger;
-using FrameWork.NetWork;
-
-using LobbyServer.Database;
-
+﻿using FrameWork.NetWork;
 using System;
+using MyDB;
 
 namespace LobbyServer
 {
@@ -13,21 +10,35 @@ namespace LobbyServer
         public int HandlePacket(BaseClient client, PacketIn packet)
         {
             LobbyClient cclient = client as LobbyClient;
-            Byte freeSlot = cclient.Characters.getFreeSlot();
+            Byte freeSlot = GetFreeSlot(cclient);
             if (freeSlot == 0) ANS_CHARACTER_CREATE.Send(cclient);
             else
-            {
+            { 
                 cclient.Pending.Slot = freeSlot;
                 cclient.Pending.Faction = packet.GetUint8();
                 cclient.Pending.Gender = packet.GetUint8();
-                cclient.Pending.Version = packet.GetUint32Reversed();
+                cclient.Pending.Version = (Byte)packet.GetUint32Reversed();
                 packet.GetUint32Reversed();
                 Byte[] Custom = new Byte[packet.Length - packet.Position];
                 packet.Read(Custom, 0, Custom.Length);
-                cclient.Pending.Custom = BitConverter.ToString(Custom);
-                cclient.Characters.Create(cclient.Pending);
+                cclient.Pending.Appearance = BitConverter.ToString(Custom);
+                Databases.CharacterTable.Add(cclient.Pending);
                 ANS_CHARACTER_CREATE.Send(cclient);
             }
+            return 0;
+        }
+
+        public Byte GetFreeSlot(LobbyClient client)
+        {
+            Byte[] slots = new Byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            if (client.Characters.Count != 0)
+            {
+                for (int i = 0; i < slots.Length; i++)
+                    foreach (CharacterEntry ch in client.Characters)
+                        if (ch.Slot != slots[i])
+                            return slots[i];
+            }
+            else return 1;
             return 0;
         }
     }

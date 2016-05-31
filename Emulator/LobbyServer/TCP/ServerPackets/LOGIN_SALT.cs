@@ -1,8 +1,6 @@
 ﻿using LobbyServer.SRP;
-
 using FrameWork.Logger;
 using FrameWork.NetWork;
-
 using System;
 using System.Text;
 
@@ -12,10 +10,10 @@ namespace LobbyServer
     {
         static public void Send(LobbyClient client)
         {
-            Log.Debug("LOGIN_SALT", "Send to " + client.Account.Email);
+            Log.Debug("LOGIN_SALT", "Sent to " + client.Account.Username);
             client.serverModulus = Auth.computeServerModulus(client.Verifier);
             PacketOut Out = new PacketOut((UInt32)Opcodes.LOGIN_SALT);
-            Out.WriteUInt32Reverse(client.Account.Id);
+            Out.WriteUInt32Reverse((uint)client.Account.Index);
             Out.Write(client.serverModulus.B.ToByteArrayUnsigned(), 0, 64);
             Out.WriteByte(0x40);
             Out.WriteByte(0);

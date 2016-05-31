@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WorldServer</RootNamespace>
     <AssemblyName>WorldServer</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -43,6 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,14 +53,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FrameWork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\APB SERVER\FrameWork.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.0.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MySql.Data">
       <HintPath>..\APB SERVER\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -76,14 +77,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\Connection.cs" />
+    <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\Databases.cs" />
+    <Compile Include="Database\DatabaseTable.cs" />
+    <Compile Include="Database\Structures\AccountEntry.cs" />
+    <Compile Include="Database\Structures\CharacterEntry.cs" />
+    <Compile Include="Database\Structures\FriendEntry.cs" />
+    <Compile Include="Database\Structures\IgnoreEntry.cs" />
+    <Compile Include="Database\Table.cs" />
     <Compile Include="District\District.cs" />
     <Compile Include="District\DW\IPacket.cs" />
     <Compile Include="District\DW\Packet.cs" />
     <Compile Include="District\DW\RegisterDistrict.cs" />
     <Compile Include="District\Listener.cs" />
     <Compile Include="District\OpCodes.cs" />
-    <Compile Include="District\WD\DBInfo.cs" />
+    <Compile Include="District\WD\MessageInfo.cs" />
     <Compile Include="District\WD\Packet.cs" />
     <Compile Include="Lobby\Acc.cs" />
     <Compile Include="Lobby\Client.cs" />

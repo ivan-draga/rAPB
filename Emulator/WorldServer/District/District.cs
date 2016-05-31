@@ -43,7 +43,12 @@ namespace WorldServer.Districts
     public class District
     {
         #region Internal
-        public TcpClient tcp;
+        public TcpClient tcp
+        {
+            get;
+            set;
+        }
+
         public void Send(Packet packet)
         {
             Byte[] array = packet.ToArray();
@@ -58,6 +63,11 @@ namespace WorldServer.Districts
         public const UInt16 ActionLimit = 100;
 
         #endregion
+
+        public District(TcpClient Tcp)
+        {
+            tcp = Tcp;
+        }
 
         public District(DistrictTypes type, Byte id, LanguageCodes langCode = LanguageCodes.EN)
         {

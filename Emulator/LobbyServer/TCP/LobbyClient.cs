@@ -1,15 +1,12 @@
 ﻿using FrameWork.Logger;
 using FrameWork.NetWork;
-
 using LobbyServer.SRP;
-using LobbyServer.Database;
 using LobbyServer.TCP;
-
 using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Reflection;
-using MySql.Data.MySqlClient;
-using MySql.Data.Types;
+using MyDB;
 
 namespace LobbyServer
 {
@@ -27,9 +24,9 @@ namespace LobbyServer
     {
         #region Database
 
-        public Account Account = null;
-        public Characters Characters = null;
-        public Character Pending;
+        public AccountEntry Account;
+        public List<CharacterEntry> Characters = null;
+        public CharacterEntry Pending;
 
         #endregion
 
@@ -45,6 +42,7 @@ namespace LobbyServer
 
         public Encryption ECrypt;
         public Byte[] SessionId;
+
         #region Client state
 
         private String _state;

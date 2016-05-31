@@ -50,7 +50,7 @@ namespace DistrictServer.World
 
         private void handleLobby()
         {
-            DW.RegisterDistrict initPacket = new DW.RegisterDistrict(Program.Type, Program.ID, Program.Language, Program.Password, Program.IP, Program.Port);
+            DW.RegisterDistrict initPacket = new DW.RegisterDistrict(Program.Type, Program.ID, Program.Language, Program.Password, Program.IP, Program.Port, Program.Token);
             stream.Write(initPacket.ToArray(), 0, initPacket.ToArray().Length);
             stream.Flush();
             Byte[] message = new Byte[4096];
@@ -74,8 +74,8 @@ namespace DistrictServer.World
                 IPacket packet = null;
                 switch (message[0])
                 {
-                    case (Byte)OpCodes.WD_DB_INFO:
-                        packet = new DBInfo();
+                    case (Byte)OpCodes.WD_MSG_INFO:
+                        packet = new MessageInfo();
                         break;
                 }
                 packet.Write(message, 1, bytesRead - 1);

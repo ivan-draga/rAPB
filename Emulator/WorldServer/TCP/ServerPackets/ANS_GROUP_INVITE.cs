@@ -1,7 +1,6 @@
 ﻿using FrameWork.NetWork;
-using MySql.Data.MySqlClient;
-using MySql.Data.Types;
 using System;
+using MyDB;
 
 namespace WorldServer.TCP.ServerPackets
 {
@@ -9,26 +8,16 @@ namespace WorldServer.TCP.ServerPackets
     {
         public ANS_GROUP_INVITE(String charName, WorldClient client) : base((UInt32)Opcodes.ANS_GROUP_INVITE)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM `characters` WHERE `name`= @name", WorldServer.Database.Connection.Instance);
-            try
+            int count = Databases.CharacterTable.Count(c => c.Name == charName);
+            if (client.Character.Name == charName) WriteUInt32Reverse((uint)ResponseCodes.RC_GROUP_INVITE_SELF);
+            else
             {
-                cmd.Prepare();
-                cmd.Parameters.AddWithValue("@name", charName);
-                Byte rows = Convert.ToByte(cmd.ExecuteScalar());
-                if (client.Name == charName) WriteUInt32Reverse((uint)ResponseCodes.RC_GROUP_INVITE_SELF);
-                else if (client.Name != charName)
+                if (count < 1) WriteUInt32Reverse((uint)ResponseCodes.RC_GROUP_INVITE_NOT_FOUND);
+                else if (count >= 1)
                 {
-                    if (rows < 1) WriteUInt32Reverse((uint)ResponseCodes.RC_GROUP_INVITE_NOT_FOUND);
-                    else if (rows >= 1)
-                    {
-                        WriteUInt32((uint)ResponseCodes.RC_SUCCESS);
-                        WriteParsedString(charName);
-                    }
+                    WriteUInt32((uint)ResponseCodes.RC_SUCCESS);
+                    WriteParsedString(charName);
                 }
-            }
-            finally
-            {
-                cmd.Dispose();
             }
         }
     }

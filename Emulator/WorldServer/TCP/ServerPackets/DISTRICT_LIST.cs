@@ -1,8 +1,6 @@
 ﻿using FrameWork.NetWork;
-
 using System;
 using System.Collections.Generic;
-
 using WorldServer.Districts;
 
 namespace WorldServer.TCP.ServerPackets

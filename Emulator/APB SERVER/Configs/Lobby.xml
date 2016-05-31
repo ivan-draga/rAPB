@@ -1,16 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <root>
-	<Database>
-		<ConnectionString>
-			Server=localhost;
-			Port=;
-			Database=apbdb;
-			User Id=root;
-			Password=;
-			Treat Tiny As Boolean=False
-		</ConnectionString>
-	</Database>
-
 	<ClientServer>
 		<Port>2106</Port>
 		<Version>1.4.1</Version>

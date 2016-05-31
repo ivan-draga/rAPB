@@ -1,7 +1,5 @@
 ﻿using FrameWork.NetWork;
-
 using System;
-
 
 namespace WorldServer.TCP.ServerPackets
 {

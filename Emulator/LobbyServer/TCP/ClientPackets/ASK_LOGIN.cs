@@ -1,14 +1,8 @@
 ﻿using FrameWork.Logger;
 using FrameWork.NetWork;
-
-using LobbyServer.Database;
 using LobbyServer.SRP;
-
 using System;
 using System.Text;
-
-using MySql.Data.MySqlClient;
-using MySql.Data.Types;
 
 namespace LobbyServer
 {
@@ -19,9 +13,8 @@ namespace LobbyServer
         {
             LobbyClient client = bcclient as LobbyClient;
             packet.Skip(24);
-            String Email = packet.GetParsedString();
-            Log.Notice("ASK_LOGIN", "Account: " + Email);
-            Account account;
+            String Username = packet.GetParsedString();
+            Log.Notice("ASK_LOGIN", "Account: " + Username);
             try
             {
                 /*if (Program.logouts.ContainsKey(Email))
@@ -30,7 +23,8 @@ namespace LobbyServer
                     account = new Account(Email);
                     Log.Info("ASK_LOGIN", "Client " + Email + " is returning to lobby");
                 }
-                else*/ account = new Account(Email);
+                else*/
+                client.Account = Databases.AccountTable.SingleOrDefault(a => a.Username == Username);
             }
             catch (ArgumentNullException)
             {
@@ -47,8 +41,7 @@ namespace LobbyServer
                 client.Disconnect();
                 return 0;
             }
-            Log.Succes("ASK_LOGIN", "Account exists");
-            client.Account = account;
+            Log.Succes("ASK_LOGIN", "Account exists: " + client.Account.Username);
             if (client.Account.extrn_login == 1)
             {
                 if (client.Account.Verifier.Length <= 2 || client.Account.Salt.Length <= 2) Register(client);
@@ -70,17 +63,8 @@ namespace LobbyServer
             //TODO - generate token when registering from site and give user download link for "token.id" file
             Random getrandom = new Random();
             String token = getrandom.Next(10000000, 99999999).ToString();
-            MySqlCommand cmd = new MySqlCommand("UPDATE `accounts` SET `token` = @token WHERE `email` = @email", Connection.Instance);
-            try
-            {
-                cmd.Prepare();
-                cmd.Parameters.AddWithValue("@email", client.Account.Email);
-                cmd.Parameters.AddWithValue("@token", token);
-                cmd.ExecuteNonQuery();
-                client.Account.token = token;
-            }
-            catch (MySqlException ex) { Log.Error("Register()", "MySQL failed! " + ex.ToString()); }
-            String Id = Convert.ToString(client.Account.Id);
+            client.Account.Token = token;
+            String Id = Convert.ToString(client.Account.Index);
             String Pass = client.Account.Password;
             Byte[] salt = new byte[10];
             Random random = new Random();
@@ -88,7 +72,7 @@ namespace LobbyServer
             random = null;
             client.Account.Salt = (new FrameWork.NetWork.Crypto.BigInteger(1, salt)).ToString(16);
             client.Account.Verifier = Auth.computeVerifier(salt, Id, Pass).ToString(16);
-            client.Account.Save();
+            Databases.AccountTable.Update(client.Account);
         }
     }
 }

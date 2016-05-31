@@ -32,6 +32,7 @@ namespace LobbyServer.World
             }
             catch
             { }
+
             IP = address.ToString();
             Port = port;
             tcpListener = new TcpListener(address, port);

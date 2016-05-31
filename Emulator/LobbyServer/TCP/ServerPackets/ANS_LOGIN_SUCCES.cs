@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FrameWork.NetWork;
-using FrameWork.Logger;
 
 namespace LobbyServer
 {
@@ -13,7 +12,7 @@ namespace LobbyServer
         {
             PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_LOGIN_SUCCESS);
             Out.WriteParsedString("Welcome to rebornAPB", 48);
-            Out.WriteUInt32Reverse(client.Account.Admin);
+            Out.WriteUInt32Reverse(client.Account.IsAdmin);
             Out.WriteInt64Reverse(TCPManager.GetTimeStamp());
             Out.WriteByte(0x13);
             Out.WriteByte(0x29);
@@ -22,8 +21,8 @@ namespace LobbyServer
             Out.WriteByte(0x07);
             Out.WriteUInt16Reverse(9999);
             Out.WriteInt32Reverse(1450);
-            Out.WriteUInt32Reverse(client.Account.Points);
-            for (int i = 1; i < 6; ++i) Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)client.Account.Id, i, true, "", ""));
+            Out.WriteUInt32Reverse((uint)client.Account.RTW_Points);
+            for (int i = 1; i < 6; ++i) Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)client.Account.Index, i, true, "", ""));
             Out.WriteInt32Reverse(0);
             Out.WriteUInt16(0x957D);
             Out.WriteUInt16(0x0400);

@@ -1,12 +1,10 @@
-﻿using MySql.Data.MySqlClient;
-using MySql.Data.Types;
-using LobbyServer.Database;
-using LobbyServer.RpcFile;
+﻿using LobbyServer.RpcFile;
 using FrameWork;
 using FrameWork.Logger;
 using System;
 using System.Net;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace LobbyServer
 {
@@ -27,23 +25,7 @@ namespace LobbyServer
             if (!EasyServer.InitLog("Lobby", "Configs/LobbyLog.conf") || !EasyServer.InitConfig("Configs/Lobby.xml", "Lobby")) return;
             if (!EasyServer.Listen<TcpServer>(EasyServer.GetConfValue<int>("Lobby", "ClientServer", "Port"), "ClientServer")) return;
             worldListener = new World.Listener(EasyServer.GetConfValue<String>("Lobby", "Worlds", "Ip"), EasyServer.GetConfValue<int>("Lobby", "Worlds", "Port"));
-            Connection.connectionString = EasyServer.GetConfValue<String>("Lobby", "Database", "ConnectionString");
-            MySqlConnection myconnection = new MySqlConnection(Connection.connectionString);
-            MySqlCommand cmd = myconnection.CreateCommand();
-            MySqlCommand acccmd = new MySqlCommand("CREATE TABLE IF NOT EXISTS `accounts`(`id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT, `email` varchar(50) NOT NULL DEFAULT '', `username` varchar(32) NOT NULL DEFAULT '', `verifier` varchar(128) DEFAULT '', `salt` varchar(20) DEFAULT '', `points` int(11) unsigned, `admin` int(1) unsigned zerofill NOT NULL DEFAULT '0', `banned` tinyint(1) NOT NULL DEFAULT '0', `extrn_login` tinyint(1) NOT NULL DEFAULT '0', `token` varchar(8), `canhost` tinyint(1) NOT NULL DEFAULT '0', UNIQUE KEY `id` (`id`), UNIQUE KEY `username` (`username`), UNIQUE KEY `email` (`email`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;", myconnection);
-            MySqlCommand charcmd = new MySqlCommand("CREATE TABLE IF NOT EXISTS `characters`(`id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT, `account` int(10) unsigned zerofill NOT NULL, `slot` tinyint(3) unsigned zerofill NOT NULL DEFAULT '001', `name` varchar(32) NOT NULL, `faction` tinyint(1) NOT NULL, `gender` tinyint(1) NOT NULL, `rank` int(3) unsigned, `money` int(11) unsigned, `threat` tinyint(2), `playtime` int(11) unsigned, `clan` varchar(60) NOT NULL DEFAULT 'APB-EMU', `version` int(11) unsigned NOT NULL, `appearence` text NOT NULL, `custom` text NOT NULL, `world` int(10) unsigned zerofill NOT NULL, PRIMARY KEY (`id`,`account`), UNIQUE KEY `characterId` (`id`), UNIQUE KEY `slot` (`account`,`slot`), UNIQUE KEY `characterName` (`name`)) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;", myconnection);
-            MySqlCommand statcmd = new MySqlCommand("CREATE TABLE IF NOT EXISTS `clientstatus`(`name` varchar(32) NOT NULL, `districtID` tinyint(1), `districtType` tinyint(1), `online` tinyint(1), `lfg` tinyint(1), `grpstatus` tinyint(1) , `grppub` tinyint(1), `grpinv` tinyint(1), UNIQUE KEY `name` (`name`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;", myconnection);
-            try
-            {
-                myconnection.Open();
-                acccmd.ExecuteNonQuery();
-                charcmd.ExecuteNonQuery();
-                statcmd.ExecuteNonQuery();
-                myconnection.Close();
-                Log.Succes("MySql", "Database connected!");
-            }
-            catch (MySqlException e) { Log.Error("MySql Error", e.ToString()); }
-
+            Databases.Load(true);
             FileMgr = new FileManager();
             string[] sVersion = EasyServer.GetConfValue<string>("Lobby", "ClientServer", "Version").Split('.');
             Build = EasyServer.GetConfValue<int>("Lobby", "ClientServer", "Build");
@@ -56,6 +38,10 @@ namespace LobbyServer
             Log.Enter();
             Console.WriteLine("For available console commands, type /commands");
             Log.Enter();
+            Timer aTimer = new Timer(10000);
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
             bool done = false;
             while (!done)
             {
@@ -90,9 +76,9 @@ namespace LobbyServer
                 foreach (LobbyClient client in clients)
                 {
                     count++;
-                    Console.WriteLine("Name: " + client.Account.Email);
+                    Console.WriteLine("Name: " + client.Account.Username);
                     Console.WriteLine("ID: " + count);
-                    Console.WriteLine("isGM: " + client.Account.Admin);
+                    Console.WriteLine("isGM: " + client.Account.IsAdmin);
                 }
                 Log.Enter();
                 Console.WriteLine("Total clients connected to login server: " + count);
@@ -107,6 +93,11 @@ namespace LobbyServer
                 Console.Clear();
             }
             else Console.WriteLine("ERROR: Unknown command \"" + command + "\"");
+        }
+
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            Databases.Load(false);
         }
     }
 }

@@ -34,6 +34,7 @@ namespace LobbyServer.World
         public Boolean EnforcerRecommended;
         public Boolean CriminalRecommended;
         public Byte Population;
+
         public World(TcpClient client)
         {
             tcp = client;

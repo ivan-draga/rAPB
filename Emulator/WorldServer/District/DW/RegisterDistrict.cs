@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Threading;
 using WorldServer.Districts.WD;
+using MyDB;
 
 namespace WorldServer.Districts.DW
 {
@@ -23,7 +24,7 @@ namespace WorldServer.Districts.DW
             String regpass = ReadS();
             String IP = ReadS();
             String Port = ReadS();
-            IPEndPoint address = (IPEndPoint)district.tcp.Client.RemoteEndPoint;
+            String Token = ReadS();
             switch ((DistrictTypes)type)
             {
                 case DistrictTypes.FINANCIAL:
@@ -50,6 +51,13 @@ namespace WorldServer.Districts.DW
             Log.Info("RegisterDistrict", district.ToString() + " tries to register.");
             if (ID != 0)
             {
+                AccountEntry acc = Databases.AccountTable.SingleOrDefault(a => a.Token == Token);
+                if(acc.CanHostDistrict == 0 || acc.Index < 1)
+                {
+                    district.Send(new MessageInfo("You can not host a district instance!"));
+                    district.tcp.Client.Disconnect(true);
+                    return;
+                }
                 district.Id = ID;
                 district.IP = IP;
                 district.Port = Convert.ToUInt16(Port);
@@ -71,16 +79,15 @@ namespace WorldServer.Districts.DW
                         }
                     }
                     Program.districtsListener.Districts.Add(code, district);
+                    Program.districtsListener.DistrictsTcp.Add(district.tcp, code);
                 }
                 Log.Succes("RegisterDistrict", district + " was registered! (" + IP + ":" + Port + ")");
                 
-                district.Send(new DBInfo(Database.Connection.connectionString));
+                district.Send(new MessageInfo("Token check complete. You are allowed to host a district!"));
             }
             else
             {
-                Log.Error("RegisterDistrict", "Invalid ID! Please choose an ID that's not 0.");
-                System.Threading.Thread.Sleep(3000);
-                Environment.Exit(2);
+                district.Send(new MessageInfo("Invalid ID! Please choose an ID that's not 0."));
             }
         }
     }

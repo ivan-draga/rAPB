@@ -15,6 +15,7 @@ using System.Text;
 using FrameWork.Logger;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Timers;
 
 namespace WorldServer
 {
@@ -61,7 +62,7 @@ namespace WorldServer
             IP3 = EasyServer.GetConfValue<Byte>("World", "Address", "IP3");
             IP4 = EasyServer.GetConfValue<Byte>("World", "Address", "IP4");
             if (!EasyServer.Listen<TcpServer>(Port, "ClientServer")) return;
-            Database.Connection.connectionString = EasyServer.GetConfValue<String>("World", "Database", "ConnectionString");
+            Databases.Load(false);
             FileMgr = new FileManager();
             Password = EasyServer.GetConfValue<string>("World", "Lobby", "Password");
             WorldName = EasyServer.GetConfValue<string>("World", "ClientServer", "Name");
@@ -72,6 +73,10 @@ namespace WorldServer
             Log.Enter();
             Console.WriteLine("For available console commands, type /commands");
             Log.Enter();
+            Timer aTimer = new Timer(10000);
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
             bool done = false;
             while (!done)
             {
@@ -104,19 +109,6 @@ namespace WorldServer
                 System.Threading.Thread.Sleep(3000);
                 Environment.Exit(2);
             }
-            else if (command.Contains("/clear clientstatus"))
-            {
-                Log.Enter();
-                MySqlCommand cmd = new MySqlCommand("DELETE FROM `clientstatus` WHERE `online` = 1", WorldServer.Database.Connection.Instance);
-                try
-                {
-                    cmd.Prepare();
-                    cmd.ExecuteNonQuery();
-                    Console.WriteLine("Tables deleted!");
-                    Log.Enter();
-                }
-                catch (MySqlException) { Console.WriteLine("ERROR: Something went wrong while deleting the table!"); }
-            }
             else if (command.Contains("/clear console"))
             {
                 Console.Clear();
@@ -128,9 +120,9 @@ namespace WorldServer
                 foreach (WorldClient client in clients)
                 {
                     count++;
-                    Console.WriteLine("Name: " + client.Name);
+                    Console.WriteLine("Name: " + client.Character.Name);
                     Console.WriteLine("ID: " + count);
-                    Console.WriteLine("isGM: " + client.isGM);
+                    Console.WriteLine("isGM: " + client.Account.IsAdmin);
                     Log.Enter();
                 }
                 Console.WriteLine("Total clients connected to world server: " + count);
@@ -158,6 +150,11 @@ namespace WorldServer
                 Log.Enter();
             }
             else Console.WriteLine("ERROR: Unknown command \"" + command + "\"");
+        }
+
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            Databases.Load(false);
         }
     }
 }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using FrameWork.NetWork;
+using MyDB;
 
 namespace LobbyServer.TCP.ClientPackets
 {
@@ -13,7 +13,16 @@ namespace LobbyServer.TCP.ClientPackets
         public int HandlePacket(BaseClient client, PacketIn packet)
         {
             LobbyClient cclient = client as LobbyClient;
-            cclient.Characters.Delete(packet.GetUint8());
+            Byte slot = packet.GetUint8();
+            foreach(CharacterEntry ch in cclient.Characters)
+            {
+                if(ch.Slot == slot)
+                {
+                    cclient.Characters.Remove(ch);
+                    Databases.CharacterTable.Remove(ch);
+                    break;
+                }
+            }
             PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_CHARACTER_DELETE);
             Out.WriteUInt32Reverse((uint)ResponseCodes.RC_SUCCESS);
             cclient.Send(Out);

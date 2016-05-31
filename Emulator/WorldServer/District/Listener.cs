@@ -17,16 +17,23 @@ namespace WorldServer.Districts
         private Thread listenThread;
         private String IP;
         private int Port;
+
         public Dictionary<UInt32, District> Districts
         {
             get;
             private set;
         }
 
+        public Dictionary<TcpClient, UInt32> DistrictsTcp
+        {
+            get;
+            private set;
+        }
 
         public Listener(String ip, Int32 port)
         {
             Districts = new Dictionary<UInt32, District>();
+            DistrictsTcp = new Dictionary<TcpClient, UInt32>();
             IPAddress address = IPAddress.Any;
             try
             {
@@ -66,9 +73,8 @@ namespace WorldServer.Districts
         private void handleWorld(object client)
         {
             TcpClient tcpClient = (TcpClient)client;
+            District district = new District(tcpClient);
             NetworkStream clientStream = tcpClient.GetStream();
-            District district = new District(0, 0);
-            district.tcp = tcpClient;
             Byte[] message = new Byte[4096];
             Int32 bytesRead;
             while (true)
@@ -97,6 +103,26 @@ namespace WorldServer.Districts
                 }
                 packet.Write(message, 1, bytesRead - 1);
                 packet.Handle(district);
+            }
+            lock(DistrictsTcp)
+            {
+                foreach(KeyValuePair<TcpClient, UInt32> dtcp in DistrictsTcp)
+                {
+                    lock(Districts)
+                    {
+                        foreach(KeyValuePair<UInt32, District> dis in Districts)
+                        {
+                            if(dis.Key == dtcp.Value)
+                            {
+                                Log.Error("Listener", dis.Value.ToString() + " disconnected!");
+                                break;
+                            }
+                        }
+                        Districts.Remove(dtcp.Value);
+                        break;
+                    }
+                }
+                DistrictsTcp.Remove(tcpClient);
             }
             tcpClient.Close();
         }
