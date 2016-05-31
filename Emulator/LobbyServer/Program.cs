@@ -22,9 +22,10 @@ namespace LobbyServer
         static void Main(string[] args)
         {
             Log.Info("LobbyServer", "Starting...");
-            if (!EasyServer.InitLog("Lobby", "Configs/LobbyLog.conf") || !EasyServer.InitConfig("Configs/Lobby.xml", "Lobby")) return;
+            if (!EasyServer.InitLog("Lobby", "Configs/LobbyLog.conf") || !EasyServer.InitConfig("Configs/Lobby.xml", "Lobby") || !EasyServer.InitConfig("Configs/Database.xml", "Database")) return;
             if (!EasyServer.Listen<TcpServer>(EasyServer.GetConfValue<int>("Lobby", "ClientServer", "Port"), "ClientServer")) return;
             worldListener = new World.Listener(EasyServer.GetConfValue<String>("Lobby", "Worlds", "Ip"), EasyServer.GetConfValue<int>("Lobby", "Worlds", "Port"));
+            Databases.InitDB();
             Databases.Load(true);
             FileMgr = new FileManager();
             string[] sVersion = EasyServer.GetConfValue<string>("Lobby", "ClientServer", "Version").Split('.');

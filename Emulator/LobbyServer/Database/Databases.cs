@@ -4,14 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyDB;
+using FrameWork;
 
 namespace LobbyServer
 {
     public static class Databases
     {
-        private static Database rebornAPB = new Database("127.0.0.1", 3306, "root", "", "rapb");
-        public static Table<AccountEntry> AccountTable = new Table<AccountEntry>(rebornAPB);
-        public static Table<CharacterEntry> CharacterTable = new Table<CharacterEntry>(rebornAPB);
+        private static Database rebornAPB;
+        public static Table<AccountEntry> AccountTable; 
+        public static Table<CharacterEntry> CharacterTable;
+
+        public static void InitDB()
+        {
+            rebornAPB = new MyDB.Database(EasyServer.GetConfValue<String>("Database", "Database", "IP"), EasyServer.GetConfValue<int>("Database", "Database", "Port"), EasyServer.GetConfValue<String>("Database", "Database", "Username"), EasyServer.GetConfValue<String>("Database", "Database", "Password"), EasyServer.GetConfValue<String>("Database", "Database", "Database"));
+            AccountTable = new Table<AccountEntry>(rebornAPB);
+            CharacterTable = new Table<CharacterEntry>(rebornAPB);
+        }
 
         public static void Load(bool first_load = false)
         {

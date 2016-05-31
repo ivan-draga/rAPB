@@ -352,21 +352,21 @@ namespace MyDB
         private string TypeToColumnDescription(Type t)
         {
             if (t == typeof(long))
-                return "bigint(21) NOT NULL";
+                return "bigint(21) NOT NULL DEFAULT '0'";
             else if (t == typeof(int))
-                return "int(11) NOT NULL";
+                return "int(11) NOT NULL DEFAULT '0'";
             else if (t == typeof(short))
-                return "smallint(6) NOT NULL";
+                return "smallint(6) NOT NULL DEFAULT '0'";
             else if (t == typeof(sbyte))
-                return "tinyint(4) NOT NULL";
+                return "tinyint(4) NOT NULL DEFAULT '0'";
             else if (t == typeof(ulong))
-                return "bigint(21) UNSIGNED NOT NULL";
+                return "bigint(21) UNSIGNED NOT NULL DEFAULT '0'";
             else if (t == typeof(uint))
-                return "int(11) UNSIGNED NOT NULL";
+                return "int(11) UNSIGNED NOT NULL DEFAULT '0'";
             else if (t == typeof(ushort))
-                return "smallint(6) UNSIGNED NOT NULL";
+                return "smallint(6) UNSIGNED NOT NULL DEFAULT '0'";
             else if (t == typeof(byte))
-                return "tinyint(4) UNSIGNED NOT NULL";
+                return "tinyint(4) UNSIGNED NOT NULL DEFAULT '0'";
             else if (t == typeof(string))
                 return "text NOT NULL DEFAULT ''";
             else

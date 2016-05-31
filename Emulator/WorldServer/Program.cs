@@ -55,13 +55,14 @@ namespace WorldServer
         static void Main(string[] args)
         {
             Log.Info("WorldServer", "Starting...");
-            if (!EasyServer.InitLog("World", "Configs/WorldLog.conf") || !EasyServer.InitConfig("Configs/World.xml", "World")) return;
+            if (!EasyServer.InitLog("World", "Configs/WorldLog.conf") || !EasyServer.InitConfig("Configs/World.xml", "World") || !EasyServer.InitConfig("Configs/Database.xml", "Database")) return;
             Port = EasyServer.GetConfValue<int>("World", "Address", "Port");
             IP1 = EasyServer.GetConfValue<Byte>("World", "Address", "IP1");
             IP2 = EasyServer.GetConfValue<Byte>("World", "Address", "IP2");
             IP3 = EasyServer.GetConfValue<Byte>("World", "Address", "IP3");
             IP4 = EasyServer.GetConfValue<Byte>("World", "Address", "IP4");
             if (!EasyServer.Listen<TcpServer>(Port, "ClientServer")) return;
+            Databases.InitDB();
             Databases.Load(false);
             FileMgr = new FileManager();
             Password = EasyServer.GetConfValue<string>("World", "Lobby", "Password");
