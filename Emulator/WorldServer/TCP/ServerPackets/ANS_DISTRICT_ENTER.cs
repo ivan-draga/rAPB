@@ -16,7 +16,7 @@ namespace WorldServer.TCP.ServerPackets
                 WriteInt32((int)ResponseCodes.RC_SUCCESS);
                 string[] delimiter = new string[] { "." };
                 string[] result = district.IP.Split(delimiter, StringSplitOptions.None);
-                foreach (string s in result) WriteByte(Convert.ToByte(s));            
+                foreach (string s in result) WriteByte(Convert.ToByte(s));      
                 WriteUInt16Reverse(district.Port);
                 WriteInt32Reverse(TcpServer.GetTimeStamp());
             }
