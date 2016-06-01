@@ -60,8 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\APB SERVER\FrameWork.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>..\APB SERVER\MySql.Data.dll</HintPath>
+    <Reference Include="MyDB">
+      <HintPath>..\APB SERVER\MyDB.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -77,14 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\Database.cs" />
-    <Compile Include="Database\Databases.cs" />
-    <Compile Include="Database\DatabaseTable.cs" />
-    <Compile Include="Database\Structures\AccountEntry.cs" />
-    <Compile Include="Database\Structures\CharacterEntry.cs" />
-    <Compile Include="Database\Structures\FriendEntry.cs" />
-    <Compile Include="Database\Structures\IgnoreEntry.cs" />
-    <Compile Include="Database\Table.cs" />
+    <Compile Include="Databases.cs" />
     <Compile Include="District\District.cs" />
     <Compile Include="District\DW\IPacket.cs" />
     <Compile Include="District\DW\Packet.cs" />

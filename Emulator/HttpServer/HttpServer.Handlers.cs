@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using MyDB;
 using FrameWork.Logger;
+using MyDB;
 
-namespace LobbyServer.HTTP
+namespace HttpServer
 {
     public partial class HttpServer
     {

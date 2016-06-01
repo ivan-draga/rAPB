@@ -4,19 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyDB
+namespace HttpServer
 {
-    public class DatabaseTable : Attribute
+    [AttributeUsage(AttributeTargets.Method)]
+    public class HttpHandlerAttribute : Attribute
     {
-        public string Name
+        public string Url
         {
             get;
             private set;
         }
 
-        public DatabaseTable(string name)
+        public HttpHandlerAttribute(string url)
         {
-            Name = name;
+            Url = url;
         }
     }
 }

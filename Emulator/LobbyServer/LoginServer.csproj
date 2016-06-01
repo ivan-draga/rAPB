@@ -61,8 +61,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\APB SERVER\FrameWork.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>..\APB SERVER\MySql.Data.dll</HintPath>
+    <Reference Include="MyDB">
+      <HintPath>..\APB SERVER\MyDB.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -78,15 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\Databases.cs" />
-    <Compile Include="Database\Database.cs" />
-    <Compile Include="Database\DatabaseTable.cs" />
-    <Compile Include="Database\Structures\AccountEntry.cs" />
-    <Compile Include="Database\Structures\CharacterEntry.cs" />
-    <Compile Include="Database\Table.cs" />
-    <Compile Include="HTTP\HttpHandlerAttribute.cs" />
-    <Compile Include="HTTP\HttpServer.cs" />
-    <Compile Include="HTTP\HttpServer.Handlers.cs" />
+    <Compile Include="Databases.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RpcFile\BlockInfo.cs" />

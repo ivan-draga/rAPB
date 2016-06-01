@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using FrameWork.Logger;
 
-namespace LobbyServer.HTTP
+namespace HttpServer
 {
     public partial class HttpServer
     {

@@ -5,7 +5,6 @@ using System;
 using System.Net;
 using System.Collections.Generic;
 using System.Timers;
-using LobbyServer.HTTP;
 
 namespace LobbyServer
 {
@@ -37,9 +36,6 @@ namespace LobbyServer
             Log.Succes("LobbyServer", "Server initialisation complete!");
             clients.Clear();
             worlds.Clear();
-            HttpServer.MapHandlers();
-            HttpServer server = new HttpServer();
-            server.Start();
             Timer aTimer = new Timer(10000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;

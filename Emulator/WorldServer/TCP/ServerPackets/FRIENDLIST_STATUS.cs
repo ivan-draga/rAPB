@@ -1,6 +1,4 @@
 ﻿using FrameWork.NetWork;
-using MySql.Data.MySqlClient;
-using MySql.Data.Types;
 using System;
 
 namespace WorldServer.TCP.ServerPackets

@@ -3,7 +3,6 @@ using FrameWork.Logger;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MySql.Data.MySqlClient;
 using WorldServer.Districts;
 using WorldServer.Lobby;
 using WorldServer.RpcFile;
