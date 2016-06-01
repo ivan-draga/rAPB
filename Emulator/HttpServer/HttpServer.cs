@@ -40,7 +40,6 @@ namespace HttpServer
         {
             m_listener = new HttpListener();
             m_listener.Prefixes.Add("http://*:8880/");
-            m_listener.Prefixes.Add("https://*:8843/");
         }
 
         public void Start()
@@ -88,8 +87,6 @@ namespace HttpServer
                 String[] raw = context.Request.RawUrl.Split('&');
                 if (raw[0] == "/favicon.ico") return;
                 if (!_handlers.TryGetValue(raw[0], out pair)) throw new Exception("Missing handler.");
-                if (!parameters.ContainsKey("username")) throw new Exception("Missing username.");
-                if (!parameters.ContainsKey("password"))  throw new Exception("Missing password.");
 
                 context.Response.ContentType = "text/json";
                 string result = pair.Value(this, context.Request, parameters);

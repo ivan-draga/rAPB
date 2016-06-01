@@ -17,11 +17,11 @@ namespace LobbyServer
             Log.Notice("ASK_LOGIN", "Account: " + Username);
             try
             {
-                /*if (Program.logouts.ContainsKey(Email))
+                /*if (Program.logouts.ContainsKey(Username))
                 {
-                    Program.logouts.TryGetValue(Email, out client.SessionId);
-                    account = new Account(Email);
-                    Log.Info("ASK_LOGIN", "Client " + Email + " is returning to lobby");
+                    Program.logouts.TryGetValue(Username, out client.SessionId);
+                    client.Account = Databases.AccountTable.SingleOrDefault(a => a.Username == Username);
+                    Log.Info("ASK_LOGIN", "Client " + Username + " is returning to lobby");
                 }
                 else*/
                 client.Account = Databases.AccountTable.SingleOrDefault(a => a.Username == Username);

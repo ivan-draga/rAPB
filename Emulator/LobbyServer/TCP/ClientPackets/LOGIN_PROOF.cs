@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using FrameWork.NetWork;
 using LobbyServer.SRP;
+using FrameWork.Logger;
 
 namespace LobbyServer
 {
@@ -37,15 +38,15 @@ namespace LobbyServer
                 }
                 else
                 {
-                    /*if (Program.logouts.ContainsKey(cclient.Account.Email))
+                    /*if (Program.logouts.ContainsKey(cclient.Account.Username))
                     {
-                        Log.Debug("LOGIN_PROOF", "Auto-logging in user " + cclient.Account.Email);
-                        cclient.Account = new LobbyServer.Database.Account(cclient.Account.Email);
-                        Program.logouts.TryGetValue(cclient.Account.Email, out cclient.SessionId);
+                        Log.Debug("LOGIN_PROOF", "Auto-logging in user " + cclient.Account.Username);
+                        cclient.Account = Databases.AccountTable.SingleOrDefault(a => a.Username == cclient.Account.Username);
+                        Program.logouts.TryGetValue(cclient.Account.Username, out cclient.SessionId);
                         ANS_LOGIN_SUCCES.Send(cclient);
                         cclient.ECrypt.SetKey(cclient.SessionId);
                         ANS_CHARACTER_INFO.Send(cclient); //fucks up here...
-                        Program.logouts.Remove(cclient.Account.Email);
+                        Program.logouts.Remove(cclient.Account.Username);
                     }
                     else
                     {*/

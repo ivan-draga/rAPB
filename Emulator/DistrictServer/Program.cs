@@ -17,6 +17,8 @@ namespace DistrictServer
     {
         public static World.Client World;
 
+        public static Listener listener;
+
         #region DistrictData
 
         public static String Password;
@@ -98,7 +100,7 @@ namespace DistrictServer
             }
             if (IP == null) { System.Threading.Thread.Sleep(500); Environment.Exit(2); }
             World = new World.Client("127.0.0.1", 2108);
-            Listener.Start();
+            listener = new Listener(Convert.ToInt32(Port));
             EasyServer.StartConsole();
         }
 
@@ -108,8 +110,8 @@ namespace DistrictServer
             externalIP = "127.0.0.1";
             return externalIP;
 
-            /*
-            try
+            
+            /*try
             {
                 string externalIP;
                 externalIP = (new WebClient()).DownloadString("http://checkip.dyndns.org/");
