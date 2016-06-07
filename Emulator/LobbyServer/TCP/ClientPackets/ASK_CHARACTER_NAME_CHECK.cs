@@ -38,7 +38,7 @@ namespace LobbyServer
             else
             {
                 cclient.Pending = default(CharacterEntry);
-                Out.WriteUInt32Reverse((uint)ResponseCodes.RC_CHARACTER_NAME_CHECK_INVALID_NAME);
+                Out.WriteUInt32Reverse((uint)ResponseCodes.RC_CHARACTER_NAME_CHECK_IN_USE);
             }
             cclient.Send(Out);
             return 0;
