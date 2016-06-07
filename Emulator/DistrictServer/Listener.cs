@@ -61,7 +61,9 @@ namespace DistrictServer
                 }
                 catch (Exception e)
                 {
+                    Log.Error("District.Listener", "Following exception was thrown when trying to receive UDP packet:\n\n");
                     Console.WriteLine(e.ToString());
+                    return;
                 }
             }
         }

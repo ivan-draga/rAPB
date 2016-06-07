@@ -17,7 +17,8 @@ namespace LobbyServer
             }
             client.Pending = default(CharacterEntry);
             client.Send(Out);
-            client.Disconnect(); //temporar fix for hanging after done with char creation
+            System.Threading.Thread.Sleep(200);
+            client.Disconnect();
         }
     }
 }

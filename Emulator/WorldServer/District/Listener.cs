@@ -104,27 +104,36 @@ namespace WorldServer.Districts
                 packet.Write(message, 1, bytesRead - 1);
                 packet.Handle(district);
             }
-            lock(DistrictsTcp)
+            try
             {
-                foreach(KeyValuePair<TcpClient, UInt32> dtcp in DistrictsTcp)
+                lock (DistrictsTcp)
                 {
-                    lock(Districts)
+                    foreach (KeyValuePair<TcpClient, UInt32> dtcp in DistrictsTcp)
                     {
-                        foreach(KeyValuePair<UInt32, District> dis in Districts)
+                        lock (Districts)
                         {
-                            if(dis.Key == dtcp.Value)
+                            foreach (KeyValuePair<UInt32, District> dis in Districts)
                             {
-                                Log.Error("Listener", dis.Value.ToString() + " disconnected!");
-                                break;
+                                if (dis.Key == dtcp.Value)
+                                {
+                                    Log.Error("Listener", dis.Value.ToString() + " disconnected!");
+                                    break;
+                                }
                             }
+                            Districts.Remove(dtcp.Value);
+                            break;
                         }
-                        Districts.Remove(dtcp.Value);
-                        break;
                     }
+                    DistrictsTcp.Remove(tcpClient);
                 }
-                DistrictsTcp.Remove(tcpClient);
+                tcpClient.Close();
             }
-            tcpClient.Close();
+            catch (Exception e)
+            {
+                Log.Error("Districts.Listener", "Following exception was thrown when trying to remove district server:\n\n");
+                Console.WriteLine(e.ToString());
+                return;
+            }
         }
     }
 }

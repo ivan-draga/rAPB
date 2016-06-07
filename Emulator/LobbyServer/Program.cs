@@ -16,23 +16,22 @@ namespace LobbyServer
         static public World.Listener worldListener;
         static public List<Byte> worlds = new List<Byte>();
         static public List<LobbyClient> clients = new List<LobbyClient>();
-        static public Dictionary<String, Byte[]> logouts = new Dictionary<String, Byte[]>();
 
         [STAThread]
         static void Main(string[] args)
         {
             Log.Info("LobbyServer", "Starting...");
-            if (!EasyServer.InitLog("Lobby", "Configs/LobbyLog.conf") || !EasyServer.InitConfig("Configs/Lobby.xml", "Lobby") || !EasyServer.InitConfig("Configs/Database.xml", "Database")) return;
-            if (!EasyServer.Listen<TcpServer>(EasyServer.GetConfValue<int>("Lobby", "ClientServer", "Port"), "ClientServer")) return;
-            worldListener = new World.Listener(EasyServer.GetConfValue<String>("Lobby", "Worlds", "Ip"), EasyServer.GetConfValue<int>("Lobby", "Worlds", "Port"));
+            if (!EasyServer.InitLog("Lobby", "Configs/Logs.conf") || !EasyServer.InitConfig("Configs/Lobby.xml", "Lobby") || !EasyServer.InitConfig("Configs/Database.xml", "Database")) return;
+            if (!EasyServer.Listen<TcpServer>(EasyServer.GetConfValue<int>("Lobby", "LoginServer", "Port"), "LoginServer")) return;
+            worldListener = new World.Listener(EasyServer.GetConfValue<String>("Lobby", "WorldListener", "IP"), EasyServer.GetConfValue<int>("Lobby", "WorldListener", "Port"));
             Databases.InitDB();
             Databases.Load(true);
             FileMgr = new FileManager();
-            string[] sVersion = EasyServer.GetConfValue<string>("Lobby", "ClientServer", "Version").Split('.');
-            Build = EasyServer.GetConfValue<int>("Lobby", "ClientServer", "Build");
+            string[] sVersion = EasyServer.GetConfValue<string>("Lobby", "LoginServer", "Version").Split('.');
+            Build = EasyServer.GetConfValue<int>("Lobby", "LoginServer", "Build");
             Version = new byte[sVersion.Length];
             for (int i = 0; i < Version.Length; ++i) Version[i] = byte.Parse(sVersion[i]);
-            Log.Info("LobbyServer", "Version = " + Version[0] + "." + Version[1] + "." + Version[2] + " : Build = " + Build);
+            Log.Info("LobbyServer", "Version: " + Version[0] + "." + Version[1] + "." + Version[2] + " | Build: " + Build);
             Log.Succes("LobbyServer", "Server initialisation complete!");
             clients.Clear();
             worlds.Clear();

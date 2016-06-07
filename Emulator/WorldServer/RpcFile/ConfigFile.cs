@@ -29,7 +29,7 @@ namespace WorldServer.RpcFile
 
         public void Reset(string path)
         {
-            Log.Debug("ConfigFile", "Reset : " + path);
+            Log.Debug("ConfigFile", "Reset: " + path);
             try
             {
                 FileStream FStream = new FileStream(path, FileMode.OpenOrCreate);
@@ -51,7 +51,7 @@ namespace WorldServer.RpcFile
             }
             catch (Exception e)
             {
-                Log.Error("FileClient", "Error loading: " + Name + ", Error: " + e.ToString());
+                Log.Error("FileClient", "Error loading: " + Name + " | Error: " + e.ToString());
             }
         }
 
@@ -61,7 +61,7 @@ namespace WorldServer.RpcFile
             string line = "test";
             while ((line = _SR.ReadLine()) != null) ParseLine(line);
             Version = GetValue<int>("File", "version");
-            Log.Debug(Name, "Version = " + Version);
+            Log.Debug(Name, "Version: " + Version);
         }
 
         public void ParseLine(string line)

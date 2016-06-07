@@ -11,7 +11,7 @@ namespace WorldServer.Lobby.LW
             Position = 0;
             Program.WorldId = ReadD();
             Log.Succes("RegisterSuccess","Registered with a following ID: " + Program.WorldId);
-            Program.Lobby.Send(new WL.SetData(Program.IP1, Program.IP2, Program.IP3, Program.IP4, (UInt32)Program.Port, 0, true, true));
+            Program.Lobby.Send(new WL.SetData(Program.IP1, Program.IP2, Program.IP3, Program.IP4, (UInt32)Program.Port, (Byte)Databases.CharacterTable.Count(c => c.World == Program.WorldId)));
         }
     }
 }

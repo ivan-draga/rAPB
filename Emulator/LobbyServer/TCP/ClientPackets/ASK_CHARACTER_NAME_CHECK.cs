@@ -14,7 +14,7 @@ namespace LobbyServer
             UInt32 WorldUid = packet.GetUint32Reversed();
             string Name = packet.GetParsedString();
             PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_CHARACTER_NAME_CHECK);
-            if (isValid(Name) && Databases.CharacterTable.Count(c => c.Name == Name) == 0)
+            if (Databases.CharacterTable.Count(c => c.Name == Name) == 0)
             {
                 cclient.Pending = new CharacterEntry();
                 cclient.Pending.Index = Databases.CharacterTable.GenerateIndex();
@@ -38,16 +38,10 @@ namespace LobbyServer
             else
             {
                 cclient.Pending = default(CharacterEntry);
-                Out.WriteUInt32Reverse((uint)ResponseCodes.RC_CHARACTER_NAME_CHECK_IN_USE);
+                Out.WriteUInt32Reverse((uint)ResponseCodes.RC_CHARACTER_NAME_CHECK_INVALID_NAME);
             }
             cclient.Send(Out);
             return 0;
-        }
-
-        static public Boolean isValid(string name)
-        {
-            Regex objAlphaNumericPattern = new Regex(".[a-zA-Z0-9]");
-            return objAlphaNumericPattern.IsMatch(name);
         }
     }
 }

@@ -31,8 +31,6 @@ namespace LobbyServer.World
         #endregion
 
         public UInt32 Port;
-        public Boolean EnforcerRecommended;
-        public Boolean CriminalRecommended;
         public Byte Population;
 
         public World(TcpClient client)

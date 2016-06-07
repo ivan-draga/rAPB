@@ -60,9 +60,8 @@ namespace MyDB
                 {
                     m_database.UpdateStructure(typeof(T));
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-
                     m_database.CreateStructure(typeof(T));
                 }
             }

@@ -89,18 +89,26 @@ namespace LobbyServer.World
                 {
                     case (Byte)OpCodes.WL_REGISTER_WORLD: packet = new RegisterWorld(); break;
                     case (Byte)OpCodes.WL_SET_DATA: packet = new SetData(); break;
-                    case (Byte)OpCodes.WL_LOGOUT:  packet = new Logout(); break;
                 }
                 packet.Write(message, 1, bytesRead - 1);
                 packet.Handle(world);
             }
-            Log.Info("World.Listener", world.Name + " disconnected!");
-            Program.worlds.Remove((Byte)world.Id);
-            lock (Worlds)
+            Log.Error("World.Listener", world.Name + " disconnected!");
+            try
             {
-                Worlds.Remove(world.Id);
+                Program.worlds.Remove((Byte)world.Id);
+                lock (Worlds)
+                {
+                    Worlds.Remove(world.Id);
+                }
+                tcpClient.Close();
             }
-            tcpClient.Close();
+            catch(Exception e)
+            {
+                Log.Error("World.Listener", "Failed to remove disconnected world, exception:\n\n");
+                Console.WriteLine(e.ToString());
+                return;
+            }
         }
     }
 }

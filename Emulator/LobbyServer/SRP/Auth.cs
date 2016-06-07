@@ -43,16 +43,6 @@ namespace LobbyServer.SRP
         {
             BigInteger b = new BigInteger(8 * 64, new Random());
             FrameWork.NetWork.Sha1Digest digest = new FrameWork.NetWork.Sha1Digest();
-            Console.WriteLine("N = " + N.ToString(16));
-            Console.Write("G = ");
-            for (int i = 0; i < G.ToByteArrayUnsigned().Length; i++)
-            {
-                Console.Write(" " + G.ToByteArrayUnsigned()[i]);
-
-            } 
-            Console.WriteLine();
-            Console.WriteLine("b: " + b.ToString(16));
-            Console.WriteLine("B: " + verifier.Multiply(K).Add(G.ModPow(b, N)).Remainder(N).ToString(16));
             return new ServerModulus(verifier.Multiply(K).Add(G.ModPow(b, N)).Remainder(N), b);
         }
 
@@ -67,20 +57,9 @@ namespace LobbyServer.SRP
             digest.DoFinal(binU, 0);
             digest.Reset();
             BigInteger U = new BigInteger(1, binU);
-            Console.WriteLine("U: " + U.ToString(16));
-            Console.WriteLine("A: " + clientModulus.ToString(16));
-            Console.WriteLine("b: " + serverModulus.b.ToString(16));
             BigInteger S = verifier.ModPow(U, N).Multiply(clientModulus).Mod(N).ModPow(serverModulus.b, N);
-            Console.WriteLine("S: " + S.ToString(16));
             Byte[] sessionKey = MGF1(S.ToByteArrayUnsigned());
             sessionId = sessionKey;
-            Console.Write("SK = ");
-            for (int i = 0; i < sessionKey.Length; i++)
-            {
-                Console.Write(" " + sessionKey[i]);
-
-            } 
-            Console.WriteLine();
             Byte[] hashN = new Byte[20];
             Byte[] hashG = new Byte[20];
             digest.BlockUpdate(N.ToByteArrayUnsigned(), 0, N.ToByteArrayUnsigned().Length);
@@ -95,13 +74,6 @@ namespace LobbyServer.SRP
             digest.DoFinal(un, 0);
             digest.Reset();
             for (int i = 0; i < 20; i++) hashN[i] ^= hashG[i];
-            Console.Write("Hash:");
-            for (int i = 0; i < hashN.Length; i++)
-            {
-                Console.Write(" " + hashN[i]);
-
-            } 
-            Console.WriteLine();
             Byte[] proof = new Byte[20];
             digest.BlockUpdate(hashN, 0, hashN.Length);
             digest.BlockUpdate(un, 0, un.Length);
@@ -192,6 +164,5 @@ namespace LobbyServer.SRP
             cnt[3] = (Byte)(i & 0xFF);
             return cnt;
         }
-
     }
 }

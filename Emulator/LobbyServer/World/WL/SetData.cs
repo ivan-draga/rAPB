@@ -16,17 +16,12 @@ namespace LobbyServer.World.WL
             IP4 = (Byte)ReadByte();
             UInt32 port = ReadD();
             Byte population = (Byte)ReadByte();
-            Boolean enfRec, crimRec;
-            enfRec = ReadByte() == 1 ? true : false;
-            crimRec = ReadByte() == 1 ? true : false;
             world.IP1 = IP1;
             world.IP2 = IP2;
             world.IP3 = IP3;
             world.IP4 = IP4;
             world.Port = port;
             world.Population = population;
-            world.CriminalRecommended = crimRec;
-            world.EnforcerRecommended = enfRec;
             Log.Succes(world.Name, "Address " + IP1 + "." + IP2 + "." + IP3 + "." + IP4 + ":" + port);
             lock (Program.worldListener.Worlds)
             {

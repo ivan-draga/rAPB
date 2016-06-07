@@ -88,6 +88,8 @@ namespace WorldServer.Districts.DW
             else
             {
                 district.Send(new MessageInfo("Invalid ID! Please choose an ID that's not 0."));
+                district.tcp.Client.Disconnect(true);
+                return;
             }
         }
     }

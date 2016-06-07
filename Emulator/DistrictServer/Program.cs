@@ -37,7 +37,7 @@ namespace DistrictServer
 
             #region District
 
-            if (!EasyServer.InitLog("World", "Configs/DistrictLog.conf") || !EasyServer.InitConfig("Configs/District.xml", "District")) return;
+            if (!EasyServer.InitLog("World", "Configs/Logs.conf") || !EasyServer.InitConfig("Configs/District.xml", "District")) return;
             switch (EasyServer.GetConfValue<String>("District", "District", "Type"))
             {
                 case "social":
@@ -95,10 +95,9 @@ namespace DistrictServer
             catch (FileNotFoundException)
             {
                 Log.Error("Token", "\"_rtoken.id\" file not found!");
-                System.Threading.Thread.Sleep(3000);
-                Environment.Exit(2);
+                return;
             }
-            if (IP == null) { System.Threading.Thread.Sleep(500); Environment.Exit(2); }
+            if (IP == null) return;
             World = new World.Client("127.0.0.1", 2108);
             listener = new Listener(Convert.ToInt32(Port));
             EasyServer.StartConsole();
@@ -110,7 +109,6 @@ namespace DistrictServer
             externalIP = "127.0.0.1";
             return externalIP;
 
-            
             /*try
             {
                 string externalIP;

@@ -14,7 +14,6 @@ namespace WorldServer.Lobby.LW
             Read(sessionId, 0, 40);
             lock (Program.expectingAccounts)
             {
-                Program.expectingAccounts.Clear();
                 Program.expectingAccounts.Add(accountId, new Acc(charId, sessionId));
             }
             Log.Succes("AccountEnter", "Account " + accountId + " now can connect to the world!");

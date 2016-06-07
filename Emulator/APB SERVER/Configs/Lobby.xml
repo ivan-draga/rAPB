@@ -1,13 +1,13 @@
 <?xml version="1.0" standalone="yes"?>
 <root>
-	<ClientServer>
+	<LoginServer>
 		<Port>2106</Port>
 		<Version>1.4.1</Version>
 		<Build>555239</Build>
-	</ClientServer>
+	</LoginServer>
 	
-	<Worlds>
-		<Ip>127.0.0.1</Ip>
+	<WorldListener>
+		<IP>127.0.0.1</IP>
 		<Port>2101</Port>
-	</Worlds>
+	</WorldListener>
 </root>

@@ -85,7 +85,7 @@ namespace LobbyServer.RpcFile
         public ConfigFile GetConf(string name, string WorldName, string CharName, bool create)
         {
             CheckCharBase(WorldName, CharName);
-            Log.Info("FileClient", "GetConf: " + name + ", CharName =" + CharName);
+            Log.Info("FileClient", "GetConf: " + name + " | CharName: " + CharName);
             if (_Files.ContainsKey(name)) return _Files[name];
             else
             {

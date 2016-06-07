@@ -4,6 +4,7 @@ using System;
 using WorldServer.Lobby;
 using WorldServer.TCP.ServerPackets;
 using MyDB;
+using System.Collections.Generic;
 
 namespace WorldServer
 {
@@ -17,7 +18,10 @@ namespace WorldServer
             Log.Debug("AskWorldEnter", "New client! Account = " + accountId);
             cclient.Account = Databases.AccountTable.SingleOrDefault(a => a.Index == accountId);
             cclient.Character = Databases.CharacterTable.SingleOrDefault(c => c.AccountIndex == accountId);
-            lock (Program.expectingAccounts) Program.expectingAccounts.TryGetValue(accountId, out cclient.account);
+            lock (Program.expectingAccounts)
+            {
+                Program.expectingAccounts.TryGetValue(accountId, out cclient.account);
+            }
             PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_WORLD_ENTER);
             if (cclient.account == null) Out.WriteInt32Reverse((int)ResponseCodes.RC_FAILED);
             else
@@ -41,6 +45,17 @@ namespace WorldServer
             cclient.Crypto = new TCP.Encryption(cclient.account.SessionId);
             cclient.Send(new DISTRICT_LIST());
             cclient.Send(Out);
+            lock (Program.expectingAccounts)
+            {
+                foreach (KeyValuePair<uint, Acc> a in Program.expectingAccounts)
+                {
+                    if (a.Value == cclient.account)
+                    {
+                        Program.expectingAccounts.Remove(a.Key);
+                        break;
+                    }
+                }      
+            }
             return 0;
         }
     }

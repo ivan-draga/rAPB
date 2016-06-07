@@ -18,10 +18,10 @@ namespace LobbyServer
                 {
                     Out.WriteUInt32Reverse((UInt32)info.Key);
                     Out.WriteParsedString(info.Value.Name, 32);
-                    Out.WriteByte(1);
+                    Out.WriteByte((Byte)info.Value.Id);
                     Out.WriteByte(info.Value.Population);
-                    Out.WriteByte(info.Value.EnforcerRecommended ? (Byte)1 : (Byte)0);
-                    Out.WriteByte(info.Value.CriminalRecommended ? (Byte)1 : (Byte)0);
+                    Out.WriteByte(1);
+                    Out.WriteByte(1);
                 }
             }
             client.Send(Out);

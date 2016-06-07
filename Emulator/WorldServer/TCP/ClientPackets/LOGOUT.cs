@@ -20,7 +20,6 @@ namespace WorldServer.TCP.ClientPackets
             cclient.Character.GroupStatus = 0;
             cclient.Character.IsGroupPublic = 0;
             Databases.CharacterTable.Update(cclient.Character);
-            Program.Lobby.Send(new Lobby.WL.Logout(cclient.Account.Username, cclient.account.SessionId));
             PacketOut Out = new PacketOut((UInt32)Opcodes.LOGOUT);
             cclient.Send(Out);
             cclient.Disconnect();

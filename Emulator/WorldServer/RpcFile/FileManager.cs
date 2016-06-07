@@ -59,20 +59,20 @@ namespace WorldServer.RpcFile
 
         public ConfigFile GetFile(int AcctId, int id, bool login, string WorldName, string CharName)
         {
-            Log.Info("FileManager", "GetFile Id =" + id);
+            Log.Info("FileManager", "GetFile: ID = " + id);
             if (login) return GetFileClient(AcctId).GetConf(GetFileName(id, login), true);
             else return GetFileClient(AcctId).GetConf(GetFileName(id, login), WorldName, CharName, true);
         }
 
         public int GetFileVersion(int AcctId, int id, bool login, string WorldName, string CharName)
         {
-            Log.Info("FileManager", "GetFileVersion Id =" + id + ", CharName =" + CharName);
+            Log.Info("FileManager", "GetFileVersion: ID = " + id + " | CharName = " + CharName);
             return GetFile(AcctId, id, login, WorldName, CharName).Version;
         }
 
         public byte[] GetFileByte(int AcctId, int id, bool login, string WorldName, string CharName)
         {
-            Log.Info("FileManager", "GetFileByte Id =" + id);
+            Log.Info("FileManager", "GetFileByte: ID =" + id);
             ConfigFile Conf = GetFileClient(AcctId).GetConf(GetFileName(id, login), WorldName, CharName, false);
             if (Conf != null) return Conf.TotalFile;
             else return new byte[0];
@@ -90,7 +90,7 @@ namespace WorldServer.RpcFile
             if (WorldName.Length <= 0 || CharName.Length <= 0) SaveInfo(AcctId, id, Info);
             else
             {
-                Log.Info("FileManager", "SaveInfo: " + AcctId + "," + WorldName + "," + CharName);
+                Log.Info("FileManager", "SaveInfo: " + AcctId + " | " + WorldName + " | " + CharName);
                 ConfigFile Conf = GetFile(AcctId, id, false, WorldName, CharName);
                 if (Conf != null) Conf.Write(Info);
             }

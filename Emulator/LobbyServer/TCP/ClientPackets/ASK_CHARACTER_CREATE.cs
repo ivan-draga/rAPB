@@ -30,15 +30,23 @@ namespace LobbyServer
 
         public Byte GetFreeSlot(LobbyClient client)
         {
-            Byte[] slots = new Byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            if (client.Characters.Count != 0)
+            try
             {
-                for (int i = 0; i < slots.Length; i++)
-                    foreach (CharacterEntry ch in client.Characters)
-                        if (ch.Slot != slots[i])
-                            return slots[i];
+                Byte[] slots = new Byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+                if (client.Characters.Count != 0)
+                {
+                    for (int i = 0; i < slots.Length; i++)
+                        foreach (CharacterEntry ch in client.Characters)
+                            if (ch.Slot != slots[i])
+                                return slots[i];
+                }
+                else return 1;
             }
-            else return 1;
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return 0;
+            }
             return 0;
         }
     }

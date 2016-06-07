@@ -1,27 +1,27 @@
 <?xml version="1.0" standalone="yes"?>
 <root>
-	<Address>
+	<WorldServer>
 		<IP1>127</IP1>
 		<IP2>0</IP2>
 		<IP3>0</IP3>
 		<IP4>1</IP4>
 		<Port>2121</Port>
-	</Address>
+	</WorldServer>
 
-	<ClientServer>
+	<WorldInfo>
                 <Id>1</Id>
                 <Name>Reborn</Name>
-        </ClientServer>
+        </WorldInfo>
 
-	<Lobby>
+	<LobbyCommunication>
 		<Ip>127.0.0.1</Ip>
 		<Port>2101</Port>
 		<Password>pass</Password>
-	</Lobby>
+	</LobbyCommunication>
 
-	<Districts>
+	<DistrictListener>
 		<Ip>127.0.0.1</Ip>
 		<Port>2108</Port>
 		<Password>pass</Password>
-	</Districts>
+	</DistrictListener>
 </root>

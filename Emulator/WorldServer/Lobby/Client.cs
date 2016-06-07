@@ -83,11 +83,20 @@ namespace WorldServer.Lobby
             Log.Error("Lobby.Client", "Lobby Server disconnected! Reconnecting...");
             client.Close();
             stream.Dispose();
-            client = new TcpClient();
-            connect(address);
-            stream = client.GetStream();
-            Log.Succes("Lobby.Client", "Reconnected!");
-            handleLobby();
+            try
+            {
+                client = new TcpClient();
+                connect(address);
+                stream = client.GetStream();
+                Log.Succes("Lobby.Client", "Reconnected!");
+                handleLobby();
+            }
+            catch (Exception e)
+            {
+                Log.Error("Lobby.Client", "Failed to reconnect due to following exception:\n\n");
+                Console.WriteLine(e.ToString());
+                return;
+            }
         }
 
         public void Send(WL.Packet packet)

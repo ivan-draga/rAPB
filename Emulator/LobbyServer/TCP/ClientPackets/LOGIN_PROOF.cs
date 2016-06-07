@@ -38,21 +38,8 @@ namespace LobbyServer
                 }
                 else
                 {
-                    /*if (Program.logouts.ContainsKey(cclient.Account.Username))
-                    {
-                        Log.Debug("LOGIN_PROOF", "Auto-logging in user " + cclient.Account.Username);
-                        cclient.Account = Databases.AccountTable.SingleOrDefault(a => a.Username == cclient.Account.Username);
-                        Program.logouts.TryGetValue(cclient.Account.Username, out cclient.SessionId);
-                        ANS_LOGIN_SUCCES.Send(cclient);
-                        cclient.ECrypt.SetKey(cclient.SessionId);
-                        ANS_CHARACTER_INFO.Send(cclient); //fucks up here...
-                        Program.logouts.Remove(cclient.Account.Username);
-                    }
-                    else
-                    {*/
-                        ANS_LOGIN_FAILED.Send(cclient, (int)ResponseCodes.RC_LOGIN_INVALID_ACCOUNT);
-                        cclient.Disconnect();
-                    //}
+                    ANS_LOGIN_FAILED.Send(cclient, (int)ResponseCodes.RC_LOGIN_INVALID_ACCOUNT);
+                    cclient.Disconnect();
                 }
             }
             return 0;

@@ -1,11 +1,9 @@
 ﻿using FrameWork.Logger;
-
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-
 using DistrictServer.World.DW;
 using DistrictServer.World.WD;
 
@@ -84,11 +82,20 @@ namespace DistrictServer.World
             Log.Error("World.Client", "World server disconnected! Reconnecting...");
             client.Close();
             stream.Dispose();
-            client = new TcpClient();
-            connect(address);
-            stream = client.GetStream();
-            Log.Succes("World.Client", "Reconnected!");
-            handleLobby();
+            try
+            {
+                client = new TcpClient();
+                connect(address);
+                stream = client.GetStream();
+                Log.Succes("World.Client", "Reconnected!");
+                handleLobby();
+            }
+            catch(Exception e)
+            {
+                Log.Error("World.Client", "Failed to reconnect due to following exception:\n\n");
+                Console.WriteLine(e.ToString());
+                return;
+            }
         }
     }
 }
