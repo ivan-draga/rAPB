@@ -8,14 +8,22 @@ using System.Timers;
 
 namespace LobbyServer
 {
+    public enum GameVersion
+    {
+        INVALID = 0,
+        RTW_CB = 1,
+        RTW_DVD = 2,
+        RTW_LAST = 3
+        //add more if needed...
+    };
+
     class Program
     {
-        static public byte[] Version;
-        static public int Build = 0;
         static public FileManager FileMgr;
         static public World.Listener worldListener;
         static public List<Byte> worlds = new List<Byte>();
         static public List<LobbyClient> clients = new List<LobbyClient>();
+        static public GameVersion version = GameVersion.INVALID;
 
         [STAThread]
         static void Main(string[] args)
@@ -27,11 +35,31 @@ namespace LobbyServer
             Databases.InitDB();
             Databases.Load(true);
             FileMgr = new FileManager();
-            string[] sVersion = EasyServer.GetConfValue<string>("Lobby", "LoginServer", "Version").Split('.');
-            Build = EasyServer.GetConfValue<int>("Lobby", "LoginServer", "Build");
-            Version = new byte[sVersion.Length];
-            for (int i = 0; i < Version.Length; ++i) Version[i] = byte.Parse(sVersion[i]);
-            Log.Info("LobbyServer", "Version: " + Version[0] + "." + Version[1] + "." + Version[2] + " | Build: " + Build);
+            string sVersion = EasyServer.GetConfValue<string>("Lobby", "LoginServer", "GameVersion");
+            if(sVersion != "RTW_CB" && sVersion != "RTW_DVD" && sVersion != "RTW_LAST")
+            {
+                Log.Error("ERROR", "Invalid game version!");
+                return;
+            }
+            else
+            {
+                if (sVersion == "RTW_CB")
+                {
+                    version = GameVersion.RTW_CB;
+                    Log.Info("Version", "Supported game version: 0.6.0.509927 (RTW closed beta)");
+                }
+                else if (sVersion == "RTW_DVD")
+                {
+                    version = GameVersion.RTW_DVD;
+                    Log.Info("Version", "Supported game version: 1.1.0.534979 (RTW DVD release)");
+                }
+                else if (sVersion == "RTW_LAST")
+                {
+                    version = GameVersion.RTW_LAST;
+                    Log.Info("Version", "Supported game version: 1.4.1.555239 (last RTW patch)");
+                }
+                else version = GameVersion.INVALID;
+            }
             Log.Succes("LobbyServer", "Server initialisation complete!");
             clients.Clear();
             worlds.Clear();
