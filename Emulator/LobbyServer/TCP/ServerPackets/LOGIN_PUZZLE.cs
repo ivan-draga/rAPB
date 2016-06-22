@@ -32,6 +32,20 @@ namespace LobbyServer
                 Out.WriteInt32Reverse(1);
                 Out.WriteInt32Reverse(555239);
             }
+            else if (Program.version == GameVersion.G1_LATEST)
+            {
+                Out.WriteInt32Reverse(1);
+                Out.WriteInt32Reverse(19);
+                Out.WriteInt32Reverse(4);
+                Out.WriteInt32Reverse(766569);
+            }
+            else if (Program.version == GameVersion.G1_ENGUPD)
+            {
+                Out.WriteInt32Reverse(2);
+                Out.WriteInt32Reverse(0);
+                Out.WriteInt32Reverse(0);
+                Out.WriteInt32Reverse(750394);
+            }
             Out.WriteByte(0x05);
             for (int i = 0; i < client.ECrypt.Key.Length; i++) Out.WriteByte(client.ECrypt.Key[i]);
             Out.WriteUInt32Reverse(0);
