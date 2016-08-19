@@ -12,7 +12,7 @@ namespace HttpServer
     {
         static void Main(string[] args)
         {
-            if(!EasyServer.InitConfig("Configs/Database.xml", "Database")) return;
+            if (!EasyServer.InitConfig("Configs/Database.xml", "Database")) return;
             Databases.InitDB();
             Databases.Load();
             HttpServer.MapHandlers();

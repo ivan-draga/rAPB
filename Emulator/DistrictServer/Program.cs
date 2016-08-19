@@ -118,6 +118,5 @@ namespace DistrictServer
             }
             catch { Log.Error("GetPublicIP", "IP retreival failed!"); return null; } */
         }
-
     }
 }
