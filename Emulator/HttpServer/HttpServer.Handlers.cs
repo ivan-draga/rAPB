@@ -34,7 +34,7 @@ namespace HttpServer
             entry.IsAdmin = 1;
             entry.IsBanned = 0;
             entry.InUse = 0;
-            entry.extrn_login = 0;
+            entry.extrn_login = 1;
             entry.CanHostDistrict = 1;
             entry.Token = token;
             Databases.AccountTable.Add(entry);
