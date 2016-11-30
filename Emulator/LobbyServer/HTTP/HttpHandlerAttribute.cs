@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HttpServer
+namespace LobbyServer
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class HttpHandlerAttribute : Attribute

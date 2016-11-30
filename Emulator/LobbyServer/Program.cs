@@ -66,6 +66,11 @@ namespace LobbyServer
                 version = GameVersion.INVALID;
                 Log.Error("Version", "Invalid game version");
             }
+
+            HttpServer.MapHandlers();
+            HttpServer server = new HttpServer();
+            server.Start();
+
             Log.Succes("LobbyServer", "Server initialisation complete!");
             clients.Clear();
             worlds.Clear();

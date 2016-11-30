@@ -4,7 +4,7 @@ using System.Net;
 using FrameWork.Logger;
 using MyDB;
 
-namespace HttpServer
+namespace LobbyServer
 {
     public partial class HttpServer
     {

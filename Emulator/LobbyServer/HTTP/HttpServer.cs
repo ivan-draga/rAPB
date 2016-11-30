@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using FrameWork.Logger;
 
-namespace HttpServer
+namespace LobbyServer
 {
     public partial class HttpServer
     {
