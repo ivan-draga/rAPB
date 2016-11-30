@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldServer", "WorldServer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistrictServer", "DistrictServer\DistrictServer.csproj", "{8901005E-EB1F-43D7-A94D-A22F8B5BC521}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClientServer", "ClientServer\ClientServer.vcxproj", "{F2224D01-D607-40D7-98C0-4C61DF9A1401}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDB", "MyDB\MyDB.csproj", "{3ED4FC14-179C-4778-B92D-14D17DAD7BE2}"
 EndProject
 Global
@@ -63,20 +61,6 @@ Global
 		{8901005E-EB1F-43D7-A94D-A22F8B5BC521}.Release|Win32.Build.0 = Release|x86
 		{8901005E-EB1F-43D7-A94D-A22F8B5BC521}.Release|x86.ActiveCfg = Release|x86
 		{8901005E-EB1F-43D7-A94D-A22F8B5BC521}.Release|x86.Build.0 = Release|x86
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Debug|Win32.Build.0 = Debug|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Debug|x86.ActiveCfg = Debug|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Debug|x86.Build.0 = Debug|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Release|Any CPU.ActiveCfg = Release|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Release|Win32.ActiveCfg = Release|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Release|Win32.Build.0 = Release|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Release|x86.ActiveCfg = Release|Win32
-		{F2224D01-D607-40D7-98C0-4C61DF9A1401}.Release|x86.Build.0 = Release|Win32
 		{3ED4FC14-179C-4778-B92D-14D17DAD7BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3ED4FC14-179C-4778-B92D-14D17DAD7BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ED4FC14-179C-4778-B92D-14D17DAD7BE2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

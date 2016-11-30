@@ -1,2 +1,0 @@
-//#define APB
-#define SDK

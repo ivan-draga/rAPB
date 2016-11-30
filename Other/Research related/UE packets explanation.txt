@@ -1,9 +1,0 @@
-- encryptedHash to XXTEA function as the key, XXTEA uses 4 32 bit integers
-- First DS packet: starts with the Unreal packet header, then contains a byte for the platform type, then the account id, then the "handshakeHash" from earlier
-- unreal engine uses bit level rather than bytes, sometimes there will be some padding at the end, to make it end on a byte
-- handshake is first, then a shit ton of packages, then the client tells the server that it's ready to join. actually before that, the client can request package data from the server i think. but yeah then the client tells the server to join and the server will start opening actor channels for entities in the game
-- all of the encrypted packets need to have size of a multiple of 4
-- when you're sending integers, you define the maximum value the integer can be, and it will only send the bits it needs
-- for example, the max channels is 2048, so when it sends a channel id, it only uses 11 bits, or 10
-- if you're looking at the packet stuff, this is the flow of the function calls in Unreal that happen:
-  Receive Packet Flow: UTcpNetDriver::TickDispatch -> FSocketWin::RecvFrom -> UNetConnection::ReceivedRawPacket -> UNetConnection::ReceivedPacket -> UChannel::ReceivedRawBunch -> UChannel::ReceivedSequencedBunch -> UChannel::ReceivedBunch

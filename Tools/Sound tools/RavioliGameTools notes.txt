@@ -1,5 +1,0 @@
-You can use the following tools to decompress the soundbanks in apb:
-Ravioli Game Tools and Sound_extractor_tools
-
-The first tool gives a preview of all the sounds before extracting it, and is easier to use, the second tool forces bank extraction,
-including encrypted ones.
