@@ -81,7 +81,7 @@ namespace DistrictServer
             try
             {
                 string line = null;
-                StreamReader file = new StreamReader("Configs\\Client stuff (put into 'Binaries' folder)\\_rtoken.id");
+                StreamReader file = new StreamReader("Configs\\token.id");
                 while ((line = file.ReadLine()) != null) Token = line;
                 file.Close();
             }

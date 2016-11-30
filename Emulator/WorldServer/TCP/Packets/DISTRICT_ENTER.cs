@@ -1,5 +1,4 @@
 ﻿using FrameWork.NetWork;
-using FrameWork.Logger;
 using System;
 
 namespace WorldServer.TCP.Packets
@@ -19,8 +18,7 @@ namespace WorldServer.TCP.Packets
             if (cclient.Reserved != null)
             {
                 Out.WriteInt32((int)ResponseCodes.RC_SUCCESS);
-                string[] delimiter = new string[] { "." };
-                string[] result = new string[] { "127", "0", "0", "1" }; //cclient.Reserved.IP.Split(delimiter, StringSplitOptions.None);
+                string[] result = cclient.Reserved.IP.Split('.');
                 foreach (string s in result) Out.WriteByte(Convert.ToByte(s));
                 Out.WriteUInt16Reverse(cclient.Reserved.Port);
                 int timestamp = TcpServer.GetTimeStamp();
