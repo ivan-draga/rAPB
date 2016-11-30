@@ -14,9 +14,9 @@ namespace WorldServer.TCP.Packets
             Out.WriteUInt32((uint)ResponseCodes.RC_SUCCESS);
             Out.WriteUInt32(instanceUID);
             Out.WriteByte(0);
-            Out.WriteUInt32Reverse(0); //charUID of leader
+            Out.WriteUInt32Reverse(0); //leader's charUID
             Out.WriteParsedString(""); //leader
-            Out.WriteByte(0); //members
+            Out.WriteByte(0); //members amount
             Out.WriteByte(0); //rating
             Out.WriteByte(0); //threat
             cclient.Send(Out);

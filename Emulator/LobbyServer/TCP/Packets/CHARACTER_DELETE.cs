@@ -1,5 +1,4 @@
-﻿using System;
-using FrameWork.NetWork;
+﻿using FrameWork.NetWork;
 using MyDB;
 
 namespace LobbyServer.TCP.Packets
@@ -21,7 +20,7 @@ namespace LobbyServer.TCP.Packets
                 }
             }
 
-            PacketOut Out = new PacketOut((UInt32)Opcodes.ANS_CHARACTER_DELETE);
+            PacketOut Out = new PacketOut((uint)Opcodes.ANS_CHARACTER_DELETE);
             Out.WriteUInt32Reverse((uint)ResponseCodes.RC_SUCCESS);
             cclient.Send(Out);
             return 0;

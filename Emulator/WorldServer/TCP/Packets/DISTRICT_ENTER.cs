@@ -9,8 +9,7 @@ namespace WorldServer.TCP.Packets
     {
         public int HandlePacket(BaseClient client, PacketIn packet)
         {
-            WorldClient cclient = (WorldClient)client;
-            SendDistrictEnter(cclient);
+            SendDistrictEnter((WorldClient)client);
             return 0;
         }
 

@@ -17,7 +17,7 @@ namespace WorldServer.TCP.Packets
             if (cclient.Character.Name == charName) Out.WriteUInt32Reverse(0x01);
             else
             {
-                if (cclient.Account.Index == chr.AccountIndex) Out.WriteUInt32Reverse(0x01);
+                if (cclient.Account.Index == chr.AccountIndex) Out.WriteUInt32Reverse((uint)ResponseCodes.RC_FAILED);
                 else
                 {
                     if (count < 1) Out.WriteUInt32Reverse((uint)ResponseCodes.RC_CHARACTERFINDER_INFO_NO_CHARACTER);

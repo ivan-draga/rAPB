@@ -39,6 +39,7 @@ namespace WorldServer.TCP.Packets
                             Out.WriteUInt32(cclient.Reserved.Key);
                             Out.WriteByte(0); //group
                             Out.WriteByte(0);
+                            cclient.Send(Out);
                             DISTRICT_ENTER.SendDistrictEnter(cclient);
                         }
                     }
@@ -48,10 +49,10 @@ namespace WorldServer.TCP.Packets
                         Out.WriteUInt32(0);
                         Out.WriteByte(0);
                         Out.WriteByte(0);
+                        cclient.Send(Out);
                     }
                 }
             }
-            cclient.Send(Out);
             return 0;
         }
     }
