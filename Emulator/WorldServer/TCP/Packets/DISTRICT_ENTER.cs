@@ -44,7 +44,7 @@ namespace WorldServer.TCP.Packets
                 Buffer.BlockCopy(encryptionHash, 0, encryptionKey, 0, 16);
 
                 Log.Succes("encryptionKey", Program.ByteToHexBitFiddle(encryptionKey));
-            }
+             }
             else Out.WriteUInt32Reverse((uint)ResponseCodes.RC_DISTRICT_RESERVE_DISTRICT_OFFLINE);
             cclient.Send(Out);
         }

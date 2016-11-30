@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Unreal.IO
+namespace DistrictServer
 {
     public static class Parser
     {

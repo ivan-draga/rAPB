@@ -34,14 +34,11 @@ namespace DistrictServer
                     IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, Port);
                     if (first_packet)
                     {
-                        for(int i = 42, j = 0; i < receiveBytes.Length; i++, j++) some_data[j] = receiveBytes[i];
                         #if ENABLE_PACKET_SAVING
                         StreamWriter file = new StreamWriter("Packets\\_first_packet.log");
                         file.Write(data2);
                         file.Close();
                         #endif
-                        first_packet = false;
-                        client.Send(some_data, some_data.Length, ip);
                     }
                     else
                     {

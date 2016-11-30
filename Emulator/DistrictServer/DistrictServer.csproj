@@ -61,6 +61,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unreal\Parser.cs" />
+    <Compile Include="Unreal\XTEA.cs" />
     <Compile Include="World\Client.cs" />
     <Compile Include="World\OpCodes.cs" />
     <Compile Include="World\DW\Packet.cs" />

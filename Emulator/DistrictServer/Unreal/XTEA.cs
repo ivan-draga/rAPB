@@ -1,6 +1,6 @@
-﻿﻿using System;
+﻿using System;
 
-namespace SmartEngine.Network
+namespace DistrictServer
 {
     public static class XTEA
     {
@@ -59,7 +59,7 @@ namespace SmartEngine.Network
                 }
             }
 
-            length = (int)(BitConverter.ToUInt16(buffer, index) + 2 + index);
+            length = (BitConverter.ToUInt16(buffer, index) + 2 + index);
             return true;
         }
     }
