@@ -1,5 +1,4 @@
 ﻿﻿using System;
-using System.Security.Cryptography;
 using System.Text;
 using FrameWork.NetWork.Crypto;
 
@@ -21,11 +20,11 @@ namespace LobbyServer.SRP
         public static readonly BigInteger N = new BigInteger("D4C7F8A2B32C11B8FBA9581EC4BA4F1B04215642EF7355E37C0FC0443EF756EA2C6B8EEB755A1C723027663CAA265EF785B8FF6A9B35227A52D86633DBDFCA43", 16);
         public static readonly BigInteger G = BigInteger.Two;
         public static readonly BigInteger K = new BigInteger("B7867F1299DA8CC24AB93E08986EBC4D6A478AD0", 16);
-        public static BigInteger computeVerifier(Byte[] salt, String name, String password)
+        public static BigInteger computeVerifier(byte[] salt, string name, string password)
         {
-            Byte[] partA = Encoding.ASCII.GetBytes(name);
-            Byte[] partB = Encoding.ASCII.GetBytes(password);
-            Byte[] credentials = new Byte[20];
+            byte[] partA = Encoding.ASCII.GetBytes(name);
+            byte[] partB = Encoding.ASCII.GetBytes(password);
+            byte[] credentials = new byte[20];
             FrameWork.NetWork.Sha1Digest digest = new FrameWork.NetWork.Sha1Digest();
             digest.BlockUpdate(partA, 0, partA.Length);
             digest.BlockUpdate(Encoding.ASCII.GetBytes(":"), 0, 1);
@@ -46,35 +45,35 @@ namespace LobbyServer.SRP
             return new ServerModulus(verifier.Multiply(K).Add(G.ModPow(b, N)).Remainder(N), b);
         }
 
-        public static Byte[] computeProof(String username, ServerModulus serverModulus, BigInteger clientModulus, BigInteger verifier, Byte[] salt, out Byte[] sessionId)
+        public static byte[] computeProof(string username, ServerModulus serverModulus, BigInteger clientModulus, BigInteger verifier, byte[] salt, out byte[] sessionId)
         {
             FrameWork.NetWork.Sha1Digest digest = new FrameWork.NetWork.Sha1Digest();
-            Byte[] a = clientModulus.ToByteArrayUnsigned();
-            Byte[] b = serverModulus.B.ToByteArrayUnsigned();
-            Byte[] binU = new Byte[20];
+            byte[] a = clientModulus.ToByteArrayUnsigned();
+            byte[] b = serverModulus.B.ToByteArrayUnsigned();
+            byte[] binU = new byte[20];
             digest.BlockUpdate(a, 0, a.Length);
             digest.BlockUpdate(b, 0, b.Length);
             digest.DoFinal(binU, 0);
             digest.Reset();
             BigInteger U = new BigInteger(1, binU);
             BigInteger S = verifier.ModPow(U, N).Multiply(clientModulus).Mod(N).ModPow(serverModulus.b, N);
-            Byte[] sessionKey = MGF1(S.ToByteArrayUnsigned());
+            byte[] sessionKey = MGF1(S.ToByteArrayUnsigned());
             sessionId = sessionKey;
-            Byte[] hashN = new Byte[20];
-            Byte[] hashG = new Byte[20];
+            byte[] hashN = new byte[20];
+            byte[] hashG = new byte[20];
             digest.BlockUpdate(N.ToByteArrayUnsigned(), 0, N.ToByteArrayUnsigned().Length);
             digest.DoFinal(hashN, 0);
             digest.Reset();
             digest.BlockUpdate(G.ToByteArrayUnsigned(), 0, G.ToByteArrayUnsigned().Length);
             digest.DoFinal(hashG, 0);
             digest.Reset();
-            Byte[] un = Encoding.ASCII.GetBytes(username);
+            byte[] un = Encoding.ASCII.GetBytes(username);
             digest.BlockUpdate(un, 0, un.Length);
-            un = new Byte[20];
+            un = new byte[20];
             digest.DoFinal(un, 0);
             digest.Reset();
             for (int i = 0; i < 20; i++) hashN[i] ^= hashG[i];
-            Byte[] proof = new Byte[20];
+            byte[] proof = new byte[20];
             digest.BlockUpdate(hashN, 0, hashN.Length);
             digest.BlockUpdate(un, 0, un.Length);
             digest.BlockUpdate(salt, 0, salt.Length);
@@ -86,23 +85,23 @@ namespace LobbyServer.SRP
             return proof;
         }
 
-        private static Byte[] getEvenBytes(Byte[] array)
+        private static byte[] getEvenBytes(byte[] array)
         {
-            Byte[] result = new Byte[array.Length / 2];
+            byte[] result = new byte[array.Length / 2];
             for (int i = 0; i < result.Length; i++) result[i] = array[i * 2];
             return result;
         }
 
-        private static Byte[] getOddBytes(Byte[] array)
+        private static byte[] getOddBytes(byte[] array)
         {
-            Byte[] result = new Byte[array.Length / 2];
+            byte[] result = new byte[array.Length / 2];
             for (int i = 0; i < result.Length; i++) result[i] = array[i * 2 + 1];
             return result;
         }
 
-        private static Byte[] interleave(Byte[] a, Byte[] b)
+        private static byte[] interleave(byte[] a, byte[] b)
         {
-            Byte[] result = new Byte[40];
+            byte[] result = new byte[40];
             for (int i = 0; i < 20; i++)
             {
                 result[i * 2] = a[i];
@@ -123,19 +122,19 @@ namespace LobbyServer.SRP
 
         public static byte[] MGF1(byte[] seed)
         {
-            UInt32 i = 0;
+            uint i = 0;
             int pos = 0;
-            Byte[] cnt = new Byte[4];
-            Byte[] hout = new Byte[20];
+            byte[] cnt = new byte[4];
+            byte[] hout = new byte[20];
             FrameWork.NetWork.Sha1Digest digest = new FrameWork.NetWork.Sha1Digest();
-            Byte[] mask = new Byte[40];
+            byte[] mask = new byte[40];
             int masklen = 40;
             while (pos < masklen)
             {
-                cnt[0] = (Byte)((i >> 24) & 0xFF);
-                cnt[1] = (Byte)((i >> 16) & 0xFF);
-                cnt[2] = (Byte)((i >> 8) & 0xFF);
-                cnt[3] = (Byte)(i & 0xFF);
+                cnt[0] = (byte)((i >> 24) & 0xFF);
+                cnt[1] = (byte)((i >> 16) & 0xFF);
+                cnt[2] = (byte)((i >> 8) & 0xFF);
+                cnt[3] = (byte)(i & 0xFF);
                 digest.Reset();
                 digest.BlockUpdate(seed, 0, seed.Length);
                 digest.BlockUpdate(cnt, 0, 4);
@@ -155,13 +154,13 @@ namespace LobbyServer.SRP
             return mask;
         }
 
-        private static Byte[] I2OSP(int i)
+        private static byte[] I2OSP(int i)
         {
-            Byte[] cnt = new Byte[4];
-            cnt[0] = (Byte)((i >> 24) & 0xFF);
-            cnt[1] = (Byte)((i >> 16) & 0xFF);
-            cnt[2] = (Byte)((i >> 8) & 0xFF);
-            cnt[3] = (Byte)(i & 0xFF);
+            byte[] cnt = new byte[4];
+            cnt[0] = (byte)((i >> 24) & 0xFF);
+            cnt[1] = (byte)((i >> 16) & 0xFF);
+            cnt[2] = (byte)((i >> 8) & 0xFF);
+            cnt[3] = (byte)(i & 0xFF);
             return cnt;
         }
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Sockets;
-
-namespace WorldServer.Lobby.LW
+﻿namespace WorldServer.Lobby.LW
 {
     interface IPacket
     {

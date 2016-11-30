@@ -1,25 +1,12 @@
-﻿using FrameWork.Logger;
-using FrameWork.NetWork;
+﻿using FrameWork.NetWork;
 using LobbyServer.SRP;
-using LobbyServer.TCP;
-using System;
+using LobbyServer.TCP.Packets;
 using System.IO;
 using System.Collections.Generic;
-using System.Reflection;
 using MyDB;
 
 namespace LobbyServer
 {
-    public enum ClientState
-    {
-        kCLIENT_STATE_LOGINSERVER_CONNECT_IN_PROGRESS = 1,
-        kCLIENT_STATE_LOGINSERVER_CONNECT_COMPLETE = 2,
-        kCLIENT_STATE_LOGIN_IN_PROGRESS = 3,
-        kCLIENT_STATE_LOGIN_SUCCESS = 4,
-        kCLIENT_STATE_CHARACTER_LIST_RECEIVED = 5,
-        kCLIENT_STATE_WORLD_LIST_RECEIVED = 6
-    };
-
     public class LobbyClient : BaseClient
     {
         #region Database
@@ -32,58 +19,16 @@ namespace LobbyServer
 
         #region SRP
 
-        public Byte[] Salt;
+        public byte[] Salt;
         public FrameWork.NetWork.Crypto.BigInteger Verifier;
         public ServerModulus serverModulus;
         public FrameWork.NetWork.Crypto.BigInteger clientModulus;
-        public Byte[] Proof;
+        public byte[] Proof;
 
         #endregion
 
-        public Encryption ECrypt;
-        public Byte[] SessionId;
-
-        #region Client state
-
-        private String _state;
-        private ClientState _cstate;
-
-        public void SetState(ClientState state)
-        {
-            _cstate = state;
-            switch (state)
-            {
-                case ClientState.kCLIENT_STATE_LOGINSERVER_CONNECT_IN_PROGRESS:
-                    _state = "kCLIENT_STATE_LOGINSERVER_CONNECT_IN_PROGRESS";
-                    break;
-                case ClientState.kCLIENT_STATE_LOGINSERVER_CONNECT_COMPLETE:
-                    _state = "kCLIENT_STATE_LOGINSERVER_CONNECT_COMPLETE";
-                    break;
-                case ClientState.kCLIENT_STATE_LOGIN_IN_PROGRESS:
-                    _state = "kCLIENT_STATE_LOGIN_IN_PROGRESS";
-                    break;
-                case ClientState.kCLIENT_STATE_LOGIN_SUCCESS:
-                    _state = "kCLIENT_STATE_LOGIN_SUCCESS";
-                    break;
-                case ClientState.kCLIENT_STATE_CHARACTER_LIST_RECEIVED:
-                    _state = "kCLIENT_STATE_CHARACTER_LIST_RECEIVED";
-                    break;
-                case ClientState.kCLIENT_STATE_WORLD_LIST_RECEIVED:
-                    _state = "kCLIENT_STATE_WORLD_LIST_RECEIVED";
-                    break;
-            }
-        }
-
-        public ClientState GetState()
-        {
-            return this._cstate;
-        }
-
-        public String GetStateAsString()
-        {
-            return this._state;
-        }
-        #endregion
+        public TCP.Encryption ECrypt;
+        public byte[] SessionId;
 
         #region Base
 
@@ -95,27 +40,19 @@ namespace LobbyServer
         public override void OnConnect()
         {
             Program.clients.Add(this);
-            ECrypt = new Encryption();
+            ECrypt = new TCP.Encryption();
             LOGIN_PUZZLE.Send(this);
         }
 
         public override void OnDisconnect()
         {
             Program.clients.Remove(this);
-            this.Proof = null;
-            this.Salt = null;
-            this.Verifier = null;
-            this.serverModulus = null;
-            this.clientModulus = null;
-            this.SessionId = null;
-            /*MySqlCommand cmd = new MySqlCommand("UPDATE `accounts` SET `extrn_login` = 0 WHERE `email` = @email", Connection.Instance);
-            try
-            {
-                cmd.Prepare();
-                cmd.Parameters.AddWithValue("@email", this.Account.Email);
-                cmd.ExecuteNonQuery();
-            }
-            catch (MySqlException ex) { Log.Error("OnDisconnect()", "MySQL failed! " + ex.ToString()); }*/
+            Proof = null;
+            Salt = null;
+            Verifier = null;
+            serverModulus = null;
+            clientModulus = null;
+            SessionId = null;
         }
 
         #endregion
@@ -136,10 +73,10 @@ namespace LobbyServer
         {
             byte[] toSend = ECrypt.Encrypt(packet);
             MemoryStream tcpOut = new MemoryStream();
-            tcpOut.WriteByte((Byte)((toSend.Length & 0xffff) & 0xff));
-            tcpOut.WriteByte((Byte)((toSend.Length & 0xffff) >> 8));
-            tcpOut.WriteByte((Byte)((toSend.Length >> 16) & 0xff));
-            tcpOut.WriteByte((Byte)(toSend.Length >> 24));
+            tcpOut.WriteByte((byte)((toSend.Length & 0xffff) & 0xff));
+            tcpOut.WriteByte((byte)((toSend.Length & 0xffff) >> 8));
+            tcpOut.WriteByte((byte)((toSend.Length >> 16) & 0xff));
+            tcpOut.WriteByte((byte)(toSend.Length >> 24));
             tcpOut.Write(toSend, 4, toSend.Length - 4);
             SendTCP(tcpOut.ToArray());
             tcpOut.Dispose();

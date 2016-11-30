@@ -2,7 +2,6 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using DistrictServer.World.DW;
 using DistrictServer.World.WD;
@@ -21,7 +20,7 @@ namespace DistrictServer.World
         private NetworkStream stream;
         private IPEndPoint address;
 
-        public Client(String ip, int Port)
+        public Client(string ip, int Port)
         {
             address = new IPEndPoint(IPAddress.Parse(ip), Port);
             client = new TcpClient();
@@ -48,10 +47,10 @@ namespace DistrictServer.World
 
         private void handleLobby()
         {
-            DW.RegisterDistrict initPacket = new DW.RegisterDistrict(Program.Type, Program.ID, Program.Language, Program.Password, Program.IP, Program.Port, Program.Token);
+            RegisterDistrict initPacket = new RegisterDistrict(Program.Type, Program.ID, Program.Language, Program.Password, Program.IP, Program.Port, Program.Token);
             stream.Write(initPacket.ToArray(), 0, initPacket.ToArray().Length);
             stream.Flush();
-            Byte[] message = new Byte[4096];
+            byte[] message = new byte[4096];
             int bytesRead;
             while (true)
             {
@@ -72,7 +71,7 @@ namespace DistrictServer.World
                 IPacket packet = null;
                 switch (message[0])
                 {
-                    case (Byte)OpCodes.WD_MSG_INFO:
+                    case (byte)OpCodes.WD_MSG_INFO:
                         packet = new MessageInfo();
                         break;
                 }

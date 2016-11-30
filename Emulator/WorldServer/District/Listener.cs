@@ -1,8 +1,6 @@
 ﻿using FrameWork.Logger;
-
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Net.Sockets;
 using System.Threading;
 using System.Net;
@@ -15,25 +13,25 @@ namespace WorldServer.Districts
     {
         private TcpListener tcpListener;
         private Thread listenThread;
-        private String IP;
+        private string IP;
         private int Port;
 
-        public Dictionary<UInt32, District> Districts
+        public Dictionary<uint, District> Districts
         {
             get;
             private set;
         }
 
-        public Dictionary<TcpClient, UInt32> DistrictsTcp
+        public Dictionary<TcpClient, uint> DistrictsTcp
         {
             get;
             private set;
         }
 
-        public Listener(String ip, Int32 port)
+        public Listener(string ip, int port)
         {
-            Districts = new Dictionary<UInt32, District>();
-            DistrictsTcp = new Dictionary<TcpClient, UInt32>();
+            Districts = new Dictionary<uint, District>();
+            DistrictsTcp = new Dictionary<TcpClient, uint>();
             IPAddress address = IPAddress.Any;
             try
             {
@@ -53,7 +51,7 @@ namespace WorldServer.Districts
         {
             try
             {
-                this.tcpListener.Start();
+                tcpListener.Start();
             }
             catch (SocketException)
             {
@@ -64,7 +62,7 @@ namespace WorldServer.Districts
             Log.Succes("Districts.Listener", "Expecting districts to connect at " + IP + ":" + Port);
             while (true)
             {
-                TcpClient client = this.tcpListener.AcceptTcpClient();
+                TcpClient client = tcpListener.AcceptTcpClient();
                 Thread clientThread = new Thread(new ParameterizedThreadStart(handleWorld));
                 clientThread.Start(client);
             }
@@ -75,8 +73,8 @@ namespace WorldServer.Districts
             TcpClient tcpClient = (TcpClient)client;
             District district = new District(tcpClient);
             NetworkStream clientStream = tcpClient.GetStream();
-            Byte[] message = new Byte[4096];
-            Int32 bytesRead;
+            byte[] message = new byte[4096];
+            int bytesRead;
             while (true)
             {
                 bytesRead = 0;
@@ -97,7 +95,7 @@ namespace WorldServer.Districts
                 IPacket packet = null;
                 switch (message[0])
                 {
-                    case (Byte)OpCodes.DW_REGISTER_DISTRICT:
+                    case (byte)OpCodes.DW_REGISTER_DISTRICT:
                         packet = new RegisterDistrict();
                         break;
                 }
@@ -108,11 +106,11 @@ namespace WorldServer.Districts
             {
                 lock (DistrictsTcp)
                 {
-                    foreach (KeyValuePair<TcpClient, UInt32> dtcp in DistrictsTcp)
+                    foreach (KeyValuePair<TcpClient, uint> dtcp in DistrictsTcp)
                     {
                         lock (Districts)
                         {
-                            foreach (KeyValuePair<UInt32, District> dis in Districts)
+                            foreach (KeyValuePair<uint, District> dis in Districts)
                             {
                                 if (dis.Key == dtcp.Value)
                                 {

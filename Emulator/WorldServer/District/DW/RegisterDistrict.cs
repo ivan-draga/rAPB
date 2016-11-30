@@ -1,10 +1,7 @@
 ﻿using FrameWork.Logger;
-using FrameWork;
 using System;
-using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
-using System.Threading;
 using WorldServer.Districts.WD;
 using MyDB;
 
@@ -17,14 +14,14 @@ namespace WorldServer.Districts.DW
         public void Handle(District district)
         {
             Position = 0;
-            Byte type = (Byte)ReadByte();
-            Byte ID = (Byte)ReadByte();
+            byte type = (byte)ReadByte();
+            byte ID = (byte)ReadByte();
             LanguageCodes language = (LanguageCodes)ReadByte();
             TcpClient client = district.tcp;
-            String regpass = ReadS();
-            String IP = ReadS();
-            String Port = ReadS();
-            String Token = ReadS();
+            string regpass = ReadS();
+            string IP = ReadS();
+            string Port = ReadS();
+            string Token = ReadS();
             switch ((DistrictTypes)type)
             {
                 case DistrictTypes.FINANCIAL:
@@ -63,9 +60,9 @@ namespace WorldServer.Districts.DW
                 district.Port = Convert.ToUInt16(Port);
                 lock (Program.districtsListener.Districts)
                 {
-                    UInt32 code = (UInt32)(district.Type << 24);
+                    uint code = (uint)(district.Type << 24);
                     code += district.Id;
-                    foreach (KeyValuePair<UInt32, District> dist in Program.districtsListener.Districts)
+                    foreach (KeyValuePair<uint, District> dist in Program.districtsListener.Districts)
                     {
                         if (dist.Value.IP == IP && Program.districtsListener.Districts.ContainsKey(code))
                         {

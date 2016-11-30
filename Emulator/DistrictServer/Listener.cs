@@ -3,19 +3,13 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using FrameWork.Logger;
-using Unreal.IO;
-using System.IO;
-using FrameWork;
-using System.Threading;
-using System.Collections.Generic;
 
 namespace DistrictServer
 {
     public class Listener
     {
-        public Listener(Int32 Port)
+        public Listener(int Port)
         {
             bool done = false;
             UdpClient receivingUdpClient = new UdpClient(Port);
@@ -32,7 +26,7 @@ namespace DistrictServer
                 IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
                 try
                 {
-                    Byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
+                    byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
                     string data1 = BitConverter.ToString(receiveBytes);
                     string data2 = data1.Replace('-', ' ');
                     Console.WriteLine("Data:\n\n" + data2 + "\n\n");

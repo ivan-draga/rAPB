@@ -1,5 +1,4 @@
 ﻿using FrameWork.Logger;
-using System;
 
 namespace WorldServer.Lobby.LW
 {
@@ -8,9 +7,9 @@ namespace WorldServer.Lobby.LW
         public void Handle()
         {
             Position = 0;
-            UInt32 accountId = ReadD();
-            UInt32 charId = ReadD();
-            Byte[] sessionId = new Byte[40];
+            uint accountId = ReadD();
+            uint charId = ReadD();
+            byte[] sessionId = new byte[40];
             Read(sessionId, 0, 40);
             lock (Program.expectingAccounts)
             {

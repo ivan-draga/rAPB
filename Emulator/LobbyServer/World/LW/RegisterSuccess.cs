@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LobbyServer.World.LW
+﻿namespace LobbyServer.World.LW
 {
     class RegisterSuccess : Packet
     {
-        public RegisterSuccess(UInt32 worldId) : base()
+        public RegisterSuccess(uint worldId) : base()
         {
-            WriteByte((Byte)OpCodes.LW_REGISTER_SUCCESS);
+            WriteByte((byte)OpCodes.LW_REGISTER_SUCCESS);
             WriteD(worldId);
         }
     }

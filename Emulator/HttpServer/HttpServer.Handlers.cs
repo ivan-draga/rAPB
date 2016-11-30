@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using FrameWork.Logger;
 using MyDB;
 
@@ -26,15 +23,15 @@ namespace HttpServer
             if (invalidCharacterRegex.IsMatch(username)) return JsonEncode("Invalid characters detected in username!");
 
             Random getrandom = new Random();
-            String token = getrandom.Next(10000000, 99999999).ToString();
+            string token = getrandom.Next(10000000, 99999999).ToString();
             AccountEntry entry = new AccountEntry();
             entry.Index = Databases.AccountTable.GenerateIndex();
             entry.Username = username;
             entry.Password = password;
             entry.Verifier = "";
             entry.Salt = "";
-            entry.RTW_Points = 0;
-            entry.IsAdmin = 0;
+            entry.RTW_Points = 1000000;
+            entry.IsAdmin = 1;
             entry.IsBanned = 0;
             entry.InUse = 0;
             entry.extrn_login = 0;

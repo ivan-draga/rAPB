@@ -13,18 +13,18 @@ namespace LobbyServer.World
     {
         private TcpListener tcpListener;
         private Thread listenThread;
-        private String IP;
+        private string IP;
         private int Port;
 
-        public Dictionary<UInt32, World> Worlds
+        public Dictionary<uint, World> Worlds
         {
             get;
             private set;
         }
 
-        public Listener(String ip, Int32 port)
+        public Listener(string ip, int port)
         {
-            Worlds = new Dictionary<UInt32, World>();
+            Worlds = new Dictionary<uint, World>();
             IPAddress address = IPAddress.Any;
             try
             {
@@ -44,7 +44,7 @@ namespace LobbyServer.World
         {
             try
             {
-                this.tcpListener.Start();
+                tcpListener.Start();
             }
             catch (SocketException)
             {
@@ -55,7 +55,7 @@ namespace LobbyServer.World
             Log.Succes("World.Listener", "Expecting worlds to connect at " + IP + ":" + Port);
             while (true)
             {
-                TcpClient client = this.tcpListener.AcceptTcpClient();
+                TcpClient client = tcpListener.AcceptTcpClient();
                 Thread clientThread = new Thread(new ParameterizedThreadStart(handleWorld));
                 clientThread.Start(client);
             }
@@ -66,8 +66,8 @@ namespace LobbyServer.World
             TcpClient tcpClient = (TcpClient)client;
             World world = new World(tcpClient);
             NetworkStream clientStream = tcpClient.GetStream();
-            Byte[] message = new Byte[4096];
-            Int32 bytesRead;
+            byte[] message = new byte[4096];
+            int bytesRead;
             while (true)
             {
                 bytesRead = 0;
@@ -87,8 +87,8 @@ namespace LobbyServer.World
                 IPacket packet = null;
                 switch (message[0])
                 {
-                    case (Byte)OpCodes.WL_REGISTER_WORLD: packet = new RegisterWorld(); break;
-                    case (Byte)OpCodes.WL_SET_DATA: packet = new SetData(); break;
+                    case (byte)OpCodes.WL_REGISTER_WORLD: packet = new RegisterWorld(); break;
+                    case (byte)OpCodes.WL_SET_DATA: packet = new SetData(); break;
                 }
                 packet.Write(message, 1, bytesRead - 1);
                 packet.Handle(world);
@@ -96,7 +96,7 @@ namespace LobbyServer.World
             Log.Error("World.Listener", world.Name + " disconnected!");
             try
             {
-                Program.worlds.Remove((Byte)world.Id);
+                Program.worlds.Remove((byte)world.Id);
                 lock (Worlds)
                 {
                     Worlds.Remove(world.Id);

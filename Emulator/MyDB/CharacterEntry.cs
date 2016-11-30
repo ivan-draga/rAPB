@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyDB
+﻿namespace MyDB
 {
     [DatabaseTable("characters")]
     public struct CharacterEntry
@@ -12,23 +6,23 @@ namespace MyDB
         public int Index;
         public int AccountIndex;
         public string Name;
-        public Byte Slot;
-        public Byte Gender;
-        public Byte Faction;
+        public byte Slot;
+        public byte Gender;
+        public byte Faction;
         public int Rank;
         public int Money;
-        public Byte Threat;
+        public byte Threat;
         public int Playtime;
         public string Clan;
-        public Byte Version;
+        public byte Version;
         public string Appearance;
         public int World;
-        public Byte IsOnline;
-        public Byte DistrictID;
-        public Byte DistrictType;
-        public Byte LFG;
-        public Byte GroupStatus;
-        public Byte IsGroupPublic;
-        public Byte GroupInvite;
+        public byte IsOnline;
+        public byte DistrictID;
+        public byte DistrictType;
+        public byte LFG;
+        public byte GroupStatus;
+        public byte IsGroupPublic;
+        public byte GroupInvite;
     }
 }

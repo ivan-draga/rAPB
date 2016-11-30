@@ -1,6 +1,4 @@
 ﻿using FrameWork.Logger;
-using System;
-using System.IO;
 
 namespace DistrictServer.World.WD
 {
@@ -9,7 +7,7 @@ namespace DistrictServer.World.WD
         public void Handle()
         {
             Position = 0;
-            String message = ReadS();
+            string message = ReadS();
             Log.Debug("Host", message);
         }
     }

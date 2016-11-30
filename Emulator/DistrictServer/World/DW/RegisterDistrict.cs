@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace DistrictServer.World.DW
+﻿namespace DistrictServer.World.DW
 {
     class RegisterDistrict : Packet
     {
-        public RegisterDistrict(Byte type, Byte Id, Byte language, String password, String IP, String Port, String Token) : base()
+        public RegisterDistrict(byte type, byte Id, byte language, string password, string IP, string Port, string Token) : base()
         {
-            WriteByte((Byte)OpCodes.WD_REGISTER_DISTRICT);
+            WriteByte((byte)OpCodes.WD_REGISTER_DISTRICT);
             WriteByte(type);
             WriteByte(Id);
             WriteByte(language);

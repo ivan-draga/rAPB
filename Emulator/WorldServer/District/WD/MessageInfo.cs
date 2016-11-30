@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WorldServer.Districts.WD
+﻿namespace WorldServer.Districts.WD
 {
     class MessageInfo : Packet
     {
-        public MessageInfo(String connection) : base()
+        public MessageInfo(string connection) : base()
         {
-            WriteByte((Byte)OpCodes.WD_MSG_INFO);
+            WriteByte((byte)OpCodes.WD_MSG_INFO);
             WriteS(connection);
         }
     }

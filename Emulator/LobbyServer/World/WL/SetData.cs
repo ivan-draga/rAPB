@@ -1,7 +1,5 @@
 ﻿using FrameWork.Logger;
 
-using System;
-
 namespace LobbyServer.World.WL
 {
     class SetData : Packet, IPacket
@@ -9,13 +7,13 @@ namespace LobbyServer.World.WL
         public void Handle(World world)
         {
             Position = 0;
-            Byte IP1, IP2, IP3, IP4;
-            IP1 = (Byte)ReadByte();
-            IP2 = (Byte)ReadByte();
-            IP3 = (Byte)ReadByte();
-            IP4 = (Byte)ReadByte();
-            UInt32 port = ReadD();
-            Byte population = (Byte)ReadByte();
+            byte IP1, IP2, IP3, IP4;
+            IP1 = (byte)ReadByte();
+            IP2 = (byte)ReadByte();
+            IP3 = (byte)ReadByte();
+            IP4 = (byte)ReadByte();
+            uint port = ReadD();
+            byte population = (byte)ReadByte();
             world.IP1 = IP1;
             world.IP2 = IP2;
             world.IP3 = IP3;

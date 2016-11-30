@@ -4,9 +4,9 @@ namespace WorldServer.Lobby.WL
 {
     class SetData : Packet
     {
-        public SetData(Byte IP1, Byte IP2, Byte IP3, Byte IP4, UInt32 Port, Byte Population) : base()
+        public SetData(byte IP1, byte IP2, byte IP3, byte IP4, uint Port, byte Population) : base()
         {
-            WriteByte((Byte)OpCodes.WL_SET_DATA);
+            WriteByte((byte)OpCodes.WL_SET_DATA);
             WriteByte(IP1);
             WriteByte(IP2);
             WriteByte(IP3);

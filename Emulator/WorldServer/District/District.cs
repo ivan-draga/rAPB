@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WorldServer.Districts.WD;
+﻿using WorldServer.Districts.WD;
 using System.Net.Sockets;
 
 namespace WorldServer.Districts
@@ -51,7 +47,7 @@ namespace WorldServer.Districts
 
         public void Send(Packet packet)
         {
-            Byte[] array = packet.ToArray();
+            byte[] array = packet.ToArray();
             tcp.GetStream().Write(array, 0, array.Length);
             tcp.GetStream().Flush();
         }
@@ -59,8 +55,8 @@ namespace WorldServer.Districts
 
         #region Limits
 
-        public const UInt16 SocialLimit = 200;
-        public const UInt16 ActionLimit = 100;
+        public const ushort SocialLimit = 200;
+        public const ushort ActionLimit = 100;
 
         #endregion
 
@@ -69,11 +65,11 @@ namespace WorldServer.Districts
             tcp = Tcp;
         }
 
-        public District(DistrictTypes type, Byte id, LanguageCodes langCode = LanguageCodes.EN)
+        public District(DistrictTypes type, byte id, LanguageCodes langCode = LanguageCodes.EN)
         {
             _type = type;
             _lang = langCode;
-            Type = (Byte)((Byte)type + (Byte)langCode);
+            Type = (byte)((byte)type + (byte)langCode);
             Id = id;
         }
 
@@ -81,78 +77,31 @@ namespace WorldServer.Districts
 
         private DistrictTypes _type;
         private LanguageCodes _lang;
-        private String _state;
-        private DistrictState _dstate;
 
         #endregion
 
         #region APBData
 
-        public Byte Type
+        public byte Type
         {
             get;
             private set;
         }
-        public Byte Id;
-        public UInt16 Enforcers = 0;
-        public UInt16 Criminals = 0;
-        public UInt16 Queue = 0;
-        public String IP = null;
+        public byte Id;
+        public ushort Enforcers = 0;
+        public ushort Criminals = 0;
+        public ushort Queue = 0;
+        public string IP = null;
         public ushort Port;
-        public UInt32 Key = 0;
+        public uint Key = 0;
 
-        public Byte isFull()
+        public byte isFull()
         {
-            if (Type == (Byte)DistrictTypes.SOCIAL)
-                return Enforcers + Criminals >= SocialLimit ? (Byte)1 : (Byte)0;
+            if (Type == (byte)DistrictTypes.SOCIAL)
+                return Enforcers + Criminals >= SocialLimit ? (byte)1 : (byte)0;
             else
-                return Enforcers + Criminals >= ActionLimit ? (Byte)1 : (Byte)0;
+                return Enforcers + Criminals >= ActionLimit ? (byte)1 : (byte)0;
 
-        }
-
-        public void SetSate(DistrictState state)
-        {
-            _dstate = state;
-            switch (state)
-            {
-                case DistrictState.kDISTRICT_STATE_DISCONNECTED:
-                    _state = "kDISTRICT_STATE_DISCONNECTED";
-                    break;
-                case DistrictState.kDISTRICT_STATE_WORLDSERVER_LISTENING:
-                    _state = "kDISTRICT_STATE_WORLDSERVER_LISTENING";
-                    break;
-                case DistrictState.kDISTRICT_STATE_WORLDSERVER_CONNECT_IN_PROGRESS:
-                    _state = "kDISTRICT_STATE_WORLDSERVER_CONNECT_IN_PROGRESS";
-                    break;
-                case DistrictState.kDISTRICT_STATE_WORLDSERVER_CONNECT_COMPLETE:
-                    _state = "kDISTRICT_STATE_WORLDSERVER_CONNECT_COMPLETE";
-                    break;
-                case DistrictState.kDISTRICT_STATE_WORLDSERVER_DEV_ATTACH_IN_PROGRESS:
-                    _state = "kDISTRICT_STATE_WORLDSERVER_DEV_ATTACH_IN_PROGRESS";
-                    break;
-                case DistrictState.kDISTRICT_STATE_WORLDSERVER_DEV_ATTACH_COMPLETE:
-                    _state = "kDISTRICT_STATE_WORLDSERVER_DEV_ATTACH_COMPLETE";
-                    break;
-                case DistrictState.kDISTRICT_STATE_WORLDSERVER_ATTACH_IN_PROGRESS:
-                    _state = "kDISTRICT_STATE_WORLDSERVER_ATTACH_IN_PROGRESS";
-                    break;
-                case DistrictState.kDISTRICT_STATE_WORLDSERVER_ATTACH_COMPLETE:
-                    _state = "kDISTRICT_STATE_WORLDSERVER_ATTACH_COMPLETE";
-                    break;
-                case DistrictState.kDISTRICT_STATE_MAX:
-                    _state = "kDISTRICT_STATE_WORLDSERVER_ATTACH_IN_PROGRESS";
-                    break;
-            }
-        }
-
-        public DistrictState GetState()
-        {
-            return this._dstate;
-        }
-
-        public String GetStateAsString()
-        {
-            return this._state;
         }
         #endregion
 
@@ -160,7 +109,7 @@ namespace WorldServer.Districts
 
         public override string ToString()
         {
-            String result = "";
+            string result = "";
             switch (_type)
             {
                 default:
@@ -216,28 +165,28 @@ namespace WorldServer.Districts
 
     public class SocialDistrict : District
     {
-        public SocialDistrict(Byte id)
+        public SocialDistrict(byte id)
             : base(DistrictTypes.SOCIAL, id)
         { }
     }
 
     public class TutorialDistrict : District
     {
-        public TutorialDistrict(Byte id)
+        public TutorialDistrict(byte id)
             : base(DistrictTypes.TUTORIAL, id)
         { }
     }
 
     public class FinancialDistrict : District
     {
-        public FinancialDistrict(Byte id, LanguageCodes langCode = LanguageCodes.EN, Boolean hardCore = false)
+        public FinancialDistrict(byte id, LanguageCodes langCode = LanguageCodes.EN, bool hardCore = false)
             : base(hardCore ? DistrictTypes.FINANCIAL_HARDCORE : DistrictTypes.FINANCIAL, id, langCode)
         { }
     }
 
     public class WaterFrontDistrict : District
     {
-        public WaterFrontDistrict(Byte id, LanguageCodes langCode = LanguageCodes.EN, Boolean hardCore = false)
+        public WaterFrontDistrict(byte id, LanguageCodes langCode = LanguageCodes.EN, bool hardCore = false)
             : base(hardCore ? DistrictTypes.WATERFRONT_HARDCORE : DistrictTypes.WATERFRONT, id, langCode)
         { }
     }

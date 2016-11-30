@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace WorldServer.Lobby.WL
 {
@@ -7,18 +6,18 @@ namespace WorldServer.Lobby.WL
     {
         public Packet() : base() { }
 
-        protected void WriteS(String s)
+        protected void WriteS(string s)
         {
-            WriteByte((Byte)s.Length);
-            for (int i = 0; i < s.Length; i++) WriteByte((Byte)s[i]);
+            WriteByte((byte)s.Length);
+            for (int i = 0; i < s.Length; i++) WriteByte((byte)s[i]);
         }
 
-        protected void WriteD(UInt32 value)
+        protected void WriteD(uint value)
         {
-            WriteByte((Byte)(value >> 24));
-            WriteByte((Byte)((value >> 16) & 0xff));
-            WriteByte((Byte)((value & 0xffff) >> 8));
-            WriteByte((Byte)((value & 0xffff) & 0xff));
+            WriteByte((byte)(value >> 24));
+            WriteByte((byte)((value >> 16) & 0xff));
+            WriteByte((byte)((value & 0xffff) >> 8));
+            WriteByte((byte)((value & 0xffff) & 0xff));
         }
     }
 }

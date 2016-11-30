@@ -16,9 +16,9 @@ namespace LobbyServer.World.WL
         public void Handle(World world)
         {
             Position = 0;
-            String name = ReadS();
-            String password = ReadS();
-            Byte ID = (Byte)ReadByte();
+            string name = ReadS();
+            string password = ReadS();
+            byte ID = (byte)ReadByte();
             world.Name = name;
             Log.Info("RegisterWorld", name + " tries to register.");
             IPEndPoint address = (IPEndPoint)world.tcp.Client.RemoteEndPoint;

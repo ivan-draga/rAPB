@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using FrameWork.NetWork;
+﻿using FrameWork.NetWork;
 
 namespace LobbyServer
 {
@@ -11,7 +6,7 @@ namespace LobbyServer
     {
         public TcpServer() : base()
         {
-            PacketOut.SizeLen = sizeof(UInt32);
+            PacketOut.SizeLen = sizeof(uint);
             PacketOut.OpcodeInLen = true;
             PacketOut.OpcodeReverse = true;
             PacketOut.SizeReverse = true;

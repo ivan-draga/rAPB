@@ -86,28 +86,26 @@
     <Compile Include="RpcFile\FileClient.cs" />
     <Compile Include="RpcFile\FileManager.cs" />
     <Compile Include="SRP\Auth.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_CHARACTER_CREATE.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_CHARACTER_DELETE.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_CHARACTER_INFO.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_CHARACTER_NAME_CHECK.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_CONFIGFILE_LOAD.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_CONFIGFILE_SAVE.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_LOGIN.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_WORLD_ENTER.cs" />
-    <Compile Include="TCP\ClientPackets\ASK_WORLD_LIST.cs" />
-    <Compile Include="TCP\ClientPackets\LOGIN_PROOF.cs" />
+    <Compile Include="TCP\Packets\CHARACTER_CREATE.cs" />
+    <Compile Include="TCP\Packets\CHARACTER_DELETE.cs" />
+    <Compile Include="TCP\Packets\CHARACTER_INFO.cs" />
+    <Compile Include="TCP\Packets\CHARACTER_NAME_CHECK.cs" />
+    <Compile Include="TCP\Packets\CONFIGFILE_LOAD.cs" />
+    <Compile Include="TCP\Packets\CONFIGFILE_SAVE.cs" />
+    <Compile Include="TCP\Packets\LOGIN.cs" />
+    <Compile Include="TCP\Packets\WORLD_ENTER.cs" />
+    <Compile Include="TCP\Packets\WORLD_LIST.cs" />
+    <Compile Include="TCP\Packets\LOGIN_PROOF.cs" />
     <Compile Include="TCP\Encryption.cs" />
     <Compile Include="TCP\Hash.cs" />
     <Compile Include="TCP\LobbyClient.cs" />
     <Compile Include="TCP\Opcodes.cs" />
     <Compile Include="TCP\ResponseCodes.cs" />
-    <Compile Include="TCP\ServerPackets\ANS_CHARACTER_CREATE.cs" />
-    <Compile Include="TCP\ServerPackets\ANS_CHARACTER_INFO.cs" />
-    <Compile Include="TCP\ServerPackets\ANS_LOGIN_FAILED.cs" />
-    <Compile Include="TCP\ServerPackets\ANS_LOGIN_SUCCES.cs" />
-    <Compile Include="TCP\ServerPackets\LOGIN_PUZZLE.cs" />
-    <Compile Include="TCP\ServerPackets\LOGIN_SALT.cs" />
-    <Compile Include="TCP\ServerPackets\WORLD_LIST.cs" />
+    <Compile Include="TCP\Packets\CHARACTER_LIST.cs" />
+    <Compile Include="TCP\Packets\LOGIN_FAILED.cs" />
+    <Compile Include="TCP\Packets\LOGIN_SUCCES.cs" />
+    <Compile Include="TCP\Packets\LOGIN_PUZZLE.cs" />
+    <Compile Include="TCP\Packets\LOGIN_SALT.cs" />
     <Compile Include="TCP\TcpServer.cs" />
     <Compile Include="World\Listener.cs" />
     <Compile Include="World\LW\AccountEnter.cs" />
@@ -140,6 +138,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

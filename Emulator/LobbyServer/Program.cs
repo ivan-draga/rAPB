@@ -2,7 +2,6 @@
 using FrameWork;
 using FrameWork.Logger;
 using System;
-using System.Net;
 using System.Collections.Generic;
 using System.Timers;
 
@@ -22,7 +21,7 @@ namespace LobbyServer
     {
         static public FileManager FileMgr;
         static public World.Listener worldListener;
-        static public List<Byte> worlds = new List<Byte>();
+        static public List<byte> worlds = new List<byte>();
         static public List<LobbyClient> clients = new List<LobbyClient>();
         static public GameVersion version = GameVersion.INVALID;
 
@@ -32,7 +31,7 @@ namespace LobbyServer
             Log.Info("LobbyServer", "Starting...");
             if (!EasyServer.InitLog("Lobby", "Configs/Logs.conf") || !EasyServer.InitConfig("Configs/Lobby.xml", "Lobby") || !EasyServer.InitConfig("Configs/Database.xml", "Database")) return;
             if (!EasyServer.Listen<TcpServer>(EasyServer.GetConfValue<int>("Lobby", "LoginServer", "Port"), "LoginServer")) return;
-            worldListener = new World.Listener(EasyServer.GetConfValue<String>("Lobby", "WorldListener", "IP"), EasyServer.GetConfValue<int>("Lobby", "WorldListener", "Port"));
+            worldListener = new World.Listener(EasyServer.GetConfValue<string>("Lobby", "WorldListener", "IP"), EasyServer.GetConfValue<int>("Lobby", "WorldListener", "Port"));
             Databases.InitDB();
             Databases.Load(true);
             FileMgr = new FileManager();
@@ -111,7 +110,7 @@ namespace LobbyServer
             }
             else if (command.Contains("/clients"))
             {
-                Byte count = 0;
+                int count = 0;
                 foreach (LobbyClient client in clients)
                 {
                     count++;

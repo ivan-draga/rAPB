@@ -1,8 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using FrameWork.Logger;
 using FrameWork.NetWork;
 using WorldServer.TCP;
 using WorldServer.Districts;
@@ -10,82 +7,10 @@ using MyDB;
 
 namespace WorldServer
 {
-    public enum ClientState
-    {
-        kCLIENT_STATE_WORLDSERVER_CONNECT_IN_PROGRESS = 9,
-        kCLIENT_STATE_WORLDSERVER_CONNECT_COMPLETE = 10,
-        kCLIENT_STATE_DISTRICT_ENTER1_IN_PROGRESS = 14,
-        kCLIENT_STATE_DISTRICT_ENTER1_COMPLETE = 15,
-        kCLIENT_STATE_DISTRICTSERVER_CONNECT_IN_PROGRESS = 16,
-        kCLIENT_STATE_DISTRICTSERVER_CONNECT_COMPLETE = 17,
-        kCLIENT_STATE_DISTRICT_ENTER2_IN_PROGRESS = 18,
-        kCLIENT_STATE_DISTRICT_ENTER2_COMPLETE = 19,
-        kCLIENT_STATE_DISTRICT_EXIT_IN_PROGRESS = 20,
-        kCLIENT_STATE_LOGOUT_IN_PROGRESS = 21,
-        kCLIENT_STATE_MAX = 22
-    };
-
     public class WorldClient : BaseClient
     {
         public District Reserved;
         public Lobby.Acc account;
-
-        #region Client state
-
-        private String _state;
-        private ClientState _cstate;
-
-        public void SetState(ClientState state)
-        {
-            _cstate = state;
-            switch (state)
-            {
-                case ClientState.kCLIENT_STATE_WORLDSERVER_CONNECT_IN_PROGRESS:
-                    _state = "kCLIENT_STATE_WORLDSERVER_CONNECT_IN_PROGRESS";
-                    break;
-                case ClientState.kCLIENT_STATE_WORLDSERVER_CONNECT_COMPLETE:
-                    _state = "kCLIENT_STATE_WORLDSERVER_CONNECT_COMPLETE";
-                    break;
-                case ClientState.kCLIENT_STATE_DISTRICT_ENTER1_IN_PROGRESS:
-                    _state = "kCLIENT_STATE_DISTRICT_ENTER1_IN_PROGRESS";
-                    break;
-                case ClientState.kCLIENT_STATE_DISTRICT_ENTER1_COMPLETE:
-                    _state = "kCLIENT_STATE_DISTRICT_ENTER1_COMPLETE";
-                    break;
-                case ClientState.kCLIENT_STATE_DISTRICTSERVER_CONNECT_IN_PROGRESS:
-                    _state = "kCLIENT_STATE_DISTRICTSERVER_CONNECT_IN_PROGRESS";
-                    break;
-                case ClientState.kCLIENT_STATE_DISTRICTSERVER_CONNECT_COMPLETE:
-                    _state = "kCLIENT_STATE_DISTRICTSERVER_CONNECT_COMPLETE";
-                    break;
-                case ClientState.kCLIENT_STATE_DISTRICT_ENTER2_IN_PROGRESS:
-                    _state = "kCLIENT_STATE_DISTRICT_ENTER2_IN_PROGRESS";
-                    break;
-                case ClientState.kCLIENT_STATE_DISTRICT_ENTER2_COMPLETE:
-                    _state = "kCLIENT_STATE_DISTRICT_ENTER2_COMPLETE";
-                    break;
-                case ClientState.kCLIENT_STATE_DISTRICT_EXIT_IN_PROGRESS:
-                    _state = "kCLIENT_STATE_DISTRICT_EXIT_IN_PROGRESS";
-                    break;
-                case ClientState.kCLIENT_STATE_LOGOUT_IN_PROGRESS:
-                    _state = "kCLIENT_STATE_LOGOUT_IN_PROGRESS";
-                    break;
-                case ClientState.kCLIENT_STATE_MAX:
-                    _state = "kCLIENT_STATE_MAX";
-                    break;
-            }
-        }
-
-        public ClientState GetState()
-        {
-            return this._cstate;
-        }
-
-        public String GetStateAsString()
-        {
-            return this._state;
-        }
-        #endregion
 
         #region Database stuff
 
@@ -146,10 +71,10 @@ namespace WorldServer
             Console.WriteLine();
             byte[] toSend = Crypto.Encrypt(packet);
             MemoryStream tcpOut = new MemoryStream();
-            tcpOut.WriteByte((Byte)((toSend.Length & 0xffff) & 0xff));
-            tcpOut.WriteByte((Byte)((toSend.Length & 0xffff) >> 8));
-            tcpOut.WriteByte((Byte)((toSend.Length >> 16) & 0xff));
-            tcpOut.WriteByte((Byte)(toSend.Length >> 24));
+            tcpOut.WriteByte((byte)((toSend.Length & 0xffff) & 0xff));
+            tcpOut.WriteByte((byte)((toSend.Length & 0xffff) >> 8));
+            tcpOut.WriteByte((byte)((toSend.Length >> 16) & 0xff));
+            tcpOut.WriteByte((byte)(toSend.Length >> 24));
             tcpOut.Write(toSend, 4, toSend.Length - 4);
             SendTCP(tcpOut.ToArray());
             tcpOut.Dispose();

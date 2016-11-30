@@ -2,7 +2,6 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using WorldServer.Lobby.LW;
 
@@ -20,7 +19,7 @@ namespace WorldServer.Lobby
         private NetworkStream stream;
         private IPEndPoint address;
 
-        public Client(String ip, int Port)
+        public Client(string ip, int Port)
         {
             address = new IPEndPoint(IPAddress.Parse(ip), Port);
             client = new TcpClient();
@@ -50,7 +49,7 @@ namespace WorldServer.Lobby
             WL.RegisterWorld initPacket = new WL.RegisterWorld(Program.WorldName, Program.Password, Program.ID);
             stream.Write(initPacket.ToArray(), 0, initPacket.ToArray().Length);
             stream.Flush();
-            Byte[] message = new Byte[4096];
+            byte[] message = new byte[4096];
             int bytesRead;
             while (true)
             {
@@ -70,10 +69,10 @@ namespace WorldServer.Lobby
                 IPacket packet = null;
                 switch (message[0])
                 {
-                    case (Byte)OpCodes.LW_REGISTER_SUCCESS:
+                    case (byte)OpCodes.LW_REGISTER_SUCCESS:
                         packet = new RegisterSuccess();
                         break;
-                    case (Byte)OpCodes.LW_ACCOUNT_ENTER:
+                    case (byte)OpCodes.LW_ACCOUNT_ENTER:
                         packet = new AccountEnter();
                         break;
                 }
@@ -101,7 +100,7 @@ namespace WorldServer.Lobby
 
         public void Send(WL.Packet packet)
         {
-            Byte[] array = packet.ToArray();
+            byte[] array = packet.ToArray();
             stream.Write(array, 0, array.Length);
             stream.Flush();
         }

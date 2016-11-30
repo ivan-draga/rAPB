@@ -2,16 +2,9 @@
 using FrameWork.Logger;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using WorldServer.Districts;
 using WorldServer.Lobby;
 using WorldServer.RpcFile;
-using System.Runtime.InteropServices;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Timers;
 
 namespace WorldServer
@@ -25,27 +18,27 @@ namespace WorldServer
 
         #region WorldData
 
-        static public Byte ID;
-        static public UInt32 WorldId;
-        static public String WorldName;
-        static public String Password;
+        static public byte ID;
+        static public uint WorldId;
+        static public string WorldName;
+        static public string Password;
 
         #region IPAddress
 
-        static public Byte IP1;
-        static public Byte IP2;
-        static public Byte IP3;
-        static public Byte IP4;
+        static public byte IP1;
+        static public byte IP2;
+        static public byte IP3;
+        static public byte IP4;
 
         #endregion
 
-        static public Int32 Port;
+        static public int Port;
 
         #endregion
 
         #region WorldLobbyCommunication
 
-        static public Lobby.Client Lobby;
+        static public Client Lobby;
 
         #endregion
 
@@ -54,19 +47,19 @@ namespace WorldServer
             Log.Info("WorldServer", "Starting...");
             if (!EasyServer.InitLog("World", "Configs/Logs.conf") || !EasyServer.InitConfig("Configs/World.xml", "World") || !EasyServer.InitConfig("Configs/Database.xml", "Database")) return;
             Port = EasyServer.GetConfValue<int>("World", "WorldServer", "Port");
-            IP1 = EasyServer.GetConfValue<Byte>("World", "WorldServer", "IP1");
-            IP2 = EasyServer.GetConfValue<Byte>("World", "WorldServer", "IP2");
-            IP3 = EasyServer.GetConfValue<Byte>("World", "WorldServer", "IP3");
-            IP4 = EasyServer.GetConfValue<Byte>("World", "WorldServer", "IP4");
+            IP1 = EasyServer.GetConfValue<byte>("World", "WorldServer", "IP1");
+            IP2 = EasyServer.GetConfValue<byte>("World", "WorldServer", "IP2");
+            IP3 = EasyServer.GetConfValue<byte>("World", "WorldServer", "IP3");
+            IP4 = EasyServer.GetConfValue<byte>("World", "WorldServer", "IP4");
             if (!EasyServer.Listen<TcpServer>(Port, "WorldInfo")) return;
             Databases.InitDB();
             Databases.Load(false);
             FileMgr = new FileManager();
             Password = EasyServer.GetConfValue<string>("World", "LobbyCommunication", "Password");
             WorldName = EasyServer.GetConfValue<string>("World", "WorldInfo", "Name");
-            ID = EasyServer.GetConfValue<Byte>("World", "WorldInfo", "Id");
-            Lobby = new Lobby.Client(EasyServer.GetConfValue<String>("World", "LobbyCommunication", "Ip"), EasyServer.GetConfValue<int>("World", "LobbyCommunication", "Port"));
-            districtsListener = new Districts.Listener(EasyServer.GetConfValue<String>("World", "DistrictListener", "Ip"), EasyServer.GetConfValue<int>("World", "DistrictListener", "Port"));
+            ID = EasyServer.GetConfValue<byte>("World", "WorldInfo", "Id");
+            Lobby = new Client(EasyServer.GetConfValue<string>("World", "LobbyCommunication", "Ip"), EasyServer.GetConfValue<int>("World", "LobbyCommunication", "Port"));
+            districtsListener = new Listener(EasyServer.GetConfValue<string>("World", "DistrictListener", "Ip"), EasyServer.GetConfValue<int>("World", "DistrictListener", "Port"));
             clients.Clear();
             Timer aTimer = new Timer(10000);
             aTimer.Elapsed += OnTimedEvent;
@@ -114,7 +107,7 @@ namespace WorldServer
             else if (command.Contains("/clients"))
             {
                 Log.Enter();
-                Byte count = 0;
+                int count = 0;
                 foreach (WorldClient client in clients)
                 {
                     count++;
@@ -130,8 +123,8 @@ namespace WorldServer
             else if (command.Contains("/districts"))
             {
                 Log.Enter();
-                Byte count = 0;
-                foreach (KeyValuePair<UInt32, District> district in Program.districtsListener.Districts)
+                int count = 0;
+                foreach (KeyValuePair<uint, District> district in districtsListener.Districts)
                 {
                     count++;
                     Console.WriteLine("IP: " + district.Value.IP);
@@ -153,6 +146,20 @@ namespace WorldServer
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             Databases.Load(false);
+        }
+
+        public static string ByteToHexBitFiddle(byte[] bytes)
+        {
+            char[] c = new char[bytes.Length * 2];
+            int b;
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                b = bytes[i] >> 4;
+                c[i * 2] = (char)(55 + b + (((b - 10) >> 31) & -7));
+                b = bytes[i] & 0xF;
+                c[i * 2 + 1] = (char)(55 + b + (((b - 10) >> 31) & -7));
+            }
+            return new string(c);
         }
     }
 }

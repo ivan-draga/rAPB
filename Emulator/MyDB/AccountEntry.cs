@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyDB
+﻿namespace MyDB
 {
     [DatabaseTable("accounts")]
     public struct AccountEntry
@@ -15,11 +9,11 @@ namespace MyDB
         public string Verifier;
         public string Salt;
         public int RTW_Points;
-        public Byte IsAdmin;
-        public Byte IsBanned;
-        public Byte InUse;
-        public Byte extrn_login;
-        public Byte CanHostDistrict;
+        public byte IsAdmin;
+        public byte IsBanned;
+        public byte InUse;
+        public byte extrn_login;
+        public byte CanHostDistrict;
         public string Token;
     }
 }

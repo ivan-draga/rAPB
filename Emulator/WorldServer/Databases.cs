@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MyDB;
+﻿using MyDB;
 using FrameWork;
 
 namespace WorldServer
 {
     public static class Databases
     {
-        private static MyDB.Database rebornAPB;
+        private static Database rebornAPB;
         public static Table<AccountEntry> AccountTable;
         public static Table<CharacterEntry> CharacterTable;
         public static Table<FriendEntry> FriendTable;
@@ -18,7 +13,7 @@ namespace WorldServer
 
         public static void InitDB()
         {
-            rebornAPB = new MyDB.Database(EasyServer.GetConfValue<String>("Database", "Database", "IP"), EasyServer.GetConfValue<int>("Database", "Database", "Port"), EasyServer.GetConfValue<String>("Database", "Database", "Username"), EasyServer.GetConfValue<String>("Database", "Database", "Password"), EasyServer.GetConfValue<String>("Database", "Database", "Database"));
+            rebornAPB = new Database(EasyServer.GetConfValue<string>("Database", "Database", "IP"), EasyServer.GetConfValue<int>("Database", "Database", "Port"), EasyServer.GetConfValue<string>("Database", "Database", "Username"), EasyServer.GetConfValue<string>("Database", "Database", "Password"), EasyServer.GetConfValue<string>("Database", "Database", "Database"));
             AccountTable = new Table<AccountEntry>(rebornAPB);
             CharacterTable = new Table<CharacterEntry>(rebornAPB);
             FriendTable = new Table<FriendEntry>(rebornAPB);
@@ -36,14 +31,14 @@ namespace WorldServer
 
         private static void Reset()
         {
-            foreach (AccountEntry acc in Databases.AccountTable.Select(a => a.InUse == 1))
+            foreach (AccountEntry acc in AccountTable.Select(a => a.InUse == 1))
             {
                 AccountEntry ac = acc;
                 ac.InUse = 0;
-                Databases.AccountTable.Update(ac);
+                AccountTable.Update(ac);
             }
 
-            foreach (CharacterEntry chr in Databases.CharacterTable.Select(c => c.IsOnline == 1))
+            foreach (CharacterEntry chr in CharacterTable.Select(c => c.IsOnline == 1))
             {
                 CharacterEntry ch = chr;
                 ch.IsOnline = 0;
@@ -53,7 +48,7 @@ namespace WorldServer
                 ch.GroupStatus = 0;
                 ch.GroupInvite = 0;
                 ch.IsGroupPublic = 0;
-                Databases.CharacterTable.Update(ch);
+                CharacterTable.Update(ch);
             }
         }
     }
