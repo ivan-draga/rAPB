@@ -20,7 +20,7 @@ namespace WorldServer.TCP.Packets
             {
                 Out.WriteInt32((int)ResponseCodes.RC_SUCCESS);
                 string[] delimiter = new string[] { "." };
-                string[] result = cclient.Reserved.IP.Split(delimiter, StringSplitOptions.None);
+                string[] result = new string[] { "127", "0", "0", "1" }; //cclient.Reserved.IP.Split(delimiter, StringSplitOptions.None);
                 foreach (string s in result) Out.WriteByte(Convert.ToByte(s));
                 Out.WriteUInt16Reverse(cclient.Reserved.Port);
                 int timestamp = TcpServer.GetTimeStamp();
@@ -33,8 +33,6 @@ namespace WorldServer.TCP.Packets
                 var handshakeHash = new byte[sha1.GetDigestSize()];
                 sha1.DoFinal(handshakeHash, 0);
 
-                Log.Succes("handshakeHash", Program.ByteToHexBitFiddle(handshakeHash));
-
                 sha1 = new Sha1Digest();
                 sha1.BlockUpdate(cclient.Crypto.Key, 0, cclient.Crypto.Key.Length);
                 sha1.BlockUpdate(handshakeHash, 0, handshakeHash.Length);
@@ -43,7 +41,7 @@ namespace WorldServer.TCP.Packets
                 var encryptionKey = new byte[16];
                 Buffer.BlockCopy(encryptionHash, 0, encryptionKey, 0, 16);
 
-                Log.Succes("encryptionKey", Program.ByteToHexBitFiddle(encryptionKey));
+                cclient.Reserved.Send(new Districts.WD.MessageInfo("key", encryptionKey));
              }
             else Out.WriteUInt32Reverse((uint)ResponseCodes.RC_DISTRICT_RESERVE_DISTRICT_OFFLINE);
             cclient.Send(Out);

@@ -4,63 +4,77 @@ namespace DistrictServer
 {
     public static class XTEA
     {
-        public unsafe static bool Encrypt(ref byte[] buffer, ref int length, int index, uint[] key)
+        public enum Mode
         {
-            if (key == null) return false;
-
-            int msgSize = length - index;
-
-            int pad = msgSize % 8;
-            if (pad > 0)
-            {
-                msgSize += (8 - pad);
-                length = index + msgSize;
-            }
-
-            fixed (byte* bufferPtr = buffer)
-            {
-                uint* words = (uint*)(bufferPtr + index);
-
-                for (int pos = 0; pos < msgSize / 4; pos += 2)
-                {
-                    uint x_sum = 0, x_delta = 0x9e3779b9, x_count = 32;
-
-                    while (x_count-- > 0)
-                    {
-                        words[pos] += (words[pos + 1] << 4 ^ words[pos + 1] >> 5) + words[pos + 1] ^ x_sum + key[x_sum & 3];
-                        x_sum += x_delta;
-                        words[pos + 1] += (words[pos] << 4 ^ words[pos] >> 5) + words[pos] ^ x_sum + key[x_sum >> 11 & 3];
-                    }
-                }
-            }
-
-            return true;
+            Encrypt,
+            Decrypt
         }
 
-        public unsafe static bool Decrypt(ref byte[] buffer, ref int length, int index, uint[] key)
+        public static byte[] Code(byte[] data, uint[] k, Mode mode)
         {
-            if (length <= index || (length - index) % 8 > 0 || key == null) return false;
+            uint[] v = new uint[(int)Math.Ceiling((float)data.Length / 4)];
+            Buffer.BlockCopy(data, 0, v, 0, data.Length);
 
-            fixed (byte* bufferPtr = buffer)
+            unchecked
             {
-                uint* words = (uint*)(bufferPtr + index);
-                int msgSize = length - index;
+                const uint DELTA = 0x9e3779b9;
+                uint y = 0, z = 0, sum = 0, p = 0, rounds = 0, e = 0;
+                int n = v.Length;
+                Func<uint> MX = () => (((z >> 5 ^ y << 2) + (y >> 3 ^ z << 4)) ^ ((sum ^ y) + (k[(p & 3) ^ e] ^ z)));
 
-                for (int pos = 0; pos < msgSize / 4; pos += 2)
+                if (mode == Mode.Encrypt)
                 {
-                    uint x_count = 32, x_sum = 0xC6EF3720, x_delta = 0x9E3779B9;
-
-                    while (x_count-- > 0)
+                    rounds = (uint)(6 + 52 / n);
+                    z = v[n - 1];
+                    do
                     {
-                        words[pos + 1] -= (words[pos] << 4 ^ words[pos] >> 5) + words[pos] ^ x_sum + key[x_sum >> 11 & 3];
-                        x_sum -= x_delta;
-                        words[pos] -= (words[pos + 1] << 4 ^ words[pos + 1] >> 5) + words[pos + 1] ^ x_sum + key[x_sum & 3];
-                    }
+                        sum += DELTA;
+                        e = (sum >> 2) & 3;
+                        for (p = 0; p < n - 1; p++)
+                        {
+                            y = v[p + 1];
+                            z = v[p] += MX();
+                        }
+                        y = v[0];
+                        z = v[n - 1] += MX();
+                    } while (--rounds > 0);
+                }
+                else
+                {
+                    rounds = (uint)(6 + 52 / n);
+                    sum = rounds * DELTA;
+                    y = v[0];
+                    do
+                    {
+                        e = (sum >> 2) & 3;
+                        for (p = (uint)(n - 1); p > 0; p--)
+                        {
+                            z = v[p - 1];
+                            y = v[p] -= MX();
+                        }
+                        z = v[n - 1];
+                        y = v[0] -= MX();
+                    } while ((sum -= DELTA) != 0);
                 }
             }
 
-            length = (BitConverter.ToUInt16(buffer, index) + 2 + index);
-            return true;
+            byte[] rvl = new byte[v.Length * 4];
+            Buffer.BlockCopy(v, 0, rvl, 0, rvl.Length);
+            return rvl;
+        }
+
+        public static string ByteToHexBitFiddle(byte[] bytes)
+        {
+            char[] c = new char[bytes.Length * 2];
+            int b;
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                b = bytes[i] >> 4;
+                c[i * 2] = (char)(55 + b + (((b - 10) >> 31) & -7));
+                b = bytes[i] & 0xF;
+                c[i * 2 + 1] = (char)(55 + b + (((b - 10) >> 31) & -7));
+            }
+            return new string(c);
         }
     }
 }

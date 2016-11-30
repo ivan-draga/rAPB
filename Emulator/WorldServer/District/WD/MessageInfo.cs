@@ -2,10 +2,11 @@
 {
     class MessageInfo : Packet
     {
-        public MessageInfo(string connection) : base()
+        public MessageInfo(string msg, byte[] data) : base()
         {
             WriteByte((byte)OpCodes.WD_MSG_INFO);
-            WriteS(connection);
+            WriteS(msg);
+            Write(data, 0, data.Length);
         }
     }
 }

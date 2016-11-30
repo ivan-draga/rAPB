@@ -2,7 +2,7 @@
 <root>
 	<LoginServer>
 		<Port>2106</Port>
-		<GameVersion>RTW_CB</GameVersion>
+		<GameVersion>RTW_LAST</GameVersion>
 	</LoginServer>
 	
 	<WorldListener>

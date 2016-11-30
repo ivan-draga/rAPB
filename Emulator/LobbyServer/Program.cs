@@ -36,39 +36,35 @@ namespace LobbyServer
             Databases.Load(true);
             FileMgr = new FileManager();
             string sVersion = EasyServer.GetConfValue<string>("Lobby", "LoginServer", "GameVersion");
-            if(sVersion != "RTW_CB" && sVersion != "RTW_DVD" && sVersion != "RTW_LAST")
+            if (sVersion == "RTW_CB")
             {
-                Log.Error("ERROR", "Invalid game version!");
-                return;
+                version = GameVersion.RTW_CB;
+                Log.Info("Version", "Supported game version: 0.6.0.509927 (RTW closed beta)");
+            }
+            else if (sVersion == "RTW_DVD")
+            {
+                version = GameVersion.RTW_DVD;
+                Log.Info("Version", "Supported game version: 1.1.0.534979 (RTW DVD release)");
+            }
+            else if (sVersion == "RTW_LAST")
+            {
+                version = GameVersion.RTW_LAST;
+                Log.Info("Version", "Supported game version: 1.4.1.555239 (last RTW patch)");
+            }
+            else if (sVersion == "G1_LATEST")
+            {
+                version = GameVersion.G1_LATEST;
+                Log.Info("Version", "Supported game version: 1.19.4.766569 (latest G1 patch)");
+            }
+            else if (sVersion == "G1_ENGUPD")
+            {
+                version = GameVersion.G1_ENGUPD;
+                Log.Info("Version", "Supported game version: 2.0.0.750394 (G1 engine update)");
             }
             else
             {
-                if (sVersion == "RTW_CB")
-                {
-                    version = GameVersion.RTW_CB;
-                    Log.Info("Version", "Supported game version: 0.6.0.509927 (RTW closed beta)");
-                }
-                else if (sVersion == "RTW_DVD")
-                {
-                    version = GameVersion.RTW_DVD;
-                    Log.Info("Version", "Supported game version: 1.1.0.534979 (RTW DVD release)");
-                }
-                else if (sVersion == "RTW_LAST")
-                {
-                    version = GameVersion.RTW_LAST;
-                    Log.Info("Version", "Supported game version: 1.4.1.555239 (last RTW patch)");
-                }
-                else if (sVersion == "G1_LATEST")
-                {
-                    version = GameVersion.G1_LATEST;
-                    Log.Info("Version", "Supported game version: 1.19.4.766569 (latest G1 patch)");
-                }
-                else if (sVersion == "G1_ENGUPD")
-                {
-                    version = GameVersion.G1_ENGUPD;
-                    Log.Info("Version", "Supported game version: 2.0.0.750394 (G1 engine update)");
-                }
-                else version = GameVersion.INVALID;
+                version = GameVersion.INVALID;
+                Log.Error("Version", "Invalid game version");
             }
             Log.Succes("LobbyServer", "Server initialisation complete!");
             clients.Clear();

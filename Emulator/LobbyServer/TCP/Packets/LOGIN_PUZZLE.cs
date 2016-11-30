@@ -33,7 +33,7 @@ namespace LobbyServer.TCP.Packets
                 Out.WriteInt32Reverse(1);
                 Out.WriteInt32Reverse(19);
                 Out.WriteInt32Reverse(4);
-                Out.WriteInt32Reverse(766569);
+                Out.WriteInt32Reverse(772616);
             }
             else if (Program.version == GameVersion.G1_ENGUPD)
             {

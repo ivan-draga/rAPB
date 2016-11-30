@@ -1,0 +1,185 @@
+[00:02:37] N EasyServer : Logger initialized.
+[00:02:37] N Server : launching APB EMU server...
+[00:02:37] N Server : (c) 2016 APB EMU Team.
+[00:02:37] N Server : Special thanks to: fiki574, Scalexo, Luna & ColdReader
+[00:02:37] N Server : Donators: FlyToha, Luna, Myrothas, aidey, dapanda & schback
+[00:02:37] N Server :  
+[00:02:37] N Server :  
+[00:02:37] N Server :  
+[00:02:37] N Server :            ,ggg, ,ggggggggggg,   ,ggggggggggg,  
+[00:02:37] N Server :           dP''8IdP'''88''''''Y8,dP'''88''''''Y8,
+[00:02:37] N Server :          dP   88Yb,  88      `8bYb,  88      `8b
+[00:02:37] N Server :         dP    88 `'  88      ,8P `'  88      ,8P
+[00:02:37] N Server :        ,8'    88     88aaaad8P'      88aaaad8P'
+[00:02:37] N Server :        d88888888     88'''''         88''''Y8ba 
+[00:02:37] N Server :  __   ,8'     88     88              88      `8b
+[00:02:37] N Server : dP'  ,8P      Y8     88              88      ,8P
+[00:02:37] N Server : Yb,_,dP       `8b,   88              88_____,d8'
+[00:02:37] N Server :  'Y8P'         `Y8   88             88888888P'  
+[00:02:37] N Server :  
+[00:02:37] N Server : ==============================================
+[00:02:37] N Server :    ,ggggggg,                               
+[00:02:37] N Server :  ,dP''''''Y8b                              
+[00:02:37] N Server :  d8'    a  Y8                              
+[00:02:37] N Server :  88     'Y8P'                              
+[00:02:37] N Server :  `8baaaa                                   
+[00:02:37] N Server : ,d8P''''      ,ggg,,ggg,,ggg,   gg      gg 
+[00:02:37] N Server : d8'          ,8' '8P' '8P' '8,  I8      8I 
+[00:02:37] N Server : Y8,          I8   8I   8I   8I  I8,    ,8I 
+[00:02:37] N Server : `Yba,,_____,,dP   8I   8I   Yb,,d8b,  ,d8b,
+[00:02:37] N Server :   `'Y88888888P'   8I   8I   `Y88P''Y88P'`Y8
+[00:02:37] I AssemblyManager : Loading Assembly : /Scripts
+[00:02:37] I AssemblyManager : Loading 0 Assembly
+[00:02:37] I TCPManager : Launching...
+[00:02:37] D TCPManager : Buffer pool allocation : 300
+[00:02:37] I TCPManager : Loading Packet Handler
+[00:02:37] D TCPManager : Registering the handler onAskCharacterFinderInfo
+[00:02:37] D TCPManager : Registering the handler onAskChatWhisper
+[00:02:37] D TCPManager : Registering the handler onAskDistrictEnter
+[00:02:37] D TCPManager : Registering the handler onAskDistrictReserve
+[00:02:37] D TCPManager : Registering the handler onAskFriendListAdd
+[00:02:37] D TCPManager : Registering the handler onAskFriendListRemove
+[00:02:37] D TCPManager : Registering the handler onAskFriendListInfo
+[00:02:37] D TCPManager : Registering the handler onAskGroupList
+[00:02:37] D TCPManager : Registering the handler onAskIgnoreListAdd
+[00:02:37] D TCPManager : Registering the handler onAskIgnoreListRemove
+[00:02:37] D TCPManager : Registering the handler onAskInstanceList
+[00:02:37] D TCPManager : Registering the handler onAskNameQuery
+[00:02:37] D TCPManager : Registering the handler onAskWorldEnter
+[00:02:37] D TCPManager : Registering the handler onChangeLFG
+[00:02:37] D TCPManager : Registering the handler onLogout
+[00:02:38] I TCPManager : Loading Crypt Handler
+[00:02:38] S TCPManager : Accepting Connections on : 0.0.0.0:2121
+[00:02:38] S Lobby.Client : Connected to the Lobby Server!
+[00:02:38] S Districts.Listener : Expecting districts to connect at 127.0.0.1:2108
+[00:02:38] S RegisterSuccess : Registered with a following ID: 1
+[00:02:40] I RegisterDistrict : Safe-Social-EN-1 tries to register.
+[00:02:40] S RegisterDistrict : Safe-Social-EN-1 was registered! (127.0.0.1:6969)
+[00:02:46] S AccountEnter : Account 1 now can connect to the world!
+[00:02:46] I TCPManager : New connection from : 127.0.0.1:45387
+[00:02:46] P 127.0.0.1:45387 : 
+0000: 20000000 B80B0000 01000000 51AE186F   ...........Q..o
+0010: 1065B6D7 933AAF04 9C3C11C3 2C664CE5  .e...:...<..,fL.
+[00:02:46] D TCPManager : Handeling package 3000
+[00:02:46] D AskWorldEnter : New client! Account = 1
+[00:02:46] I FileManager : GetFileVersion: ID = 1 | CharName = 1
+[00:02:46] I FileManager : GetFile: ID = 1
+[00:02:46] I FileClient : CheckBase: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER/ClientFiles/1
+[00:02:46] I AccountPersistent3.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent3.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=0
+[00:02:46] D AccountPersistent3.ini : Version: 0
+[00:02:46] I AccountPersistent4.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent4.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=0
+[00:02:46] D AccountPersistent4.ini : Version: 0
+[00:02:46] I AccountPersistent5.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistent5.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=0
+[00:02:46] D AccountPersistent5.ini : Version: 0
+[00:02:46] I AccountPersistentUI.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountPersistentUI.ini
+[00:02:46] D FileClient : New block: AcceptDates
+[00:02:46] D AcceptDates : EULA=Hour=8 Min=37 Sec=32 Day=25 Month=7 Year=2010
+[00:02:46] D AcceptDates : TOS=Hour=4 Min=2 Sec=28 Day=2 Month=7 Year=2010
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=2
+[00:02:46] D AccountPersistentUI.ini : Version: 2
+[00:02:46] I AccountTutorialSettings.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1/AccountTutorialSettings.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=3
+[00:02:46] D FileClient : New block: AllCharacters
+[00:02:46] D AllCharacters : ShowFactionTutorialVideos=false
+[00:02:46] D AllCharacters : CriminalTutorialVideoSeen=True
+[00:02:46] D AllCharacters : EnforcerTutorialVideoSeen=False
+[00:02:46] D AccountTutorialSettings.ini : Version: 3
+[00:02:46] I CharacterPersistent1.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1/CharacterPersistent1.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=0
+[00:02:46] D CharacterPersistent1.ini : Version: 0
+[00:02:46] I CharacterPersistent2.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1/CharacterPersistent2.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=0
+[00:02:46] D CharacterPersistent2.ini : Version: 0
+[00:02:46] I CharacterPersistent3.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1/CharacterPersistent3.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=0
+[00:02:46] D CharacterPersistent3.ini : Version: 0
+[00:02:46] I CharacterPersistent4.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1/CharacterPersistent4.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=0
+[00:02:46] D CharacterPersistent4.ini : Version: 0
+[00:02:46] I CharacterPersistent5.ini : Loading+Opening : C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1
+[00:02:46] D ConfigFile : Reset: C:\Users\Bruno\Desktop\Projekti\rAPB\Emulator\APB SERVER\ClientFiles\1\Reborn\1/CharacterPersistent5.ini
+[00:02:46] D FileClient : New block: File
+[00:02:46] D File : version=0
+[00:02:46] D CharacterPersistent5.ini : Version: 0
+[00:02:46] I FileClient : GetConf: CharacterPersistent1.ini | CharName: 1
+[00:02:46] I FileManager : GetFileVersion: ID = 2 | CharName = 1
+[00:02:46] I FileManager : GetFile: ID = 2
+[00:02:46] I FileClient : GetConf: CharacterPersistent2.ini | CharName: 1
+[00:02:46] I FileManager : GetFileVersion: ID = 3 | CharName = 1
+[00:02:46] I FileManager : GetFile: ID = 3
+[00:02:46] I FileClient : GetConf: CharacterPersistent3.ini | CharName: 1
+[00:02:46] I FileManager : GetFileVersion: ID = 4 | CharName = 1
+[00:02:46] I FileManager : GetFile: ID = 4
+[00:02:46] I FileClient : GetConf: CharacterPersistent4.ini | CharName: 1
+[00:02:46] I FileManager : GetFileVersion: ID = 5 | CharName = 1
+[00:02:46] I FileManager : GetFile: ID = 5
+[00:02:46] I FileClient : GetConf: CharacterPersistent5.ini | CharName: 1
+[00:02:46] P SendTCP : 
+0000: EE000000 8C80065D 0D3C24C3 036197E3  .......].<$..a..
+0010: 72DA4412 907FB774 EFC9BF00 0F17D424  r.D...t.......$
+0020: 57EC86C1 3DB049CF 62E50A37 E5F0A784  W...=.I.b..7....
+0030: B19FC732 E7F025CF 5458E801 9C7A9F21  ...2..%.TX...z.!
+0040: 93159404 757146A7 8887725A E29FC00F  ....uqF...rZ....
+0050: E187E582 EAEAD97E 013D246C 93911DDD  .......~.=$l....
+0060: E3394FDA 7BCEDC4F 639F031B 2ED9E76E  .9O.{..Oc......n
+0070: 388B386C AA383A95 09D064F2 D1DFBA80  8.8l.8:...d.....
+0080: 5E49C18B ABA257E9 9E3E2B1C 93325576  ^I....W..>+..2Uv
+0090: 94E0E5EC 10246E2C C76EC89A E56259C5  .....$n,.n...bY.
+00A0: 33A01576 8D80C92D 807BB4EC DD891B97  3..v...-.{......
+00B0: F95AD3AC 629F07A5 10E71521 9E391577  .Z..b......!.9.w
+00C0: D4DE76AA 98DF4A28 023B3581 93765F1B  ..v...J(.;5..v_.
+00D0: E13545CF 22BBA65C 52621318 8E0CAF9C  .5E."..\Rb......
+00E0: 468FDD13 DE71AA80 41873CCA AA46        F....q..A.<..F  
+[00:02:46] P SendTCPAs : 
+0000: 39000000 A79F2F5C 09D12B42 1971D82B  9...../\..+B.q.+
+0010: 66BB99B3 17D571BF EA67A66E E062068A  f.....q..g.n.b..
+0020: 5D4EE72A F649ACDD AFBC8030 9D7CC781  ]N.*.I.....0.|..
+0030: 4F7D1FCB F099D1A0 48                       O}......H       
+[00:02:46] P 127.0.0.1:45387 : 
+0000: 08000000 9084065D                           .......]        
+[00:02:46] D TCPManager : Handeling package 3002
+[00:02:46] P SendTCP : 
+0000: 19000000 FB7E1226 CA0B0509 8147E2FB  .....~.&.....G..
+0010: 93C5C9D0 E832CD1B 16                       .....2...       
+[00:02:46] P 127.0.0.1:45387 : 
+0000: 0B000000 FA3724C3 1E6192                 .....7$..a.     
+[00:02:46] D TCPManager : Handeling package 3063
+[00:02:46] E TCPManager : Opcode no Handler :3063(00000BF7)
+[00:02:48] P 127.0.0.1:45387 : 
+0000: 11000000 5879DADF F8E965B4 8B10364B  ....Xy....e...6K
+0010: 5B                                               [               
+[00:02:48] D TCPManager : Handeling package 3003
+[00:02:48] P SendTCP : 
+0000: 16000000 27B3971A 2D4C37CA 5C92149E  ....'...-L7.\...
+0010: 93650362 8669                                .e.b.i          
+[00:02:48] P SendTCP : 
+0000: 12000000 02BB1AAB 8C0E8336 3C2C75E6  ...........6<,u.
+0010: 3897                                            8.              
+[00:02:48] P 127.0.0.1:45387 : 
+0000: 08000000 5EF2D724                           ....^..$        
+[00:02:48] D TCPManager : Handeling package 3005
+[00:02:48] P SendTCP : 
+0000: 16000000 FF00D62D E4321FC3 B5A98299  .......-.2......
+0010: CB6041AA D1EB                                .`A...          
+[00:02:53] E Listener : Safe-Social-EN-1 disconnected!

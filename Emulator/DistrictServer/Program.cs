@@ -10,6 +10,7 @@ namespace DistrictServer
         public static World.Client World;
 
         public static Listener listener;
+        public static byte[] xtea_key = null;
 
         #region DistrictData
 

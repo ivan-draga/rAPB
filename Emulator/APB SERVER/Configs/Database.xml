@@ -4,7 +4,7 @@
 		<IP>127.0.0.1</IP>
 		<Port>3306</Port>
 		<Username>root</Username>
-		<Password></Password>
+		<Password>root</Password>
 		<Database>rapb</Database>
 	</Database>
 </root>

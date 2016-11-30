@@ -40,7 +40,7 @@ namespace WorldServer.TCP.Packets
                 Out.WriteByte(1);
                 Out.WriteByte(cclient.Character.LFG);
             }
-            cclient.Crypto = new TCP.Encryption(cclient.account.SessionId);
+            cclient.Crypto = new Encryption(cclient.account.SessionId);
             cclient.Send(new DISTRICT_LIST());
             cclient.Send(Out);
             lock (Program.expectingAccounts)
