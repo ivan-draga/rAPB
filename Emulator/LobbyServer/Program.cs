@@ -67,9 +67,16 @@ namespace LobbyServer
                 Log.Error("Version", "Invalid game version");
             }
 
-            HttpServer.MapHandlers();
-            HttpServer server = new HttpServer();
-            server.Start();
+            try
+            {
+                HttpServer.MapHandlers();
+                HttpServer server = new HttpServer();
+                server.Start();
+            }
+            catch
+            {
+                Log.Error("HTTP", "If you want to use HTTP stuff, start this server with Admin rights");
+            }
 
             Log.Succes("LobbyServer", "Server initialisation complete!");
             clients.Clear();

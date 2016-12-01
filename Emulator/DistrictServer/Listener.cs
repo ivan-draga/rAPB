@@ -12,14 +12,13 @@ namespace DistrictServer
     {
         public Listener(int Port)
         {
-            bool done = false;
+            bool done = false, first_packet = true;
             UdpClient receivingUdpClient = new UdpClient(Port);
             receivingUdpClient.DontFragment = true;
             receivingUdpClient.EnableBroadcast = true;
             Log.Notice("Listener", "Starting UDP server on port " + Port);
-            bool first_packet = true;
-            string data1 = null, data2 = null, data3 = null, data4 = null;
             uint[] key = null;
+            string enc = null, dec = null;
             #if ENABLE_PACKET_SAVING
             int count = 1;
             #endif
@@ -29,23 +28,21 @@ namespace DistrictServer
                 try
                 {
                     byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
-                    data1 = BitConverter.ToString(receiveBytes);
-                    data2 = data1.Replace('-', ' ');
-                    Console.WriteLine("Data:\n\n" + data2 + "\n\n");
+                    enc = ByteToString(receiveBytes);
+                    Console.WriteLine("Data:\n\n" + enc + "\n\n");
 
                     if (!first_packet)
                     {
                         key = new uint[Program.xtea_key.Length / 4];
                         Buffer.BlockCopy(Program.xtea_key, 0, key, 0, Program.xtea_key.Length);
-                        byte[] result = XTEA.Code(receiveBytes, key, XTEA.Mode.Decrypt); //do stuff with this
-                        data3 = BitConverter.ToString(result);
-                        data4 = data3.Replace('-', ' ');
-                        Console.WriteLine("Data (decrypted):\n\n" + data4 + "\n\n");
+                        byte[] result = XTEA.Code(receiveBytes, key, XTEA.Mode.Decrypt);
+                        dec = ByteToString(result);
+                        Console.WriteLine("Data (decrypted):\n\n" + dec + "\n\n");
                     }
 
                     #if ENABLE_PACKET_SAVING
                     StreamWriter file = new StreamWriter(first_packet == true ? "Packets\\first_packet.log" : "Packets\\packet" + count + ".log");
-                    file.WriteLine(first_packet == true ? data2 :  "Encrypted: " + data2 + " || Decrypted: " + data4);
+                    file.WriteLine(first_packet == true ? enc :  "Encrypted: " + enc + " || Decrypted: " + dec);
                     file.Close();
                     if(!first_packet) count++;
                     #endif
@@ -59,6 +56,25 @@ namespace DistrictServer
                     return;
                 }
             }
+        }
+
+        public static string ByteToString(byte[] array)
+        {
+            return BitConverter.ToString(array).Replace('-', ' ');
+        }
+
+        public static string ByteToHexBitFiddle(byte[] bytes)
+        {
+            char[] c = new char[bytes.Length * 2];
+            int b;
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                b = bytes[i] >> 4;
+                c[i * 2] = (char)(55 + b + (((b - 10) >> 31) & -7));
+                b = bytes[i] & 0xF;
+                c[i * 2 + 1] = (char)(55 + b + (((b - 10) >> 31) & -7));
+            }
+            return new string(c);
         }
     }
 }

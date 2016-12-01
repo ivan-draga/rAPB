@@ -22,8 +22,8 @@ namespace WorldServer.TCP.Packets
                 string[] result = cclient.Reserved.IP.Split('.');
                 foreach (string s in result) Out.WriteByte(Convert.ToByte(s));
                 Out.WriteUInt16Reverse(cclient.Reserved.Port);
-                int timestamp = TcpServer.GetTimeStamp();
-                Out.WriteInt32Reverse(timestamp);
+                ulong timestamp = (ulong)TCPManager.GetTimeStamp();
+                Out.WriteUInt64Reverse(timestamp);
 
                 var timestampBytes = BitConverter.GetBytes(timestamp);
                 var sha1 = new Sha1Digest();
