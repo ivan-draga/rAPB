@@ -12,7 +12,7 @@ namespace DistrictServer
     {
         public Listener(int Port)
         {
-            bool done = false, first_packet = true;
+            bool done = false;
             UdpClient receivingUdpClient = new UdpClient(Port);
             receivingUdpClient.DontFragment = true;
             receivingUdpClient.EnableBroadcast = true;
@@ -20,7 +20,7 @@ namespace DistrictServer
             uint[] key = null;
             string enc = null, dec = null;
             #if ENABLE_PACKET_SAVING
-            int count = 1;
+            int count = 0;
             #endif
             while (!done)
             {
@@ -31,7 +31,7 @@ namespace DistrictServer
                     enc = ByteToString(receiveBytes);
                     Console.WriteLine("Data:\n\n" + enc + "\n\n");
 
-                    if (!first_packet)
+                    if (!IsFirstPacket(receiveBytes))
                     {
                         key = new uint[Program.xtea_key.Length / 4];
                         Buffer.BlockCopy(Program.xtea_key, 0, key, 0, Program.xtea_key.Length);
@@ -41,13 +41,11 @@ namespace DistrictServer
                     }
 
                     #if ENABLE_PACKET_SAVING
-                    StreamWriter file = new StreamWriter(first_packet == true ? "Packets\\first_packet.log" : "Packets\\packet" + count + ".log");
-                    file.WriteLine(first_packet == true ? enc :  "Encrypted: " + enc + " || Decrypted: " + dec);
+                    StreamWriter file = new StreamWriter("Packets\\packet" + count + ".log");
+                    file.WriteLine("Encrypted: " + enc + " || Decrypted: " + dec);
                     file.Close();
-                    if(!first_packet) count++;
+                    count++;
                     #endif
-
-                    first_packet = false;
                 }
                 catch (Exception e)
                 {
@@ -56,6 +54,26 @@ namespace DistrictServer
                     return;
                 }
             }
+        }
+
+        public static byte[] first_packet_header = new byte[42]
+        {
+            0x00, 0x00, 0x00, 0x80, 0x05, 0x20, 0x80,
+            0x60, 0xC9, 0x11, 0x00, 0x00, 0x40, 0x50,
+            0x15, 0x15, 0x12, 0x48, 0xD0, 0xD0, 0x50,
+            0x12, 0x51, 0x0F, 0x0C, 0x0C, 0x0C, 0x0C,
+            0x0C, 0x0C, 0x0C, 0x0C, 0x4C, 0x0C, 0x48,
+            0x50, 0x15, 0x15, 0xD2, 0x52, 0x51, 0x56
+        };
+
+        public static bool IsFirstPacket(byte[] data)
+        {
+            byte[] header = new byte[42];
+            Buffer.BlockCopy(data, 0, header, 0, 42);
+            int count = 0;
+            for (int i = 0; i < 42; i++) if (header[i] == first_packet_header[i]) count++;
+            if (count == 42) return true;
+            else return false;
         }
 
         public static string ByteToString(byte[] array)

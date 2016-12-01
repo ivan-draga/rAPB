@@ -62,7 +62,7 @@ namespace DistrictServer
                 }
                 b = btmp;
             }
-            return null;
+            return result;
         }
 
         private static uint read_unrser(ref int num, byte[] buffer, uint bits, int max)
