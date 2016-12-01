@@ -32,7 +32,7 @@ namespace WorldServer.TCP.Packets
                 var handshakeHash = new byte[sha1.GetDigestSize()];
                 sha1.DoFinal(handshakeHash, 0);
 
-                Log.Debug("handshakeHask", MyDB.Utils.ByteToHexBitFiddle(handshakeHash));
+                Log.Debug("handshakeHash", MyDB.Utils.ByteToHexBitFiddle(handshakeHash));
 
                 sha1 = new Sha1Digest();
                 sha1.BlockUpdate(cclient.Crypto.Key, 0, cclient.Crypto.Key.Length);
@@ -42,7 +42,7 @@ namespace WorldServer.TCP.Packets
                 var encryptionKey = new byte[16];
                 Buffer.BlockCopy(encryptionHash, 0, encryptionKey, 0, 16);
 
-                Log.Debug("handshakeHask", MyDB.Utils.ByteToHexBitFiddle(encryptionKey));
+                Log.Debug("encryptionKey", MyDB.Utils.ByteToHexBitFiddle(encryptionKey));
 
                 cclient.Reserved.Send(new Districts.WD.MessageInfo("key", encryptionKey));
              }
