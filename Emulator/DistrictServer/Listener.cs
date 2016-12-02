@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using FrameWork.Logger;
-using System.Collections;
 
 namespace DistrictServer
 {
@@ -22,11 +21,10 @@ namespace DistrictServer
             while (!done)
             {
                 IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-                Packet p = null;
                 try
                 {
                     byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
-                    enc = ByteToString(receiveBytes);
+                    enc = ByteToHexBitFiddle(receiveBytes);
                     Console.WriteLine("Data:\n\n" + enc + "\n\n");
                     StreamWriter file = new StreamWriter("Packets\\packet" + count + ".log");
                     if (!IsFirstPacket(receiveBytes))
@@ -34,13 +32,11 @@ namespace DistrictServer
                         key = new uint[Program.xtea_key.Length / 4];
                         Buffer.BlockCopy(Program.xtea_key, 0, key, 0, Program.xtea_key.Length);
                         byte[] result = XTEA.Code(receiveBytes, key, XTEA.Mode.Decrypt);
-                        dec = ByteToString(result);
+                        dec = ByteToHexBitFiddle(result);
                         Console.WriteLine("Data (decrypted):\n\n" + dec + "\n\n");
-                        p = UnrealParser.Parse(result);
-                        Console.WriteLine(p.ToString() + "\n");
-                        file.WriteLine("Encrypted: " + enc + " || Decrypted: " + dec + " || UnrealPacket: " + p.ToString());
+                        file.WriteLine("Encrypted: " + enc + " || Decrypted: " + dec);
                     }
-                    else file.WriteLine("Data: " + enc + " || Bits: " + ByteToBitToString(receiveBytes));
+                    else file.WriteLine("Data: " + enc + " || Key: " + ByteToHexBitFiddle(Program.xtea_key) + " || Handshake: " + ByteToHexBitFiddle(Program.handshake_hash));
                     file.Close();
                     count++;
                 }
@@ -71,23 +67,6 @@ namespace DistrictServer
             for (int i = 0; i < 42; i++) if (header[i] == first_packet_header[i]) count++;
             if (count == 42) return true;
             else return false;
-        }
-
-        public static string ByteToString(byte[] array)
-        {
-            return BitConverter.ToString(array).Replace('-', ' ');
-        }
-
-        public static string ByteToBitToString(byte[] array)
-        {
-            BitArray bits = new BitArray(array);
-            string s = null;
-            for (int i = 0; i < bits.Count; i++)
-            {
-                char c = bits[i] ? '1' : '0';
-                s += c;
-            }
-            return s;
         }
 
         public static string ByteToHexBitFiddle(byte[] bytes)

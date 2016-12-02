@@ -11,6 +11,7 @@ namespace DistrictServer
 
         public static Listener listener;
         public static byte[] xtea_key = null;
+        public static byte[] handshake_hash = null;
 
         #region DistrictData
 

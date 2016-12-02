@@ -51,7 +51,7 @@ namespace WorldServer.Districts.DW
                 AccountEntry acc = Databases.AccountTable.SingleOrDefault(a => a.Token == Token);
                 if(acc.CanHostDistrict == 0 || acc.Index < 1)
                 {
-                    district.Send(new MessageInfo("You can not host a district instance!", new byte[] { 0x00 }));
+                    district.Send(new MessageInfo("You can not host a district instance!", new byte[] { 0x00 }, new byte[] { 0x00 }));
                     district.tcp.Client.Disconnect(true);
                     return;
                 }
@@ -80,11 +80,11 @@ namespace WorldServer.Districts.DW
                 }
                 Log.Succes("RegisterDistrict", district + " was registered! (" + IP + ":" + Port + ")");
                 
-                district.Send(new MessageInfo("Token check complete. You are allowed to host a district!", new byte[] { 0x00 }));
+                district.Send(new MessageInfo("Token check complete. You are allowed to host a district!", new byte[] { 0x00 }, new byte[] { 0x00 }));
             }
             else
             {
-                district.Send(new MessageInfo("Invalid ID! Please choose an ID that's not 0.", new byte[] { 0x00 }));
+                district.Send(new MessageInfo("Invalid ID! Please choose an ID that's not 0.", new byte[] { 0x00 }, new byte[] { 0x00 }));
                 district.tcp.Client.Disconnect(true);
                 return;
             }

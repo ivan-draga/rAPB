@@ -1,5 +1,4 @@
 ﻿using FrameWork.NetWork;
-using FrameWork.Logger;
 using System;
 
 namespace WorldServer.TCP.Packets
@@ -32,7 +31,8 @@ namespace WorldServer.TCP.Packets
                 var handshakeHash = new byte[sha1.GetDigestSize()];
                 sha1.DoFinal(handshakeHash, 0);
 
-                Log.Debug("handshakeHash", MyDB.Utils.ByteToHexBitFiddle(handshakeHash));
+                byte[] hash = new byte[handshakeHash.Length];
+                Buffer.BlockCopy(handshakeHash, 0, hash, 0, handshakeHash.Length);
 
                 sha1 = new Sha1Digest();
                 sha1.BlockUpdate(cclient.Crypto.Key, 0, cclient.Crypto.Key.Length);
@@ -42,9 +42,7 @@ namespace WorldServer.TCP.Packets
                 var encryptionKey = new byte[16];
                 Buffer.BlockCopy(encryptionHash, 0, encryptionKey, 0, 16);
 
-                Log.Debug("encryptionKey", MyDB.Utils.ByteToHexBitFiddle(encryptionKey));
-
-                cclient.Reserved.Send(new Districts.WD.MessageInfo("key", encryptionKey));
+                cclient.Reserved.Send(new Districts.WD.MessageInfo("hashes", encryptionKey, hash));
              }
             else Out.WriteUInt32Reverse((uint)ResponseCodes.RC_DISTRICT_RESERVE_DISTRICT_OFFLINE);
             cclient.Send(Out);
