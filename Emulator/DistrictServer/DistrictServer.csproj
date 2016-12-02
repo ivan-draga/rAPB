@@ -60,6 +60,7 @@
     <Compile Include="Listener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnrealParser.cs" />
     <Compile Include="XTEA.cs" />
     <Compile Include="World\Client.cs" />
     <Compile Include="World\OpCodes.cs" />

@@ -15,5 +15,17 @@
             }
             return new string(c);
         }
+
+        public static string ByteToBitToString(byte[] array)
+        {
+            System.Collections.BitArray bits = new System.Collections.BitArray(array);
+            string s = null;
+            for (int i = 0; i < bits.Count; i++)
+            {
+                char c = bits[i] ? '1' : '0';
+                s += c;
+            }
+            return s;
+        }
     }
 }

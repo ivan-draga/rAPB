@@ -1,11 +1,10 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace DistrictServer
 {
-    public static class Parser
+    public static class UnrealParser
     {
-        public static object Parse(byte[] buffer)
+        public static Packet Parse(byte[] buffer)
         {
             Packet result = new Packet();
             int val4000 = 0x4000;
@@ -50,7 +49,7 @@ namespace DistrictServer
                     continue;
                 }
                 uint btmp;
-                for (btmp = (uint)(b + blen); b < btmp; )
+                for (btmp = (uint)(b + blen); b < btmp;)
                 {
                     int len = 0;
                     b = read_unrnum(ref len, buffer, b);
@@ -91,39 +90,26 @@ namespace DistrictServer
 
         private static uint read_bitmem(byte[] _in, int inlen, ref byte[] _out, uint bits)
         {
-            int index = 0;
-            for (; inlen-- != 0; index++) _out[index] = (byte)read_bitx(8, _in, ref bits);
+            for (int index = 0; inlen-- != 0; index++) _out[index] = (byte)read_bitx(8, _in, ref bits);
             return bits;
         }
 
         private static int read_unreal_index(byte[] index_num, ref int ret)
         {
-            byte b0 = index_num[0],
-                 b1 = index_num[1],
-                 b2 = index_num[2],
-                 b3 = index_num[3],
-                 b4 = index_num[4];
-            ret = b0 | (b1 << 8) | (b2 << 16) | (b3 << 24);
-            bool b00 = Convert.ToBoolean(b0);
-            bool b01 = Convert.ToBoolean(b1);
-            bool b02 = Convert.ToBoolean(b2);
-            bool b03 = Convert.ToBoolean(b3);
-            bool bool_0x40 = Convert.ToBoolean(0x40);
-            bool bool_0x80 = Convert.ToBoolean(0x80);
-            //return (4);
+            byte b0 = index_num[0], b1 = index_num[1], b2 = index_num[2], b3 = index_num[3], b4 = index_num[4];
             int len, result;
             result = 0;
             len = 1;
-            if (b00 & bool_0x40)
+            if ((b0 & 0x40) != 0)
             {
                 len++;
-                if (b01 & bool_0x80)
+                if ((b1 & 0x80) != 0)
                 {
                     len++;
-                    if (b02 & bool_0x80)
+                    if ((b2 & 0x80) != 0)
                     {
                         len++;
-                        if (b03 & bool_0x80)
+                        if ((b3 & 0x80) != 0)
                         {
                             len++;
                             result = b4;
@@ -135,18 +121,14 @@ namespace DistrictServer
                 result = (result << 7) | (b1 & 0x7f);
             }
             result = (result << 6) | (b0 & 0x3f);
-            if (b00 & bool_0x80) result = -result;
+            if ((b0 & 0x80) != 0) result = -result;
             ret = result;
             return (len);
         }
 
         private static uint read_bits(uint bits, byte[] buffer, ref uint in_bits)
         {
-            uint seek_bits,
-                    rem,
-                    seek = 0,
-                    ret = 0,
-                    mask = 0xffffffff;
+            uint seek_bits, rem, seek = 0, ret = 0, mask = 0xffffffff;
             if (bits > 32) return 0;
             if (bits < 32) mask = (uint)((1 << (byte)bits) - 1);
             while (true)
@@ -173,7 +155,7 @@ namespace DistrictServer
         public string Command = "null";
         public override string ToString()
         {
-            return Id + " " + AckId + " " + Open + " " + Close + " " + Reliable + " " + ChIndex + " " + ChSequence + " " + ChType + " " + Command;
+            return "[ID:" + Id + "|AckId:" + AckId + "|Open:" + Open + "|Close:" + Close + "|Reliable:" + Reliable + "|ChIndex:" + ChIndex + "|ChSequence:" + ChSequence + "|ChType:" + ChType + "|Command:" + Command + "]";
         }
     }
 }

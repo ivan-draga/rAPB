@@ -1,10 +1,9 @@
-﻿#define ENABLE_PACKET_SAVING
-
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using FrameWork.Logger;
+using System.Collections;
 
 namespace DistrictServer
 {
@@ -19,18 +18,17 @@ namespace DistrictServer
             Log.Notice("Listener", "Starting UDP server on port " + Port);
             uint[] key = null;
             string enc = null, dec = null;
-            #if ENABLE_PACKET_SAVING
             int count = 0;
-            #endif
             while (!done)
             {
                 IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                Packet p = null;
                 try
                 {
                     byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
                     enc = ByteToString(receiveBytes);
                     Console.WriteLine("Data:\n\n" + enc + "\n\n");
-
+                    StreamWriter file = new StreamWriter("Packets\\packet" + count + ".log");
                     if (!IsFirstPacket(receiveBytes))
                     {
                         key = new uint[Program.xtea_key.Length / 4];
@@ -38,14 +36,13 @@ namespace DistrictServer
                         byte[] result = XTEA.Code(receiveBytes, key, XTEA.Mode.Decrypt);
                         dec = ByteToString(result);
                         Console.WriteLine("Data (decrypted):\n\n" + dec + "\n\n");
+                        p = UnrealParser.Parse(result);
+                        Console.WriteLine(p.ToString() + "\n");
+                        file.WriteLine("Encrypted: " + enc + " || Decrypted: " + dec + " || UnrealPacket: " + p.ToString());
                     }
-
-                    #if ENABLE_PACKET_SAVING
-                    StreamWriter file = new StreamWriter("Packets\\packet" + count + ".log");
-                    file.WriteLine("Encrypted: " + enc + " || Decrypted: " + dec);
+                    else file.WriteLine("Data: " + enc + " || Bits: " + ByteToBitToString(receiveBytes));
                     file.Close();
                     count++;
-                    #endif
                 }
                 catch (Exception e)
                 {
@@ -79,6 +76,18 @@ namespace DistrictServer
         public static string ByteToString(byte[] array)
         {
             return BitConverter.ToString(array).Replace('-', ' ');
+        }
+
+        public static string ByteToBitToString(byte[] array)
+        {
+            BitArray bits = new BitArray(array);
+            string s = null;
+            for (int i = 0; i < bits.Count; i++)
+            {
+                char c = bits[i] ? '1' : '0';
+                s += c;
+            }
+            return s;
         }
 
         public static string ByteToHexBitFiddle(byte[] bytes)
