@@ -4,9 +4,9 @@ namespace DistrictServer
 {
     public static class UnrealParser
     {
-        public static Packet Parse(byte[] buffer)
+        public static UnrealPacket Parse(byte[] buffer)
         {
-            Packet result = new Packet();
+            UnrealPacket result = new UnrealPacket();
             int val4000 = 0x4000;
             int val3ff = 0x3ff;
             int val400 = 0x400;
@@ -14,7 +14,7 @@ namespace DistrictServer
             int val1000 = 0x1000;
             uint b = buffer[buffer.Length - 1];
             int bsize;
-            for (bsize = (buffer.Length * 8) - 1; (b & 0x80) != 0; b <<= 1, bsize--) ;
+            for (bsize = (buffer.Length * 8) - 1; (b & 0x80) != 0; b <<= 1, bsize--);
             b = 0;
             b = read_unrser(ref result.Id, buffer, b, val4000);
             while (b < bsize)
@@ -26,15 +26,15 @@ namespace DistrictServer
                 }
                 if (read_bitx(1, buffer, ref b) != 0)
                 {
-                    result.Open = read_bitx(1, buffer, ref b) == 1 ? true : false;
-                    result.Close = read_bitx(1, buffer, ref b) == 1 ? true : false;
+                    result.Open = read_bitx(1, buffer, ref b) != 0 ? true : false;
+                    result.Close = read_bitx(1, buffer, ref b) != 0 ? true : false;
                 }
                 else
                 {
                     result.Open = false;
                     result.Close = false;
                 }
-                result.Reliable = read_bitx(1, buffer, ref b) == 1 ? true : false;
+                result.Reliable = read_bitx(1, buffer, ref b) != 0 ? true : false;
                 b = read_unrser(ref result.ChIndex, buffer, b, val3ff);
                 if (result.Reliable) b = read_unrser(ref result.ChSequence, buffer, b, val400);
                 if (result.Reliable || result.Open) b = read_unrser(ref result.ChType, buffer, b, val8);
@@ -123,7 +123,7 @@ namespace DistrictServer
             result = (result << 6) | (b0 & 0x3f);
             if ((b0 & 0x80) != 0) result = -result;
             ret = result;
-            return (len);
+            return len;
         }
 
         private static uint read_bits(uint bits, byte[] buffer, ref uint in_bits)
@@ -142,16 +142,14 @@ namespace DistrictServer
                 seek += rem;
                 mask = (uint)((1 << (byte)bits) - 1);
             }
-            return (ret);
+            return ret;
         }
     }
 
-    public class Packet
+    public class UnrealPacket
     {
-        public int Id = -1;
-        public int AckId = -1;
+        public int Id = -1, AckId = -1, ChIndex = -1, ChSequence = -1, ChType = -1;
         public bool Open = false, Close = false, Reliable = false;
-        public int ChIndex = -1, ChSequence = -1, ChType = -1;
         public string Command = "null";
         public override string ToString()
         {

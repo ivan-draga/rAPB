@@ -34,7 +34,16 @@ namespace DistrictServer
                         byte[] result = XTEA.Code(receiveBytes, key, XTEA.Mode.Decrypt);
                         dec = ByteToHexBitFiddle(result);
                         Console.WriteLine("Data (decrypted):\n\n" + dec + "\n\n");
-                        file.WriteLine("Encrypted: " + enc + " || Decrypted: " + dec);
+                        try
+                        {
+                            UnrealPacket p = UnrealParser.Parse(result);
+                            Console.WriteLine("\n\n" + p.ToString() + "\n\n");
+                            file.WriteLine("Encrypted: " + enc + " || Decrypted: " + dec + " || UnrealPacket: " + p.ToString());
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }                        
                     }
                     else file.WriteLine("Data: " + enc + " || Key: " + ByteToHexBitFiddle(Program.xtea_key) + " || Handshake: " + ByteToHexBitFiddle(Program.handshake_hash));
                     file.Close();
