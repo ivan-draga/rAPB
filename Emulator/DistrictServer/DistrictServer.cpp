@@ -19,13 +19,12 @@ int main()
 			if(net->Send(data) == 0)
 			{
 				Logger(lINFO, "Network::Send()", "Initial data sent");
-				net->Receive(2);
-				do
+				if(net->ReceiveInitial() == 0)
 				{
-					Logger(lINFO, "main()", "Ready to receive data");
-					net->Receive(16); //encryptionKey
-				} while (1);
-
+					char* encryptionKey = net->ReceiveEncryptionKey();
+					Logger(lINFO, "Network::ReceiveEncryptionKey()", "%s (length: %d)", encryptionKey, strlen(encryptionKey));
+					//TODO: further...
+				}
 				system("pause");
 			}
 			else Logger(lERROR, "Network::Send()", "Data sending failed");

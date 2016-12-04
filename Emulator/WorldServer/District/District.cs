@@ -43,12 +43,6 @@ namespace WorldServer.Districts
             get;
             set;
         }
-
-        public void Send(byte[] array)
-        {
-            tcp.GetStream().Write(array, 0, array.Length);
-            tcp.GetStream().Flush();
-        }
         #endregion
 
         #region Limits

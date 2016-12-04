@@ -42,8 +42,8 @@ namespace WorldServer.TCP.Packets
                 var encryptionKey = new byte[16];
                 Buffer.BlockCopy(encryptionHash, 0, encryptionKey, 0, 16);
 
-                //TODO: send encryptionKey and handshakeHash
-             }
+                cclient.Reserved.tcp.Client.Send(encryptionKey);
+            }
             else Out.WriteUInt32Reverse((uint)ResponseCodes.RC_DISTRICT_RESERVE_DISTRICT_OFFLINE);
             cclient.Send(Out);
         }

@@ -18,5 +18,6 @@ public:
 	int Dispose();
 	int Shutdown();
 	int Send(char* buffer);
-	void Receive(int size);
+	int ReceiveInitial(); 
+	char* ReceiveEncryptionKey();
 };
