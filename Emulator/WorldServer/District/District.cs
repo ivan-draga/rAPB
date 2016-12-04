@@ -1,5 +1,4 @@
-﻿using WorldServer.Districts.WD;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 
 namespace WorldServer.Districts
 {
@@ -45,12 +44,12 @@ namespace WorldServer.Districts
             set;
         }
 
-        public void Send(Packet packet)
+        /*public void Send(Packet packet)
         {
             byte[] array = packet.ToArray();
             tcp.GetStream().Write(array, 0, array.Length);
             tcp.GetStream().Flush();
-        }
+        }*/
         #endregion
 
         #region Limits

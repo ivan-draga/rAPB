@@ -5,8 +5,6 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Net;
 
-using WorldServer.Districts.DW;
-
 namespace WorldServer.Districts
 {
     class Listener
@@ -42,7 +40,7 @@ namespace WorldServer.Districts
 
             IP = address.ToString();
             Port = port;
-            tcpListener = new TcpListener( address, port);
+            tcpListener = new TcpListener(address, port);
             listenThread = new Thread(new ThreadStart(listenForClients));
             listenThread.Start();
         }
@@ -55,7 +53,7 @@ namespace WorldServer.Districts
             }
             catch (SocketException)
             {
-                Log.Error("Districts.Listener","Failed to bind to the address " + IP + ":" + Port + "! Retry in 5 seconds.");
+                Log.Error("Districts.Listener", "Failed to bind to the address " + IP + ":" + Port + "! Retry in 5 seconds.");
                 Thread.Sleep(5 * 1000);
                 listenForClients();
             }
@@ -63,12 +61,12 @@ namespace WorldServer.Districts
             while (true)
             {
                 TcpClient client = tcpListener.AcceptTcpClient();
-                Thread clientThread = new Thread(new ParameterizedThreadStart(handleWorld));
+                Thread clientThread = new Thread(new ParameterizedThreadStart(handleDistrict));
                 clientThread.Start(client);
             }
         }
 
-        private void handleWorld(object client)
+        private void handleDistrict(object client)
         {
             TcpClient tcpClient = (TcpClient)client;
             District district = new District(tcpClient);
@@ -91,16 +89,19 @@ namespace WorldServer.Districts
                 {
                     break;
                 }
-
-                IPacket packet = null;
-                switch (message[0])
+                else
                 {
-                    case (byte)OpCodes.DW_REGISTER_DISTRICT:
-                        packet = new RegisterDistrict();
-                        break;
+                    byte[] data = new byte[bytesRead];
+                    Buffer.BlockCopy(message, 0, data, 0, bytesRead);
+
+                    if(data[0] == 0x30)
+                    {
+                        int type = data[1] - 0x30;
+                        byte ID = (byte)(data[2] - 0x30);
+                        LanguageCodes language = (LanguageCodes)(data[3] - 0x30);
+                        RegisterDistrict.Register(district, tcpClient, type, ID, language, "127.0.0.1", "6969", "55759563");
+                    }
                 }
-                packet.Write(message, 1, bytesRead - 1);
-                packet.Handle(district);
             }
             try
             {

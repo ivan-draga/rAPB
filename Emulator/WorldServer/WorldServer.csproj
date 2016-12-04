@@ -79,13 +79,8 @@
   <ItemGroup>
     <Compile Include="Databases.cs" />
     <Compile Include="District\District.cs" />
-    <Compile Include="District\DW\IPacket.cs" />
-    <Compile Include="District\DW\Packet.cs" />
-    <Compile Include="District\DW\RegisterDistrict.cs" />
     <Compile Include="District\Listener.cs" />
-    <Compile Include="District\OpCodes.cs" />
-    <Compile Include="District\WD\MessageInfo.cs" />
-    <Compile Include="District\WD\Packet.cs" />
+    <Compile Include="District\RegisterDistrict.cs" />
     <Compile Include="Lobby\Acc.cs" />
     <Compile Include="Lobby\Client.cs" />
     <Compile Include="Lobby\LW\AccountEnter.cs" />
