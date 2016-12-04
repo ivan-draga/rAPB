@@ -38,6 +38,7 @@ namespace WorldServer.Districts
                 MyDB.AccountEntry acc = Databases.AccountTable.SingleOrDefault(a => a.Token == token);
                 if (acc.CanHostDistrict == 0 || acc.Index < 1)
                 {
+                    district.tcp.Client.Send(new byte[] { 0x30, 0x30 });
                     district.tcp.Client.Disconnect(true);
                     return;
                 }
@@ -52,12 +53,14 @@ namespace WorldServer.Districts
                     {
                         if (dist.Value.IP == ip && Program.districtsListener.Districts.ContainsKey(code))
                         {
+                            district.tcp.Client.Send(new byte[] { 0x30, 0x31 });
                             Program.districtsListener.Districts.Remove(code);
                             break;
                         }
                         else if (dist.Value.IP != ip && Program.districtsListener.Districts.ContainsKey(code))
                         {
                             Log.Error("RegisterDistrict", "Fail try of district registration that already exists!");
+                            district.tcp.Client.Send(new byte[] { 0x30, 0x32 });
                             break;
                         }
                     }
@@ -65,9 +68,11 @@ namespace WorldServer.Districts
                     Program.districtsListener.DistrictsTcp.Add(district.tcp, code);
                 }
                 Log.Succes("RegisterDistrict", district + " was registered! (" + ip + ":" + port + ")");
+                district.tcp.Client.Send(new byte[] { 0x30, 0x33 });
             }
             else
             {
+                district.tcp.Client.Send(new byte[] { 0x30, 0x34 });
                 district.tcp.Client.Disconnect(true);
                 return;
             }

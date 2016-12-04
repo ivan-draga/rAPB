@@ -42,7 +42,7 @@ namespace WorldServer.TCP.Packets
                 var encryptionKey = new byte[16];
                 Buffer.BlockCopy(encryptionHash, 0, encryptionKey, 0, 16);
 
-                //cclient.Reserved.Send(new Districts.WD.MessageInfo("hashes", encryptionKey, hash));
+                //TODO: send encryptionKey and handshakeHash
              }
             else Out.WriteUInt32Reverse((uint)ResponseCodes.RC_DISTRICT_RESERVE_DISTRICT_OFFLINE);
             cclient.Send(Out);

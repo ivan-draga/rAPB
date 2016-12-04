@@ -18,5 +18,5 @@ public:
 	int Dispose();
 	int Shutdown();
 	int Send(char* buffer);
-	void Receive();
+	void Receive(int size);
 };

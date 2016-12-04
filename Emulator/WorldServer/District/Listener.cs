@@ -94,11 +94,12 @@ namespace WorldServer.Districts
                     byte[] data = new byte[bytesRead];
                     Buffer.BlockCopy(message, 0, data, 0, bytesRead);
 
-                    if(data[0] == 0x30)
+                    if(GetValue(data[0]) == 0) //initial packet id
                     {
-                        int type = data[1] - 0x30;
-                        byte ID = (byte)(data[2] - 0x30);
-                        LanguageCodes language = (LanguageCodes)(data[3] - 0x30);
+                        int type = GetValue(data[1]);
+                        byte ID = (byte)GetValue(data[2]);
+                        LanguageCodes language = (LanguageCodes)GetValue(data[3]);
+                        //TODO: receive IP, Port, Token
                         RegisterDistrict.Register(district, tcpClient, type, ID, language, "127.0.0.1", "6969", "55759563");
                     }
                 }
@@ -133,6 +134,11 @@ namespace WorldServer.Districts
                 Console.WriteLine(e.ToString());
                 return;
             }
+        }
+
+        public static int GetValue(byte data)
+        {
+            return (data - 0x30);
         }
     }
 }

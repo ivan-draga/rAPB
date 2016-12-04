@@ -44,12 +44,11 @@ namespace WorldServer.Districts
             set;
         }
 
-        /*public void Send(Packet packet)
+        public void Send(byte[] array)
         {
-            byte[] array = packet.ToArray();
             tcp.GetStream().Write(array, 0, array.Length);
             tcp.GetStream().Flush();
-        }*/
+        }
         #endregion
 
         #region Limits

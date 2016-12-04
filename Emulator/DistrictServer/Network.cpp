@@ -51,16 +51,36 @@ int Network::Send(char* buffer)
 	else return 0;
 }
 
-void Network::Receive()
+void Network::Receive(int size)
 {
-	char buffer[2048];
-	int result;
-	do 
+	char* buffer = new char[size];
+	int result = recv(sock, buffer, sizeof(buffer), 0);
+	if (result > 0)
 	{
-		result = recv(sock, buffer, sizeof(buffer), 0);
-		if (result > 0) printf("Bytes received: %d\n", result);
-		else if (result == 0) printf("Connection closed\n");
-		else printf("recv failed: %d\n", WSAGetLastError());
-	} 
-	while (result > 0);
+		buffer[size] = '\0';
+		switch(buffer[0])
+		{
+			case '0': //response packet to initial packet
+			{
+				char response = buffer[1];
+				if (response == '0') Logger(lERROR, "Network::Receive()", "Not allowed to host a district");
+				else if (response == '1' || response == '2') Logger(lERROR, "Network::Receive()", "District already exists");
+				else if (response == '3') Logger(lSUCCESS, "Network::Receive()", "Registered at World Server");
+				else if (response == '4') Logger(lERROR, "Network::Receive()", "ID can not be 0");
+				break;
+			}
+
+			case '1': //packet that holds encryptionKey
+			{
+				break;
+			}
+
+			case '2': //packet that holds handshakeHash
+			{
+				break;
+			}
+		}
+	}
+	else if (result == 0) Logger(lERROR, "Network::Receive()", "Connection closed");
+	else Logger(lERROR, "Network::Receive()", "Receiving failed! Error code: %d", WSAGetLastError());
 }
