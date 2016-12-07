@@ -37,7 +37,7 @@ void setColor(unsigned int color)
 void Log_Clear()
 {
 	FILE *file;
-	file = fopen("Logs\\district.log", "w");
+	file = fopen("Logs\\DistrictLog.txt", "w");
 	fprintf(file, "\0");
 }
 
@@ -46,7 +46,7 @@ void Logger(unsigned int lvl, char* caller, char* logline, ...)
 	while (isLogging) Sleep(10);
 	isLogging = true;
 	FILE *file;
-	file = fopen("Logs\\district.log", "a+");
+	file = fopen("Logs\\DistrictLog.txt", "a+");
 	char timeStr[9];
 	char logOut[1024];
 	_strtime_s(timeStr);

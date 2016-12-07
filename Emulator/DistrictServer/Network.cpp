@@ -20,6 +20,8 @@ int Network::Setup(char* address, int port)
 	addr.sin_family = AF_INET;
 	addr.sin_addr.s_addr = inet_addr(address);
 	addr.sin_port = htons(port);
+
+	encryptionKey = NULL;
 	return 0;
 }
 
@@ -51,56 +53,60 @@ int Network::Send(char* buffer)
 	else return 0;
 }
 
-int Network::ReceiveInitial()
+int Network::Receive(Packet p)
 {
-	char* buffer = new char[2];
-	int  result = recv(sock, buffer, 2, 0);
-	if (result > 0)
+	//TODO: obviously improve this...
+	if (p == Packet::Initial)
 	{
-		buffer[result] = '\0';
-		if (buffer[0] == '0')
+		char* buffer = new char[2];
+		int  result = recv(sock, buffer, 2, 0);
+		if (result > 0)
 		{
-			char response = buffer[1];
-			if (response == '0')
+			buffer[result] = '\0';
+			if (buffer[0] == '0')
 			{
-				Logger(lERROR, "Network::ReceiveInitial()", "Not allowed to host a district");
-				return 1;
-			}
-			else if (response == '1' || response == '2')
-			{
-				Logger(lERROR, "Network::Receive()", "District already exists");
-				return 1;
-			}
-			else if (response == '3')
-			{
-				Logger(lSUCCESS, "Network::ReceiveInitial()", "Registered at World Server");
-				return 0;
-			}
-			else if (response == '4')
-			{
-				Logger(lERROR, "Network::ReceiveInitial()", "ID can not be 0");
-				return 1;
+				char response = buffer[1];
+				if (response == '0') Logger(lERROR, "Network::Receive()", "Not allowed to host a district");
+				else if (response == '1' || response == '2') Logger(lERROR, "Network::Receive()", "District already exists");
+				else if (response == '3')
+				{
+					Logger(lSUCCESS, "Network::Receive()", "Registered at World Server");
+					return result;
+				}
+				else if (response == '4') Logger(lERROR, "Network::Receive()", "ID can not be 0");
 			}
 		}
-	}
-	else if (result == 0) 
-	{
-		Logger(lERROR, "Network::ReceiveInitial()", "Connection closed");
+		else if (result == 0) Logger(lERROR, "Network::Receive()", "Connection closed");
+		else Logger(lERROR, "Network::Receive()", "Receiving failed! Error code: %d", WSAGetLastError());
 		return 1;
 	}
-	else 
+	else if (p == Packet::EncryptionKey)
 	{
-		Logger(lERROR, "Network::ReceiveInitial()", "Receiving failed! Error code: %d", WSAGetLastError());
-		return 1;
+		char* buffer = new char[16];
+		int result = recv(sock, buffer, 16, 0);
+		if (result > 0)
+		{
+			buffer[result] = '\0';
+			SetEncryptionKey(buffer); 
+		}
+		else if (result == 0) Logger(lERROR, "Network::Receive()", "Connection closed");
+		else
+		{
+			Logger(lERROR, "Network::Receive()", "Receiving failed! Error code: %d", WSAGetLastError());
+			Logger(lINFO, "Information", "Shutting down in 5 seconds");
+			Sleep(5000);
+			ExitProcess(0);
+		}
+		return result;
 	}
 }
 
-char* Network::ReceiveEncryptionKey()
+char* Network::GetEncryptionKey()
 {
-	char* buffer = new char[16];
-	int result = recv(sock, buffer, 16, 0);
-	if (result > 0) buffer[result] = '\0';
-	else if (result == 0) Logger(lERROR, "Network::ReceiveEncryptionKey()", "Connection closed");
-	else Logger(lERROR, "Network::ReceiveEncryptionKey()", "Receiving failed! Error code: %d", WSAGetLastError());
-	return buffer;
+	return encryptionKey;
+}
+
+void Network::SetEncryptionKey(char* encryptionKey)
+{
+	this->encryptionKey = encryptionKey;
 }

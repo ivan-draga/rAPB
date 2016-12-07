@@ -5,27 +5,41 @@
 
 #include "Network.h"
 
+#define DISTRICT_TYPE 1 //social
+#define DISTRICT_ID 1
+#define LANGUAGE 0 //English
+
 int main()
 {
+	Log_Clear();
 	Network *net = new Network();
-	if (net->Setup("127.0.0.1", 2108) == 0)
+	if (net->Setup("127.0.0.1", 2108) == OK)
 	{
 		Logger(lINFO, "Network::Setup()", "Ready to connect to World Server");
-		if (net->Connect() == 0)
+		if (net->Connect() == OK)
 		{
 			Logger(lSUCCESS, "Network::Connect()", "Connected to World Server");
 			char data[10];
-			sprintf_s(data, sizeof(data), "%d%d%d%d", 0, 1, 1, 0); //packet id, district type, district id, language
-			if(net->Send(data) == 0)
+			sprintf_s(data, sizeof(data), "%d%d%d%d", 0, DISTRICT_TYPE, DISTRICT_ID, LANGUAGE); //TODO: make this read from config file
+			if(net->Send(data) == OK)
 			{
 				Logger(lINFO, "Network::Send()", "Initial data sent");
-				if(net->ReceiveInitial() == 0)
+				if(net->Receive(Network::Packet::Initial) == INIT_LEN)
 				{
-					char* encryptionKey = net->ReceiveEncryptionKey();
-					Logger(lINFO, "Network::ReceiveEncryptionKey()", "%s (length: %d)", encryptionKey, strlen(encryptionKey));
-					//TODO: further...
+					int num = 0;
+					while (1)
+					{
+						num += net->Receive(Network::Packet::EncryptionKey);
+						if (num == ENCKEY_LEN)
+						{
+							char* encryptionKey = net->GetEncryptionKey();
+							Logger(lINFO, "Network::Receive()", "XXTEA encryption key received");
+							//TODO: further...
+							net->SetEncryptionKey(NULL);
+						}
+						else num = 0;
+					}
 				}
-				system("pause");
 			}
 			else Logger(lERROR, "Network::Send()", "Data sending failed");
 		}
