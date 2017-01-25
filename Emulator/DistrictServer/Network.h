@@ -13,7 +13,6 @@ private:
 	WSAData data;
 	SOCKET sock;
 	struct sockaddr_in addr;
-	char* encryptionKey;
 public:
 	Network();
 	int Setup(char* address, int port);

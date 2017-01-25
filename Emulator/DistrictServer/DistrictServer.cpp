@@ -1,39 +1,41 @@
 #include "stdafx.h"
 #include "Network.h"
 #include "Account.h"
+#include "Configuration.h"
 
-#define DISTRICT_TYPE 1 //social
-#define DISTRICT_ID 1
-#define LANGUAGE 0 //English
+Configuration* cfg;
+vector<Account*>* accounts;
+Network* net;
 
-bool ProcessPacket(char* buffer, Network* net);
+bool ProcessPacket(char* buffer);
 bool ContainsAccount(int id);
 void Thread(Account* acc);
-vector<Account*>* accounts = new vector<Account*>();
 
 int main()
 {
 	Log_Clear();
-	Network *net = new Network();
-	if (net->Setup("127.0.0.1", 2108) == OK)
+	cfg = new Configuration("Configs\\District.conf");
+	accounts = new vector<Account*>();
+	net = new Network();
+	if (net->Setup(cfg->GetWorldIP(), cfg->GetWorldPort()) == OK)
 	{
 		Logger(lINFO, "Network::Setup()", "Ready to connect to World Server");
 		if (net->Connect() == OK)
 		{
 			Logger(lSUCCESS, "Network::Connect()", "Connected to World Server");
 			char data[10];
-			sprintf_s(data, sizeof(data), "%d%d%d%d", 0, DISTRICT_TYPE, DISTRICT_ID, LANGUAGE); //TODO: make this read from config file
+			sprintf_s(data, sizeof(data), "%d%d%d%d", 0, cfg->GetDistrictType(), cfg->GetDistrictID(), cfg->GetDistrictLanguage()); 
 			if(net->Send(data) == OK)
 			{
 				Logger(lINFO, "Network::Send()", "Initial data sent");
 				char* initial = net->Receive(2);
-				if(ProcessPacket(initial, net))
+				if(ProcessPacket(initial))
 				{
 					bool loop = true;
 					while (loop)
 					{
 						char* districtEnter = net->Receive(2);
-						loop = ProcessPacket(districtEnter, net);
+						loop = ProcessPacket(districtEnter);
 					}
 					Logger(lERROR, "main()", "Failed to process packet, exiting in 5 seconds...");
 					Sleep(5000);
@@ -49,7 +51,7 @@ int main()
     return 0;
 }
 
-bool ProcessPacket(char* buffer, Network* net)
+bool ProcessPacket(char* buffer)
 {
 	if (buffer[0] == '0')
 	{

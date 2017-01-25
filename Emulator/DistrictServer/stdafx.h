@@ -7,6 +7,7 @@ using namespace std;
 #include <vector>
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include <thread>
 
 #define lINFO 0
