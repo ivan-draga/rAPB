@@ -7,21 +7,7 @@ namespace LobbyServer.TCP.Packets
         static public void Send(LobbyClient client)
         {
             PacketOut Out = new PacketOut((uint)Opcodes.LOGIN_PUZZLE);
-            if(Program.version == GameVersion.RTW_CB)
-            {
-                Out.WriteInt32Reverse(0);
-                Out.WriteInt32Reverse(6);
-                Out.WriteInt32Reverse(0);
-                Out.WriteInt32Reverse(509927);
-            }
-            else if(Program.version == GameVersion.RTW_DVD)
-            {
-                Out.WriteInt32Reverse(1);
-                Out.WriteInt32Reverse(1);
-                Out.WriteInt32Reverse(0);
-                Out.WriteInt32Reverse(534979);
-            }
-            else if (Program.version == GameVersion.RTW_LAST)
+            if (Program.version == GameVersion.RTW_LAST)
             {
                 Out.WriteInt32Reverse(1);
                 Out.WriteInt32Reverse(4);
@@ -33,14 +19,7 @@ namespace LobbyServer.TCP.Packets
                 Out.WriteInt32Reverse(1);
                 Out.WriteInt32Reverse(19);
                 Out.WriteInt32Reverse(4);
-                Out.WriteInt32Reverse(772616);
-            }
-            else if (Program.version == GameVersion.G1_ENGUPD)
-            {
-                Out.WriteInt32Reverse(2);
-                Out.WriteInt32Reverse(0);
-                Out.WriteInt32Reverse(0);
-                Out.WriteInt32Reverse(750394);
+                Out.WriteInt32Reverse(775065);
             }
             Out.WriteByte(0x05);
             for (int i = 0; i < client.ECrypt.Key.Length; i++) Out.WriteByte(client.ECrypt.Key[i]);
