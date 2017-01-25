@@ -20,5 +20,6 @@ public:
 	int Dispose();
 	int Shutdown();
 	int Send(char* buffer);
+	int SendInitial(int districtType, int districtId, int language);
 	char* Receive(int size);
 };

@@ -51,6 +51,13 @@ int Network::Send(char* buffer)
 	else return 0;
 }
 
+int Network::SendInitial(int districtType, int districtId, int language)
+{
+	char data[10];
+	sprintf_s(data, sizeof(data), "%d%d%d%d", 0, districtType, districtId, language);
+	return Send(data);
+}
+
 char* Network::Receive(int size)
 {
 	char* buffer = new char[size];

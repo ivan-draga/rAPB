@@ -1,13 +1,17 @@
 #include "stdafx.h"
+
 #include "Network.h"
 #include "Account.h"
 #include "Configuration.h"
+#include "UdpListener.h"
 
 Configuration* cfg;
 vector<Account*>* accounts;
-Network* net;
+vector<thread*>* threads;
+Network* world;
+int count;
 
-bool ProcessPacket(char* buffer);
+bool ProcessWorldPacket(char* buffer);
 bool ContainsAccount(int id);
 void Thread(Account* acc);
 
@@ -16,30 +20,29 @@ int main()
 	Log_Clear();
 	cfg = new Configuration("Configs\\District.conf");
 	accounts = new vector<Account*>();
-	net = new Network();
-	if (net->Setup(cfg->GetWorldIP(), cfg->GetWorldPort()) == OK)
+	threads = new vector<thread*>();
+	world = new Network();
+	if (world->Setup(cfg->GetWorldIP(), cfg->GetWorldPort()) == OK)
 	{
 		Logger(lINFO, "Network::Setup()", "Ready to connect to World Server");
-		if (net->Connect() == OK)
+		if (world->Connect() == OK)
 		{
 			Logger(lSUCCESS, "Network::Connect()", "Connected to World Server");
-			char data[10];
-			sprintf_s(data, sizeof(data), "%d%d%d%d", 0, cfg->GetDistrictType(), cfg->GetDistrictID(), cfg->GetDistrictLanguage()); 
-			if(net->Send(data) == OK)
+			if(world->SendInitial(cfg->GetDistrictType(), cfg->GetDistrictID(), cfg->GetDistrictLanguage()) == OK)
 			{
 				Logger(lINFO, "Network::Send()", "Initial data sent");
-				char* initial = net->Receive(2);
-				if(ProcessPacket(initial))
+				char* response = world->Receive(2);
+				if(ProcessWorldPacket(response))
 				{
 					bool loop = true;
 					while (loop)
 					{
-						char* districtEnter = net->Receive(2);
-						loop = ProcessPacket(districtEnter);
+						char* districtEnter = world->Receive(2);
+						loop = ProcessWorldPacket(districtEnter);
 					}
-					Logger(lERROR, "main()", "Failed to process packet, exiting in 5 seconds...");
+					Logger(lERROR, "main()", "Exiting in 5 seconds...");
 					Sleep(5000);
-					exit(-1);
+					exit(1);
 				}
 				else Logger(lERROR, "ProcessPacket()", "Initial packet failed to process");
 			}
@@ -51,30 +54,30 @@ int main()
     return 0;
 }
 
-bool ProcessPacket(char* buffer)
+bool ProcessWorldPacket(char* buffer)
 {
 	if (buffer[0] == '0')
 	{
-		Logger(lINFO, "ProcessPacket()", "Received response for initial packet");
+		Logger(lINFO, "ProcessWorldPacket()", "Received response for initial packet");
 		char response = buffer[1];
 		if (response == '0')
 		{
-			Logger(lERROR, "ProcessPacket()", "Not allowed to host a district");
+			Logger(lERROR, "ProcessWorldPacket()", "Not allowed to host a district");
 			return false;
 		}
 		else if (response == '1' || response == '2')
 		{
-			Logger(lERROR, "ProcessPacket()", "District already exists");
+			Logger(lERROR, "ProcessWorldPacket()", "District already exists");
 			return false;
 		}
 		else if (response == '3')
 		{
-			Logger(lSUCCESS, "ProcessPacket()", "Registered at World Server");
+			Logger(lSUCCESS, "ProcessWorldPacket()", "Registered at World Server");
 			return true;
 		}
 		else if (response == '4')
 		{
-			Logger(lERROR, "ProcessPacket()", "ID can not be 0");
+			Logger(lERROR, "ProcessWorldPacket()", "ID can not be 0");
 			return false;
 		}
 		else return false;
@@ -82,13 +85,14 @@ bool ProcessPacket(char* buffer)
 	else if (buffer[0] == '1')
 	{
 		int accountId = (int)buffer[1];
-		char* encryptionKey = net->Receive(16);
+		char* encryptionKey = world->Receive(16);
 		Account* acc = new Account(accountId, encryptionKey);
 		if (ContainsAccount(acc->GetId())) return true;
 		Logger(lINFO, "ProcessPacket()", "District enter from account ID: %d (key: %s)", accountId, encryptionKey);
 		accounts->push_back(acc);
-		thread t(Thread, acc);
-		t.join();
+		thread *t = new thread(Thread, acc);
+		threads->push_back(t);
+		threads->back()->join();
 		return true;
 	}
 	else return false;
@@ -106,5 +110,15 @@ bool ContainsAccount(int id)
 
 void Thread(Account* acc)
 {
-	//TODO: udp packet receiving
+	UdpListener* listener = new UdpListener();
+	while (1)
+	{
+		char t[30];
+		sprintf_s(t, sizeof(t), "Thread(%d)", acc->GetId());
+		char data[2048];
+		strcpy(data, listener->Receive());
+		int len = strlen(data);
+		if(len > 0) Logger(lINFO, t, "Received data, size = %d", len);
+		//TODO: process data, packet size seems 88 always
+	}
 }

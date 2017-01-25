@@ -25,3 +25,4 @@ using namespace std;
 
 void Logger(unsigned int lvl, char* caller, char* logline, ...);
 void Log_Clear();
+long btea(long* v, long n, long* k);
