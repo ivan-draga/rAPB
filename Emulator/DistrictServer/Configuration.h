@@ -4,14 +4,14 @@ class Configuration
 {
 private:
 	char* ip;
-	int port;
+	char* port;
 	int districtType;
 	int districtId;
 	int language;
 public:
 	Configuration(char* file);
 	char* GetWorldIP();
-	int GetWorldPort();
+	char* GetWorldPort();
 	int GetDistrictType();
 	int GetDistrictID();
 	int GetDistrictLanguage();

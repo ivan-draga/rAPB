@@ -46,7 +46,27 @@ void Logger(unsigned int lvl, char* caller, char* logline, ...)
 	fclose(file);
 }
 
-#define MX ((z>>5^y<<2) + (y>>3^z<<4) ^ (sum^y) + (k[p&3^e]^z))
+char* GetTokenFromFile(char* file)
+{
+	ifstream in(file);
+	char str[255];
+
+	if (!in)
+	{
+		cout << "Cannot open config file.\n";
+		return "";
+	}
+
+	in.getline(str, 255);
+	in.close();
+	return str;
+}
+
+char* GetPublicIP()
+{
+	//TODO
+	return "127.0.0.1";
+}
 
 long btea(long* v, long n, long* k) 
 {

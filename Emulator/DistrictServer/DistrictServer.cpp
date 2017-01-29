@@ -19,16 +19,18 @@ int main()
 {
 	Log_Clear();
 	cfg = new Configuration("Configs\\District.conf");
+	char* token = new char[8];
+	strcpy(token, GetTokenFromFile("Configs\\token.id"));
 	accounts = new vector<Account*>();
 	threads = new vector<thread*>();
 	world = new Network();
-	if (world->Setup(cfg->GetWorldIP(), cfg->GetWorldPort()) == OK)
+	if (world->Setup(cfg->GetWorldIP(), atoi(cfg->GetWorldPort())) == OK)
 	{
 		Logger(lINFO, "Network::Setup()", "Ready to connect to World Server");
 		if (world->Connect() == OK)
 		{
 			Logger(lSUCCESS, "Network::Connect()", "Connected to World Server");
-			if(world->SendInitial(cfg->GetDistrictType(), cfg->GetDistrictID(), cfg->GetDistrictLanguage()) == OK)
+			if(world->SendInitial(cfg->GetDistrictType(), cfg->GetDistrictID(), cfg->GetDistrictLanguage(), GetPublicIP(), "6969", token) == OK)
 			{
 				Logger(lINFO, "Network::Send()", "Initial data sent");
 				char* response = world->Receive(2);

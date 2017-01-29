@@ -7,7 +7,7 @@ Configuration::Configuration(char* file)
 	char str[255];
 	int line = 0;
 	ip = new char[16];
-	port = 0;
+	port = new char[4];
 	districtId = 0;
 	districtType = 0;
 	language = 0;
@@ -24,7 +24,7 @@ Configuration::Configuration(char* file)
 		if (in)
 		{
 			if (line == 0) strcpy(ip, str);
-			else if (line == 1) port = atoi(str);
+			else if (line == 1) strcpy(port, str);
 			else if (line == 2)
 			{
 				if (strcmp(str, "Social") == 0) districtType = 1;
@@ -57,7 +57,7 @@ char* Configuration::GetWorldIP()
 	return this->ip;
 }
 
-int Configuration::GetWorldPort()
+char* Configuration::GetWorldPort()
 {
 	return this->port;
 }

@@ -51,10 +51,13 @@ int Network::Send(char* buffer)
 	else return 0;
 }
 
-int Network::SendInitial(int districtType, int districtId, int language)
+int Network::SendInitial(int districtType, int districtId, int language, char* address, char* port, char* token)
 {
-	char data[10];
-	sprintf_s(data, sizeof(data), "%d%d%d%d", 0, districtType, districtId, language);
+	char data[255];
+	int a = 0;
+	if (strlen(address) < 10) a = 1;
+	else a = 2;
+	sprintf_s(data, sizeof(data), "%d%d%d%d%d%d%s%d%d%s%d%d%s", 0, districtType, districtId, language, a, strlen(address), address, 0, strlen(port), port, 0, 8, token);
 	return Send(data);
 }
 

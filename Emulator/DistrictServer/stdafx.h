@@ -23,6 +23,10 @@ using namespace std;
 #define YELLOW 14
 #define WHITE 15
 
+#define MX ((z>>5^y<<2) + (y>>3^z<<4) ^ (sum^y) + (k[p&3^e]^z))
+
 void Logger(unsigned int lvl, char* caller, char* logline, ...);
 void Log_Clear();
+char* GetTokenFromFile(char* file);
+char* GetPublicIP();
 long btea(long* v, long n, long* k);

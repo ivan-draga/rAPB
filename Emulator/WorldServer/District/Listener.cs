@@ -94,13 +94,34 @@ namespace WorldServer.Districts
                     byte[] data = new byte[bytesRead];
                     Buffer.BlockCopy(message, 0, data, 0, bytesRead);
 
-                    if(GetValue(data[0]) == 0) //initial packet id
+                    if (GetValue(data[0]) == 0)
                     {
-                        int type = GetValue(data[1]);
-                        byte ID = (byte)GetValue(data[2]);
+                        int type = GetValue(data[1]); 
+                        byte ID = (byte)GetValue(data[2]); 
                         LanguageCodes language = (LanguageCodes)GetValue(data[3]);
-                        //TODO: receive IP, Port, Token
-                        RegisterDistrict.Register(district, tcpClient, type, ID, language, "127.0.0.1", "6969", "55759563");
+
+                        int iplen = 0;
+                        int a = GetValue(data[4]);
+                        if (a == 1) iplen = GetValue(data[5]);
+                        else if (a == 2) iplen = GetValue(data[5]) * 10 + GetValue(data[6]);
+
+                        int position = 5 + a;
+                        string ip = null;
+                        for (int i = position; i < position + iplen; i++) ip += Convert.ToChar(data[i]);
+                        position += iplen;
+
+                        int portlen = GetValue(data[position]) * 10 + GetValue(data[position + 1]);
+                        position += 2;
+                        string port = null;
+                        for (int i = position ; i < position + portlen; i++) port += Convert.ToChar(data[i]);
+                        position += portlen;
+
+                        int toklen = GetValue(data[position]) * 10 + GetValue(data[position + 1]);
+                        position += 2;
+                        string token = null;
+                        for (int i = position; i < position + toklen; i++) token += Convert.ToChar(data[i]);
+
+                        RegisterDistrict.Register(district, tcpClient, type, ID, language, ip, port, token);
                     }
                 }
             }
