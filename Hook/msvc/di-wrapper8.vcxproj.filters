@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DirectInput8">
+      <UniqueIdentifier>{0323d2b7-c8c7-457c-bd15-b812438bd448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{22ff99c6-6caf-4244-bc01-2a5302099641}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{b2c0473e-3b49-4e13-882d-14842ce83c1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\APB">
+      <UniqueIdentifier>{15fa6392-8a2a-4819-9909-feef96dc4f50}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dinput.h">
+      <Filter>DirectInput8</Filter>
+    </ClInclude>
+    <ClInclude Include="..\di_wrap.h">
+      <Filter>DirectInput8</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Patch_APB.h">
+      <Filter>Base\APB</Filter>
+    </ClInclude>
+    <ClInclude Include="Entry.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="vmthooks.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="WS2_32.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="CPatcher.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="CSDK.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Addresses.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Patch_APB.cpp">
+      <Filter>Base\APB</Filter>
+    </ClCompile>
+    <ClCompile Include="vmthooks.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="WS2_32.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="CPatcher.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="CSDK.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="di-wrapper.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
