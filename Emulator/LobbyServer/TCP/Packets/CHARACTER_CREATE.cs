@@ -38,7 +38,19 @@ namespace LobbyServer.TCP.Packets
 
         public byte GetFreeSlot(LobbyClient client)
         {
-            return (byte)(client.Characters.Count + 1);
+            byte slot = 0;
+            bool[] slots = new bool[8];
+            for (int i = 0; i < 8; i++) slots[i] = false;
+            foreach(CharacterEntry ch in client.Characters) slots[ch.Slot - 1] = true;
+            for (int i = 0; i < 8; i++)
+            {
+                if (!slots[i])
+                {
+                    slot = (byte)(i + 1);
+                    break;
+                }
+            }
+            return slot;
         }
     }
 }
