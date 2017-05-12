@@ -21,11 +21,11 @@ namespace LobbyServer.TCP.Packets
             }
 
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_WORLD_ENTER);
-            if (info == null) Out.WriteUInt32Reverse(1);
+            if (info == null) Out.WriteUInt32Reverse((uint)ResponseCodes.RC_FAILED);
             else
             {
                 info.Send(new AccountEnter((uint)cclient.Account.Index, (uint)character.Index, cclient.SessionId));
-                Out.WriteUInt32Reverse((uint)ResponseCodes.RC_SUCCESS);
+                Out.WriteInt32Reverse((int)ResponseCodes.RC_SUCCESS);
                 Out.WriteByte(info.IP1);
                 Out.WriteByte(info.IP2);
                 Out.WriteByte(info.IP3);

@@ -30,7 +30,7 @@ namespace LobbyServer
             entry.Password = password;
             entry.Verifier = "";
             entry.Salt = "";
-            entry.RTW_Points = 1000000;
+            entry.Threat = 0;
             entry.IsAdmin = 1;
             entry.IsBanned = 0;
             entry.InUse = 0;
@@ -40,7 +40,7 @@ namespace LobbyServer
             Databases.AccountTable.Add(entry);
 
             Log.Succes("HTTP", "Successfully created account '" + username + "'");
-            return JsonEncode("Account created!\n\nYour token is: " + token + ".\nCopy and paste given token in \"_rtoken.id\" file and put it in the same folder where your \"APB.exe\" is located.");
+            return JsonEncode("Account created!\n\nYour token is: " + token + ".");
         }
     }
 }

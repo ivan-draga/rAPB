@@ -11,7 +11,7 @@
         public byte Faction;
         public int Rank;
         public int Money;
-        public byte Threat;
+        public int JokerTickets;
         public int Playtime;
         public string Clan;
         public byte Version;

@@ -11,7 +11,7 @@ namespace LobbyServer.TCP.Packets
         public int HandlePacket(BaseClient bcclient, PacketIn packet)
         {
             LobbyClient client = bcclient as LobbyClient;
-            packet.Skip(24);
+            packet.Skip(25);
             string Username = packet.GetParsedString();
             Log.Notice("ASK_LOGIN", "Account: " + Username);
             try
@@ -27,7 +27,7 @@ namespace LobbyServer.TCP.Packets
             }
             catch (Exception e)
             {
-                Log.Error("ASK_LOGIN", "Account's not found");
+                Log.Error("ASK_LOGIN", "Account is not found");
                 Log.Debug("ASK_LOGIN", e.ToString());
                 LOGIN_FAILED.Send(client, (int)ResponseCodes.RC_LOGIN_INVALID_ACCOUNT);
                 client.Disconnect();
@@ -53,13 +53,12 @@ namespace LobbyServer.TCP.Packets
         static public void Register(LobbyClient client)
         {
             string Id = Convert.ToString(client.Account.Index);
-            string Pass = client.Account.Password;
             byte[] salt = new byte[10];
             Random random = new Random();
             random.NextBytes(salt);
             random = null;
             client.Account.Salt = (new FrameWork.NetWork.Crypto.BigInteger(1, salt)).ToString(16);
-            client.Account.Verifier = Auth.computeVerifier(salt, Id, Pass).ToString(16);
+            client.Account.Verifier = Auth.computeVerifier(salt, Id, client.Account.Password).ToString(16);
             Databases.AccountTable.Update(client.Account);
         }
     }

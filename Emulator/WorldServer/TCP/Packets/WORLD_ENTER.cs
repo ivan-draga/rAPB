@@ -26,8 +26,6 @@ namespace WorldServer.TCP.Packets
             {
                 Out.WriteInt32Reverse((int)ResponseCodes.RC_SUCCESS);
                 Out.WriteUInt32Reverse(cclient.account.Character);
-                Out.WriteUInt32Reverse((uint)cclient.Account.RTW_Points);
-                Out.WriteByte(cclient.Account.IsAdmin);
                 Out.WriteInt64Reverse(TCPManager.GetTimeStamp());
                 Out.WriteFloat(5.00f);
                 Out.WriteByte(0);
@@ -39,6 +37,7 @@ namespace WorldServer.TCP.Packets
                 Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 5, false, Program.WorldName, cclient.account.Character.ToString()));
                 Out.WriteByte(1);
                 Out.WriteByte(cclient.Character.LFG);
+                Out.WriteByte(0);
             }
             cclient.Crypto = new Encryption(cclient.account.SessionId);
             cclient.Send(new DISTRICT_LIST());

@@ -11,7 +11,6 @@ namespace LobbyServer.TCP.Packets
             LobbyClient cclient = client as LobbyClient;
             uint WorldUid = packet.GetUint32Reversed();
             string Name = packet.GetParsedString();
-
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_CHARACTER_NAME_CHECK);
             if (Databases.CharacterTable.Count(c => c.Name == Name) == 0)
             {
@@ -22,7 +21,7 @@ namespace LobbyServer.TCP.Packets
                 cclient.Pending.World = (int)WorldUid;
                 cclient.Pending.Rank = 1;
                 cclient.Pending.Money = 0;
-                cclient.Pending.Threat = 1;
+                cclient.Pending.JokerTickets = 0;
                 cclient.Pending.Playtime = 0;
                 cclient.Pending.Clan = "APB-EMU";
                 cclient.Pending.IsOnline = 0;

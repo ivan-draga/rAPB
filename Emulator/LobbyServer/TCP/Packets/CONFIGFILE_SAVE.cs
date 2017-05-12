@@ -17,7 +17,6 @@ namespace LobbyServer.TCP.Packets
             File = ZlibMgr.Decompress(File);
             Log.Debug("ConfigSave", "Config saved! FileId = " + FileId + " | Version = " + Version + " | Size = " + File.Length);
             Program.FileMgr.SaveInfo(cclient.Account.Index, FileId, File);
-
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_CONFIGFILE_SAVE);
             Out.WriteUInt32Reverse((uint)ResponseCodes.RC_SUCCESS);
             Out.WriteByte(FileId);

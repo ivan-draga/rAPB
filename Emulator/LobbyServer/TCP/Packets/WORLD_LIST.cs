@@ -9,11 +9,11 @@ namespace LobbyServer
         public int HandlePacket(BaseClient client, PacketIn packet)
         {
             LobbyClient cclient = client as LobbyClient;
-            SendWorldList(cclient);
+            Send(cclient);
             return 0;
         }
 
-        public static void SendWorldList(LobbyClient cclient)
+        public static void Send(LobbyClient cclient)
         {
             PacketOut Out = new PacketOut((uint)Opcodes.WORLD_LIST);
             Out.WriteInt32Reverse((int)ResponseCodes.RC_SUCCESS);
@@ -26,8 +26,15 @@ namespace LobbyServer
                     Out.WriteParsedString(info.Value.Name, 32);
                     Out.WriteByte((byte)info.Value.Id);
                     Out.WriteByte(info.Value.Population);
-                    Out.WriteByte(1);
-                    Out.WriteByte(1);
+                    Out.WriteByte(0); //m_nEnfFaction %d
+                    Out.WriteByte(0); //m_nCrimFaction %d
+                    Out.WriteByte(0); //m_nPremiumOnly %d
+
+                    //m_nPingIP
+                    Out.WriteByte(info.Value.IP1);
+                    Out.WriteByte(info.Value.IP2);
+                    Out.WriteByte(info.Value.IP3);
+                    Out.WriteByte(info.Value.IP4);
                 }
             }
             cclient.Send(Out);

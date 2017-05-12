@@ -13,7 +13,7 @@ namespace LobbyServer.TCP.Packets
             byte[] clientModulus = new byte[64];
             for (int i = 0; i < 64; ++i) clientModulus[i] = packet.GetUint8();
             cclient.clientModulus = new FrameWork.NetWork.Crypto.BigInteger(1, clientModulus);
-            ushort unk = packet.GetUint16();
+            packet.GetUint16();
             byte[] Proof = new byte[20];
             for (int i = 0; i < 20; ++i) Proof[i] = packet.GetUint8();
             cclient.Proof = Proof;

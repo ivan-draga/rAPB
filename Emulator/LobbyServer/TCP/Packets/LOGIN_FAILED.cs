@@ -8,6 +8,7 @@ namespace LobbyServer.TCP.Packets
         {
             PacketOut packet = new PacketOut((uint)Opcodes.ANS_LOGIN_FAILED);
             packet.WriteInt32Reverse(code);
+            packet.WriteInt32Reverse(0);
             client.Send(packet);
         }
     }

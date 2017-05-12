@@ -12,7 +12,6 @@ namespace LobbyServer.TCP.Packets
             LobbyClient cclient = client as LobbyClient;
             byte slotId = packet.GetUint8();
             CharacterEntry Info = Databases.CharacterTable.SingleOrDefault(c => c.AccountIndex == cclient.Account.Index && c.Slot == slotId);
-
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_CHARACTER_INFO);
             if (Info.Index < 1) Out.WriteUInt32Reverse((uint)ResponseCodes.RC_FAILED);
             else
@@ -22,8 +21,8 @@ namespace LobbyServer.TCP.Packets
                 Out.WriteByte(Info.Gender);
                 Out.WriteUInt32Reverse((uint)Info.Playtime);
                 Out.WriteUInt32Reverse((uint)Info.Rank);
-                Out.WriteByte(Info.Threat);
                 Out.WriteUInt32Reverse((uint)Info.Money);
+                Out.WriteUInt32Reverse((uint)Info.JokerTickets);
                 Out.WriteParsedString(Info.Clan, 60);
                 byte[] Custom = getCustom(Info);
                 Out.Write(Custom, 0, Custom.Length);

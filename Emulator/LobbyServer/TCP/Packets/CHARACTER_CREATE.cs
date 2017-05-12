@@ -10,7 +10,6 @@ namespace LobbyServer.TCP.Packets
         public int HandlePacket(BaseClient client, PacketIn packet)
         {
             LobbyClient cclient = (LobbyClient)client;
-
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_CHARACTER_CREATE);
             byte freeSlot = GetFreeSlot(cclient);
             if (freeSlot == 0) Out.WriteInt32Reverse((int)ResponseCodes.RC_FAILED);
@@ -21,18 +20,21 @@ namespace LobbyServer.TCP.Packets
                 cclient.Pending.Gender = packet.GetUint8();
                 cclient.Pending.Version = (byte)packet.GetUint32Reversed();
                 packet.GetUint32Reversed();
+                packet.GetUint32Reversed();
                 byte[] Custom = new byte[packet.Length - packet.Position];
                 packet.Read(Custom, 0, Custom.Length);
-                cclient.Pending.Appearance = BitConverter.ToString(Custom);
+                byte[] ActualCustom = new byte[Custom.Length + 4];
+                ActualCustom[0] = 0x36;
+                ActualCustom[1] = 0x00;
+                ActualCustom[2] = 0x00;
+                ActualCustom[3] = 0x00;
+                Buffer.BlockCopy(Custom, 0, ActualCustom, 4, Custom.Length);
+                cclient.Pending.Appearance = BitConverter.ToString(ActualCustom);
                 Databases.CharacterTable.Add(cclient.Pending);
                 Out.WriteInt32Reverse((int)ResponseCodes.RC_SUCCESS);
                 Out.WriteInt32Reverse(cclient.Pending.Slot);
             }
             cclient.Send(Out);
-            System.Threading.Thread.Sleep(500);
-            cclient.Pending = default(CharacterEntry);
-            System.Threading.Thread.Sleep(500);
-            cclient.Disconnect();
             return 0;
         }
 

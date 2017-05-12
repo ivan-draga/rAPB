@@ -4,23 +4,16 @@ using FrameWork.Logger;
 using System;
 using System.Collections.Generic;
 using System.Timers;
+using System.IO;
 
 namespace LobbyServer
 {
-    public enum GameVersion
-    {
-        INVALID = 0,
-        RTW_LAST = 1,
-        G1_LATEST = 2,
-    };
-
     class Program
     {
         static public FileManager FileMgr;
         static public World.Listener worldListener;
         static public List<byte> worlds = new List<byte>();
         static public List<LobbyClient> clients = new List<LobbyClient>();
-        static public GameVersion version = GameVersion.INVALID;
 
         [STAThread]
         static void Main(string[] args)
@@ -32,22 +25,6 @@ namespace LobbyServer
             Databases.InitDB();
             Databases.Load(true);
             FileMgr = new FileManager();
-            string sVersion = EasyServer.GetConfValue<string>("Lobby", "LoginServer", "GameVersion");
-            if (sVersion == "RTW_LAST")
-            {
-                version = GameVersion.RTW_LAST;
-                Log.Info("Version", "Supported game version: 1.4.1.555239 (last RTW patch)");
-            }
-            else if (sVersion == "G1_LATEST")
-            {
-                version = GameVersion.G1_LATEST;
-                Log.Info("Version", "Supported game version: 1.19.4.775065 (latest G1 patch)");
-            }
-            else
-            {
-                version = GameVersion.INVALID;
-                Log.Error("Version", "Invalid game version");
-            }
 
             try
             {
@@ -67,6 +44,8 @@ namespace LobbyServer
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
+            string[] dirs = Directory.GetDirectories("ClientFiles");
+            foreach (string dir in dirs) Directory.Delete(dir, true);
             Log.Enter();
             Console.WriteLine("For available console commands, type /commands");
             Log.Enter();

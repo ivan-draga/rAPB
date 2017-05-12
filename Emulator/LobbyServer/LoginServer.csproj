@@ -95,6 +95,8 @@
     <Compile Include="TCP\Packets\CHARACTER_NAME_CHECK.cs" />
     <Compile Include="TCP\Packets\CONFIGFILE_LOAD.cs" />
     <Compile Include="TCP\Packets\CONFIGFILE_SAVE.cs" />
+    <Compile Include="TCP\Packets\ERROR.cs" />
+    <Compile Include="TCP\Packets\KICK.cs" />
     <Compile Include="TCP\Packets\LOGIN.cs" />
     <Compile Include="TCP\Packets\WORLD_ENTER.cs" />
     <Compile Include="TCP\Packets\WORLD_LIST.cs" />

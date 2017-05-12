@@ -8,7 +8,7 @@
         public string Password;
         public string Verifier;
         public string Salt;
-        public int RTW_Points;
+        public byte Threat;
         public byte IsAdmin;
         public byte IsBanned;
         public byte InUse;
