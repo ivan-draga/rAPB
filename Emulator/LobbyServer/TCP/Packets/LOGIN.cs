@@ -17,13 +17,17 @@ namespace LobbyServer.TCP.Packets
             try
             {
                 client.Account = Databases.AccountTable.SingleOrDefault(a => a.Username == Username);
+                if (client.Account.Verifier.Length <= 2 || client.Account.Salt.Length <= 2) Register(client);
+                client.Salt = new FrameWork.NetWork.Crypto.BigInteger(client.Account.Salt, 16).ToByteArrayUnsigned();
+                client.Verifier = new FrameWork.NetWork.Crypto.BigInteger(client.Account.Verifier, 16);
+                Log.Succes("ASK_LOGIN", "Account exists: " + client.Account.Username);
+                LOGIN_SALT.Send(client);
             }
             catch (ArgumentNullException)
             {
                 Log.Error("ASK_LOGIN", "Database is busy");
                 LOGIN_FAILED.Send(client, (int)ResponseCodes.RC_DATABASE_BUSY);
                 client.Disconnect();
-                return 0;
             }
             catch (Exception e)
             {
@@ -31,23 +35,8 @@ namespace LobbyServer.TCP.Packets
                 Log.Debug("ASK_LOGIN", e.ToString());
                 LOGIN_FAILED.Send(client, (int)ResponseCodes.RC_LOGIN_INVALID_ACCOUNT);
                 client.Disconnect();
-                return 0;
             }
-            Log.Succes("ASK_LOGIN", "Account exists: " + client.Account.Username);
-            if (client.Account.extrn_login == 1)
-            {
-                if (client.Account.Verifier.Length <= 2 || client.Account.Salt.Length <= 2) Register(client);
-                client.Salt = new FrameWork.NetWork.Crypto.BigInteger(client.Account.Salt, 16).ToByteArrayUnsigned();
-                client.Verifier = new FrameWork.NetWork.Crypto.BigInteger(client.Account.Verifier, 16);
-                LOGIN_SALT.Send(client);
-                return 0;
-            }
-            else
-            {
-                LOGIN_FAILED.Send(client, (int)ResponseCodes.RC_LOGIN_APB_INACTIVATED);
-                client.Disconnect();
-                return 0;
-            }
+            return 0;
         }
 
         static public void Register(LobbyClient client)

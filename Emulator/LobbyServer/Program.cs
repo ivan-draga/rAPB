@@ -40,7 +40,7 @@ namespace LobbyServer
             Log.Succes("LobbyServer", "Server initialisation complete!");
             clients.Clear();
             worlds.Clear();
-            Timer aTimer = new Timer(10000);
+            Timer aTimer = new Timer(1000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;

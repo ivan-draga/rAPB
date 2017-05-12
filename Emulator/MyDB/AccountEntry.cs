@@ -12,7 +12,6 @@
         public byte IsAdmin;
         public byte IsBanned;
         public byte InUse;
-        public byte extrn_login;
         public byte CanHostDistrict;
         public string Token;
     }

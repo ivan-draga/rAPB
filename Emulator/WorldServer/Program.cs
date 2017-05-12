@@ -61,7 +61,7 @@ namespace WorldServer
             Lobby = new Client(EasyServer.GetConfValue<string>("World", "LobbyCommunication", "Ip"), EasyServer.GetConfValue<int>("World", "LobbyCommunication", "Port"));
             districtsListener = new Listener(EasyServer.GetConfValue<string>("World", "DistrictListener", "Ip"), EasyServer.GetConfValue<int>("World", "DistrictListener", "Port"));
             clients.Clear();
-            Timer aTimer = new Timer(10000);
+            Timer aTimer = new Timer(1000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
