@@ -30,11 +30,11 @@ namespace WorldServer.TCP.Packets
                 Out.WriteFloat(5.00f);
                 Out.WriteByte(0);
                 Out.WriteByte(0);
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 1, false, Program.WorldName, cclient.account.Character.ToString()));
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 2, false, Program.WorldName, cclient.account.Character.ToString()));
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 3, false, Program.WorldName, cclient.account.Character.ToString()));
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 4, false, Program.WorldName, cclient.account.Character.ToString()));
-                Out.WriteInt32Reverse(Program.FileMgr.GetFileVersion((int)accountId, 5, false, Program.WorldName, cclient.account.Character.ToString()));
+                Out.WriteInt32Reverse(0);
+                Out.WriteInt32Reverse(0);
+                Out.WriteInt32Reverse(0);
+                Out.WriteInt32Reverse(0);
+                Out.WriteInt32Reverse(0);
                 Out.WriteByte(1);
                 Out.WriteByte(cclient.Character.LFG);
                 Out.WriteByte(0);

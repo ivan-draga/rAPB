@@ -4,14 +4,12 @@ using System;
 using System.Collections.Generic;
 using WorldServer.Districts;
 using WorldServer.Lobby;
-using WorldServer.RpcFile;
 using System.Timers;
 
 namespace WorldServer
 {
     class Program
     {
-        static public FileManager FileMgr;
         static public Dictionary<UInt32, Acc> expectingAccounts = new Dictionary<UInt32, Acc>();
         static public Districts.Listener districtsListener;
         static public List<WorldClient> clients = new List<WorldClient>();
@@ -54,7 +52,6 @@ namespace WorldServer
             if (!EasyServer.Listen<TcpServer>(Port, "WorldInfo")) return;
             Databases.InitDB();
             Databases.Load(false);
-            FileMgr = new FileManager();
             Password = EasyServer.GetConfValue<string>("World", "LobbyCommunication", "Password");
             WorldName = EasyServer.GetConfValue<string>("World", "WorldInfo", "Name");
             ID = EasyServer.GetConfValue<byte>("World", "WorldInfo", "Id");

@@ -84,10 +84,6 @@
     <Compile Include="HTTP\HttpServer.Handlers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RpcFile\BlockInfo.cs" />
-    <Compile Include="RpcFile\ConfigFile.cs" />
-    <Compile Include="RpcFile\FileClient.cs" />
-    <Compile Include="RpcFile\FileManager.cs" />
     <Compile Include="SRP\Auth.cs" />
     <Compile Include="TCP\Packets\CHARACTER_CREATE.cs" />
     <Compile Include="TCP\Packets\CHARACTER_DELETE.cs" />

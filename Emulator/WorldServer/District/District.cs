@@ -12,6 +12,18 @@ namespace WorldServer.Districts
         WATERFRONT_HARDCORE = 27
     }
 
+    /*public enum DistrictTypes //G1 districts
+    {
+        SOCIAL = 1,
+        FINANCIAL = 2,
+        FINANCIAL_ANARCHY = 8,
+        TUTORIAL = 14,
+        WATERFRONT = 21,
+        WATERFRONT_ANARCHY = 27,
+        BAYLAN_SHIPPING = 33,
+        THE_BEACON = 34
+    }*/
+
     public enum LanguageCodes
     {
         EN = 0,
@@ -21,19 +33,6 @@ namespace WorldServer.Districts
         ES = 4,
         RU = 5
     }
-
-    public enum DistrictState
-    {
-        kDISTRICT_STATE_DISCONNECTED = 0,
-        kDISTRICT_STATE_WORLDSERVER_LISTENING = 1,
-        kDISTRICT_STATE_WORLDSERVER_CONNECT_IN_PROGRESS = 2,
-        kDISTRICT_STATE_WORLDSERVER_CONNECT_COMPLETE = 3,
-        kDISTRICT_STATE_WORLDSERVER_DEV_ATTACH_IN_PROGRESS = 4,
-        kDISTRICT_STATE_WORLDSERVER_DEV_ATTACH_COMPLETE = 5,
-        kDISTRICT_STATE_WORLDSERVER_ATTACH_IN_PROGRESS = 6,
-        kDISTRICT_STATE_WORLDSERVER_ATTACH_COMPLETE = 7,
-        kDISTRICT_STATE_MAX = 8
-    };
 
     public class District
     {
@@ -79,6 +78,7 @@ namespace WorldServer.Districts
             get;
             private set;
         }
+
         public byte Id;
         public ushort Enforcers = 0;
         public ushort Criminals = 0;

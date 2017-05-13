@@ -16,7 +16,7 @@ namespace LobbyServer.TCP
             string tmp2 = "";
             for (int i = 0; i < buffer.Length; i++)
             {
-                tmp2 += (String.Format("{0:X2} ", buffer[i]));
+                tmp2 += (string.Format("{0:X2} ", buffer[i]));
                 if (((i + 1) % 16 == 0) && (i != 0))
                 {
                     tmp2 += "\r\n";
@@ -46,7 +46,7 @@ namespace LobbyServer.TCP
         public byte[] Encrypt(PacketOut packet)
         {
             byte[] data = packet.ToArray();
-            Log.Info("[SERVER PRE-ENCRYPT]", this.DumpData(data));
+            Log.Info("[SERVER PRE-ENCRYPT]", DumpData(data));
             encryption.Process(data, 4, data.Length - 4);
             return data;
         }
@@ -58,7 +58,7 @@ namespace LobbyServer.TCP
             PacketIn result = new PacketIn(data, 0, data.Length);
             result.Size = result.GetUint32Reversed();
             result.Opcode = result.GetUint32Reversed();
-            Log.Info("[CLIENT POST-ENCRYPT]", this.DumpData(data));
+            Log.Info("[CLIENT POST-ENCRYPT]", DumpData(data));
             return result;
         }
 

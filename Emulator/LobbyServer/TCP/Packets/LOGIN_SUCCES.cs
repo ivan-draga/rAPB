@@ -11,7 +11,7 @@ namespace LobbyServer.TCP.Packets
             Out.WriteUInt32Reverse(1);
             Out.WriteInt64Reverse(TCPManager.GetTimeStamp());
             Out.WriteUInt32Reverse(client.Account.IsAdmin);
-            for (int i = 1; i < 6; ++i) Out.WriteInt32Reverse(0); //Program.FileMgr.GetFileVersion(client.Account.Index, i, true, "", "")
+            for (int i = 1; i < 6; ++i) Out.WriteInt32Reverse(0);
             Out.WriteString("");
             Out.WriteInt32(0);
             Out.WriteInt32(0);

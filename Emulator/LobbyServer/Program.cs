@@ -1,16 +1,13 @@
-﻿using LobbyServer.RpcFile;
-using FrameWork;
+﻿using FrameWork;
 using FrameWork.Logger;
 using System;
 using System.Collections.Generic;
 using System.Timers;
-using System.IO;
 
 namespace LobbyServer
 {
     class Program
     {
-        static public FileManager FileMgr;
         static public World.Listener worldListener;
         static public List<byte> worlds = new List<byte>();
         static public List<LobbyClient> clients = new List<LobbyClient>();
@@ -24,7 +21,6 @@ namespace LobbyServer
             worldListener = new World.Listener(EasyServer.GetConfValue<string>("Lobby", "WorldListener", "IP"), EasyServer.GetConfValue<int>("Lobby", "WorldListener", "Port"));
             Databases.InitDB();
             Databases.Load(true);
-            FileMgr = new FileManager();
 
             try
             {
@@ -44,8 +40,6 @@ namespace LobbyServer
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
-            string[] dirs = Directory.GetDirectories("ClientFiles");
-            foreach (string dir in dirs) Directory.Delete(dir, true);
             Log.Enter();
             Console.WriteLine("For available console commands, type /commands");
             Log.Enter();
