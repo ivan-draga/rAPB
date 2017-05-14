@@ -94,17 +94,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCP\Packets\CHARACTERFINDER_INFO.cs" />
-    <Compile Include="TCP\Packets\CHAT_WHISPER.cs" />
     <Compile Include="TCP\Packets\DISTRICT_ENTER.cs" />
     <Compile Include="TCP\Packets\DISTRICT_RESERVE.cs" />
     <Compile Include="TCP\Packets\FRIENDLIST_ADD.cs" />
     <Compile Include="TCP\Packets\FRIENDLIST_REMOVE.cs" />
     <Compile Include="TCP\Packets\FRIENDLIST_STATE.cs" />
-    <Compile Include="TCP\Packets\GROUP_LIST.cs" />
     <Compile Include="TCP\Packets\IGNORELIST_ADD.cs" />
     <Compile Include="TCP\Packets\IGNORELIST_REMOVE.cs" />
     <Compile Include="TCP\Packets\INSTANCE_LIST.cs" />
-    <Compile Include="TCP\Packets\NAME_QUERY.cs" />
     <Compile Include="TCP\Packets\WORLD_ENTER.cs" />
     <Compile Include="TCP\Packets\LFG.cs" />
     <Compile Include="TCP\Packets\LOGOUT.cs" />

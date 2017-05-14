@@ -21,7 +21,6 @@ namespace WorldServer.TCP.Packets
                     Out.WriteUInt16Reverse(district.Value.Criminals);
                     Out.WriteByte(district.Value.isFull());
                     Out.WriteUInt16Reverse(district.Value.Queue);
-                    Out.WriteUInt32(0); //district threat
                 }
             }
             cclient.Send(Out);

@@ -35,8 +35,10 @@ namespace WorldServer.TCP.Packets
                             Out.WriteByte(chr.GroupInvite);
                             uint code = (uint)(chr.DistrictType << 24);
                             code += chr.DistrictID;
+                            Districts.District d;
+                            Program.districtsListener.Districts.TryGetValue(code, out d);
                             Out.WriteUInt32(code);
-                            Out.WriteByte(0); //districtstatus
+                            Out.WriteByte(d.isFull());
                             Out.WriteFloat(1.00f);
                         }
                         else Out.WriteUInt32Reverse((uint)ResponseCodes.RC_CHARACTERFINDER_INFO_NO_CHARACTER);

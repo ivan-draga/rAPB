@@ -34,8 +34,10 @@ namespace WorldServer.TCP.Packets
                         Out.WriteByte(chr.GroupInvite);
                         uint code = (uint)(chr.DistrictType << 24);
                         code += chr.DistrictID;
+                        Districts.District d;
+                        Program.districtsListener.Districts.TryGetValue(code, out d);
                         Out.WriteUInt32(code);
-                        Out.WriteByte(0); //districtstatus
+                        Out.WriteByte(d.isFull());
                         FriendEntry frnd = new FriendEntry();
                         frnd.Index = Databases.FriendTable.GenerateIndex();
                         frnd.CharacterOwnerIndex = cclient.Character.Index;

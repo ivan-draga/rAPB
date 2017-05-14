@@ -28,8 +28,8 @@ namespace WorldServer.TCP.Packets
                 Out.WriteUInt32Reverse(cclient.account.Character);
                 Out.WriteInt64Reverse(TCPManager.GetTimeStamp());
                 Out.WriteFloat(5.00f);
-                Out.WriteByte(0);
-                Out.WriteByte(0);
+                Out.WriteByte(cclient.Character.IsGroupPublic);
+                Out.WriteByte(cclient.Character.GroupInvite);
                 Out.WriteInt32Reverse(0);
                 Out.WriteInt32Reverse(0);
                 Out.WriteInt32Reverse(0);

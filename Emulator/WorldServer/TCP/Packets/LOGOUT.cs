@@ -16,8 +16,8 @@ namespace WorldServer.TCP.Packets
             cclient.Character.GroupStatus = 0;
             cclient.Character.IsGroupPublic = 0;
             Databases.CharacterTable.Update(cclient.Character);
-            PacketOut Out = new PacketOut((uint)Opcodes.LOGOUT);
-            cclient.Send(Out);
+            cclient.Character = default(MyDB.CharacterEntry);
+            cclient.Reserved = null;
             cclient.Disconnect();
             return 0;
         }
