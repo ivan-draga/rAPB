@@ -4,7 +4,8 @@
 Account::Account(int id, char* encryptionKey)
 {
 	this->id = id;
-	this->encryptionKey = encryptionKey;
+	this->encryptionKey = new char[16];
+	strcpy(this->encryptionKey, encryptionKey);
 }
 
 void Account::SetId(int id)
@@ -19,7 +20,8 @@ int Account::GetId()
 
 void Account::SetEncryptionKey(char* encryptionKey)
 {
-	this->encryptionKey = encryptionKey;
+	this->encryptionKey = new char[16];
+	strcpy(this->encryptionKey, encryptionKey);
 }
 
 char* Account::GetEncryptionKey()

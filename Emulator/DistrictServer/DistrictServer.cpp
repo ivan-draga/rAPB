@@ -4,14 +4,14 @@
 #include "Account.h"
 #include "Configuration.h"
 #include "UdpListener.h"
+#include "WS_DS_COM.h"
 
 Configuration* cfg;
 vector<Account*>* accounts;
 vector<thread*>* threads;
 Network* world;
-int count;
-
-bool ProcessWorldPacket(char* buffer);
+WS2DS* packet;
+bool ProcessWorldPacket(WS2DS* packet);
 bool ContainsAccount(int id);
 void Thread(Account* acc);
 
@@ -33,14 +33,14 @@ int main()
 			if(world->SendInitial(cfg->GetDistrictType(), cfg->GetDistrictID(), cfg->GetDistrictLanguage(), GetPublicIP(), "6969", token) == OK)
 			{
 				Logger(lINFO, "Network::Send()", "Initial data sent");
-				char* response = world->Receive(2);
-				if(ProcessWorldPacket(response))
+				packet = new WS2DS(world->Receive(2));
+				if(ProcessWorldPacket(packet))
 				{
 					bool loop = true;
 					while (loop)
 					{
-						char* districtEnter = world->Receive(2);
-						loop = ProcessWorldPacket(districtEnter);
+						packet = new WS2DS(world->Receive(2));
+						loop = ProcessWorldPacket(packet);
 					}
 					Logger(lERROR, "main()", "Exiting in 5 seconds...");
 					Sleep(5000);
@@ -56,41 +56,41 @@ int main()
     return 0;
 }
 
-bool ProcessWorldPacket(char* buffer)
+bool ProcessWorldPacket(WS2DS* packet)
 {
-	if (buffer[0] == '0')
+	if (packet->ReadHeader() == WS2DS::ResponseToInitial)
 	{
 		Logger(lINFO, "ProcessWorldPacket()", "Received response for initial packet");
-		char response = buffer[1];
-		if (response == '0')
+		switch (packet->ReadChar())
 		{
-			Logger(lERROR, "ProcessWorldPacket()", "Not allowed to host a district");
-			return false;
+			case WS2DS::NotAllowed:
+				Logger(lERROR, "ProcessWorldPacket()", "Not allowed to host a district");
+				return false;
+
+			case WS2DS::DistrictAlreadyExists1:
+			case WS2DS::DistrictAlreadyExists2:
+				Logger(lERROR, "ProcessWorldPacket()", "District already exists");
+				return false;
+
+			case WS2DS::RegisterSuccess:
+				Logger(lSUCCESS, "ProcessWorldPacket()", "Registered at World Server");
+				return true;
+
+			case WS2DS::IDis0:
+				Logger(lERROR, "ProcessWorldPacket()", "ID can not be 0");
+				return false;
+				
+			default:
+				return false;
 		}
-		else if (response == '1' || response == '2')
-		{
-			Logger(lERROR, "ProcessWorldPacket()", "District already exists");
-			return false;
-		}
-		else if (response == '3')
-		{
-			Logger(lSUCCESS, "ProcessWorldPacket()", "Registered at World Server");
-			return true;
-		}
-		else if (response == '4')
-		{
-			Logger(lERROR, "ProcessWorldPacket()", "ID can not be 0");
-			return false;
-		}
-		else return false;
 	}
-	else if (buffer[0] == '1')
+	else if (packet->ReadHeader() == WS2DS::AccountEntersDistrict)
 	{
-		int accountId = (int)buffer[1];
+		int accountId = (int)packet->ReadChar();
 		char* encryptionKey = world->Receive(16);
 		Account* acc = new Account(accountId, encryptionKey);
 		if (ContainsAccount(acc->GetId())) return true;
-		Logger(lINFO, "ProcessPacket()", "District enter from account ID: %d (key: %s)", accountId, encryptionKey);
+		Logger(lINFO, "ProcessPacket()", "District enter from account ID: %d (key: %s)", acc->GetId(), acc->GetEncryptionKey());
 		accounts->push_back(acc);
 		thread *t = new thread(Thread, acc);
 		threads->push_back(t);
@@ -120,7 +120,6 @@ void Thread(Account* acc)
 		char data[2048];
 		strcpy(data, listener->Receive());
 		int len = strlen(data);
-		if(len > 0) Logger(lINFO, t, "Received data, size = %d", len);
-		//TODO: process data, packet size seems 88 always
+		if (len > 0) Logger(lINFO, t, "Received data, size = %d", len);
 	}
 }
