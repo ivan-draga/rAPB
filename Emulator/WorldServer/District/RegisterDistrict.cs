@@ -14,9 +14,6 @@ namespace WorldServer.Districts
                 case DistrictTypes.FINANCIAL:
                     district = new FinancialDistrict(ID, language);
                     break;
-                case DistrictTypes.FINANCIAL_HARDCORE:
-                    district = new FinancialDistrict(ID, language, true);
-                    break;
                 case DistrictTypes.SOCIAL:
                     district = new SocialDistrict(ID);
                     break;
@@ -25,9 +22,6 @@ namespace WorldServer.Districts
                     break;
                 case DistrictTypes.WATERFRONT:
                     district = new WaterFrontDistrict(ID, language);
-                    break;
-                case DistrictTypes.WATERFRONT_HARDCORE:
-                    district = new WaterFrontDistrict(ID, language, true);
                     break;
             }
 
@@ -55,13 +49,13 @@ namespace WorldServer.Districts
                         {
                             district.tcp.Client.Send(new byte[] { 0x30, 0x31 });
                             Program.districtsListener.Districts.Remove(code);
-                            break;
+                            return;
                         }
                         else if (dist.Value.IP != ip && Program.districtsListener.Districts.ContainsKey(code))
                         {
                             Log.Error("RegisterDistrict", "Fail try of district registration that already exists!");
                             district.tcp.Client.Send(new byte[] { 0x30, 0x32 });
-                            break;
+                            return;
                         }
                     }
                     Program.districtsListener.Districts.Add(code, district);

@@ -8,11 +8,11 @@ namespace WorldServer.TCP.Packets
     {
         public int HandlePacket(BaseClient client, PacketIn packet)
         {
-            SendDistrictEnter((WorldClient)client);
+            Send((WorldClient)client);
             return 0;
         }
 
-        public static void SendDistrictEnter(WorldClient cclient)
+        public static void Send(WorldClient cclient)
         {
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_DISTRICT_ENTER);
             if (cclient.Reserved != null)

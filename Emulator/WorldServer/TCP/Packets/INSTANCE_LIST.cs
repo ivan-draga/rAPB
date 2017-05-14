@@ -9,9 +9,8 @@ namespace WorldServer.TCP.Packets
         public int HandlePacket(BaseClient client, PacketIn packet)
         {
             WorldClient cclient = (WorldClient)client;
-
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_INSTANCE_LIST);
-            Out.WriteUInt32((uint)ResponseCodes.RC_SUCCESS);
+            Out.WriteUInt32((uint)ResponseCodes.RC_SUCCESS);            
             lock (Program.districtsListener.Districts)
             {
                 Out.WriteUInt16Reverse((ushort)Program.districtsListener.Districts.Count);
@@ -22,6 +21,7 @@ namespace WorldServer.TCP.Packets
                     Out.WriteUInt16Reverse(district.Value.Criminals);
                     Out.WriteByte(district.Value.isFull());
                     Out.WriteUInt16Reverse(district.Value.Queue);
+                    Out.WriteUInt32(0); //district threat
                 }
             }
             cclient.Send(Out);

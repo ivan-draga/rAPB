@@ -27,12 +27,11 @@ Configuration::Configuration(char* file)
 			else if (line == 1) strcpy(port, str);
 			else if (line == 2)
 			{
+				//TODO: support for other districts when their IDs are found
 				if (strcmp(str, "Social") == 0) districtType = 1;
 				else if (strcmp(str, "Financial") == 0) districtType = 2;
-				else if (strcmp(str, "Waterfront") == 0) districtType = 21;
-				else if (strcmp(str, "FinancialHardcore") == 0) districtType = 8;
-				else if (strcmp(str, "WaterfrontHardcore") == 0) districtType = 27;
 				else if (strcmp(str, "Tutorial") == 0) districtType = 14;
+				else if (strcmp(str, "Waterfront") == 0) districtType = 21;
 				else districtType = 1;
 			}
 			else if (line == 3) districtId = atoi(str);

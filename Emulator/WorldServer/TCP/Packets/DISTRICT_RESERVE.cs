@@ -10,7 +10,6 @@ namespace WorldServer.TCP.Packets
         {
             WorldClient cclient = (WorldClient)client;
             uint code = packet.GetUint32();
-
             PacketOut Out = new PacketOut((uint)Opcodes.ANS_DISTRICT_RESERVE);
             uint soc = 16777216;
             uint fin = 2 * soc;
@@ -19,7 +18,7 @@ namespace WorldServer.TCP.Packets
             {
                 foreach (KeyValuePair<uint, Districts.District> district in Program.districtsListener.Districts)
                 {
-                    if (code - soc < 100) if (district.Value.Type == (byte)Districts.DistrictTypes.SOCIAL) cclient.Reserved = new Districts.SocialDistrict(district.Value.Id);
+                    if (code - soc < 100) if (district.Value.Type == (byte)Districts.DistrictTypes.SOCIAL) cclient.Reserved = new Districts.SocialDistrict(district.Value.Id); ;
                     if (code - fin < 100) if (district.Value.Type == (byte)Districts.DistrictTypes.FINANCIAL) cclient.Reserved = new Districts.FinancialDistrict(district.Value.Id);
                     if (code - wat < 100) if (district.Value.Type == (byte)Districts.DistrictTypes.WATERFRONT) cclient.Reserved = new Districts.WaterFrontDistrict(district.Value.Id);
 
@@ -37,9 +36,9 @@ namespace WorldServer.TCP.Packets
                             cclient.Reserved.tcp = district.Value.tcp;
                             Out.WriteUInt32((uint)ResponseCodes.RC_SUCCESS);
                             Out.WriteUInt32(cclient.Reserved.Key);
-                            Out.WriteByte(0); //group
+                            Out.WriteByte(cclient.Character.GroupStatus);
                             Out.WriteByte(0);
-                            DISTRICT_ENTER.SendDistrictEnter(cclient);
+                            DISTRICT_ENTER.Send(cclient);
                         }
                     }
                     else

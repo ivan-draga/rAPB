@@ -6,23 +6,18 @@ namespace WorldServer.Districts
     {
         SOCIAL = 1,
         FINANCIAL = 2,
-        FINANCIAL_HARDCORE = 8,
-        TUTORIAL = 14,
+        FINANCIAL_ANARCHY = 8, //not supported yet
+        FINANCIAL_DYNAMIC = 0, //unknown type ID
+        FINANCIAL_OPENCONFLICT = 0, //unknown type ID
+        TUTORIAL = 14, 
         WATERFRONT = 21,
-        WATERFRONT_HARDCORE = 27
-    }
-
-    /*public enum DistrictTypes //G1 districts
-    {
-        SOCIAL = 1,
-        FINANCIAL = 2,
-        FINANCIAL_ANARCHY = 8,
-        TUTORIAL = 14,
-        WATERFRONT = 21,
-        WATERFRONT_ANARCHY = 27,
+        WATERFRONT_ANARCHY = 27, //not supported yet
+        WATERFRONT_DYNAMIC = 0, //unknown type ID
+        WATERFRONT_OPENCONFLICT = 0, //unknown type ID
         BAYLAN_SHIPPING = 33,
-        THE_BEACON = 34
-    }*/
+        THE_BEACON = 34,
+        ASYLUM = 0 //unknown type ID
+    }
 
     public enum LanguageCodes
     {
@@ -108,22 +103,16 @@ namespace WorldServer.Districts
                     FrameWork.Logger.Log.Error("District error", "Wrong district type specified, please chose valid one!");
                     break;
                 case DistrictTypes.SOCIAL:
-                    result += "Safe-Social";
+                    result += "Social-Breakwater Marina";
                     break;
                 case DistrictTypes.TUTORIAL:
                     result += "Tutorial-Financial";
                     break;
                 case DistrictTypes.FINANCIAL:
-                    result += "Action-Financial";
-                    break;
-                case DistrictTypes.FINANCIAL_HARDCORE:
-                    result += "Hardcore-Financial";
+                    result += "Missions-Financial";
                     break;
                 case DistrictTypes.WATERFRONT:
-                    result += "Action-Waterfront";
-                    break;
-                case DistrictTypes.WATERFRONT_HARDCORE:
-                    result += "Hardcore-Waterfront";
+                    result += "Missions-Waterfront";
                     break;
             }
 
@@ -171,15 +160,15 @@ namespace WorldServer.Districts
 
     public class FinancialDistrict : District
     {
-        public FinancialDistrict(byte id, LanguageCodes langCode = LanguageCodes.EN, bool hardCore = false)
-            : base(hardCore ? DistrictTypes.FINANCIAL_HARDCORE : DistrictTypes.FINANCIAL, id, langCode)
+        public FinancialDistrict(byte id, LanguageCodes langCode = LanguageCodes.EN)
+            : base(DistrictTypes.FINANCIAL, id, langCode)
         { }
     }
 
     public class WaterFrontDistrict : District
     {
-        public WaterFrontDistrict(byte id, LanguageCodes langCode = LanguageCodes.EN, bool hardCore = false)
-            : base(hardCore ? DistrictTypes.WATERFRONT_HARDCORE : DistrictTypes.WATERFRONT, id, langCode)
+        public WaterFrontDistrict(byte id, LanguageCodes langCode = LanguageCodes.EN)
+            : base(DistrictTypes.WATERFRONT, id, langCode)
         { }
     }
 }
