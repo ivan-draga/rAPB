@@ -9,15 +9,9 @@ namespace LobbyServer
 {
     public class LobbyClient : BaseClient
     {
-        #region Database
-
         public AccountEntry Account;
         public List<CharacterEntry> Characters = null;
         public CharacterEntry Pending;
-
-        #endregion
-
-        #region SRP
 
         public byte[] Salt;
         public FrameWork.NetWork.Crypto.BigInteger Verifier;
@@ -25,15 +19,10 @@ namespace LobbyServer
         public FrameWork.NetWork.Crypto.BigInteger clientModulus;
         public byte[] Proof;
 
-        #endregion
-
         public TCP.Encryption ECrypt;
         public byte[] SessionId;
 
-        #region Base
-
-        public LobbyClient(TCPManager srv)
-            : base(srv)
+        public LobbyClient(TCPManager srv) : base(srv)
         {
         }
 
@@ -54,10 +43,6 @@ namespace LobbyServer
             clientModulus = null;
             SessionId = null;
         }
-
-        #endregion
-
-        #region TCP
 
         protected override void OnReceive(PacketIn packet)
         {
@@ -82,7 +67,5 @@ namespace LobbyServer
             tcpOut.Dispose();
             toSend = null;
         }
-
-        #endregion
     }
 }

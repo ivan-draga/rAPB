@@ -35,7 +35,7 @@ namespace WorldServer.TCP.Packets
                 Out.WriteInt32Reverse(0);
                 Out.WriteInt32Reverse(0);
                 Out.WriteInt32Reverse(0);
-                Out.WriteByte(1);
+                Out.WriteByte(1); //has completed tutorial
                 Out.WriteByte(cclient.Character.LFG);
                 Out.WriteByte(0);
             }

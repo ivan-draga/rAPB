@@ -12,17 +12,10 @@ namespace WorldServer
         public District Reserved;
         public Lobby.Acc account;
 
-        #region Database stuff
-
         public AccountEntry Account;
         public CharacterEntry Character;
 
-        #endregion
-
-        #region Base
-
-        public WorldClient(TCPManager srv)
-            : base(srv)
+        public WorldClient(TCPManager srv) : base(srv)
         {
         }
 
@@ -36,13 +29,7 @@ namespace WorldServer
             Program.clients.Remove(this);
         }
 
-        #endregion
-
-        #region Encryption
         public Encryption Crypto = null;
-        #endregion
-
-        #region TCP
 
         protected override void OnReceive(PacketIn packet)
         {
@@ -80,7 +67,5 @@ namespace WorldServer
             tcpOut.Dispose();
             toSend = null;
         }
-
-        #endregion
     }
 }

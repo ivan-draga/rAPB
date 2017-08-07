@@ -31,20 +31,14 @@ namespace WorldServer.Districts
 
     public class District
     {
-        #region Internal
         public TcpClient tcp
         {
             get;
             set;
         }
-        #endregion
-
-        #region Limits
 
         public const ushort SocialLimit = 200;
         public const ushort ActionLimit = 100;
-
-        #endregion
 
         public District(TcpClient Tcp)
         {
@@ -59,14 +53,8 @@ namespace WorldServer.Districts
             Id = id;
         }
 
-        #region PrivateData
-
         private DistrictTypes _type;
         private LanguageCodes _lang;
-
-        #endregion
-
-        #region APBData
 
         public byte Type
         {
@@ -84,15 +72,9 @@ namespace WorldServer.Districts
 
         public byte isFull()
         {
-            if (Type == (byte)DistrictTypes.SOCIAL)
-                return Enforcers + Criminals >= SocialLimit ? (byte)1 : (byte)0;
-            else
-                return Enforcers + Criminals >= ActionLimit ? (byte)1 : (byte)0;
-
+            if (Type == (byte)DistrictTypes.SOCIAL) return Enforcers + Criminals >= SocialLimit ? (byte)1 : (byte)0;
+            else return Enforcers + Criminals >= ActionLimit ? (byte)1 : (byte)0;
         }
-        #endregion
-
-        #region ToString
 
         public override string ToString()
         {
@@ -141,7 +123,6 @@ namespace WorldServer.Districts
             result += "-" + Id.ToString();
             return result;
         }
-        #endregion
     }
 
     public class SocialDistrict : District

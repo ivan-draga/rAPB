@@ -9,6 +9,7 @@ namespace WorldServer.TCP
         private ARC4 encryption;
         private ARC4 decryption;
         public readonly byte[] Key;
+
         public Encryption(byte[] key = null)
         {
             if (key == null)
@@ -23,10 +24,7 @@ namespace WorldServer.TCP
             key = digest.ComputeHash(key);
             digest.Dispose();
             Console.Write("New key:");
-            for (int i = 0; i < 20; i++)
-            {
-                Console.Write(" " + key[i]);
-            }
+            for (int i = 0; i < 20; i++) Console.Write(" " + key[i]);
             Console.WriteLine();
             encryption = new ARC4(key);
             decryption = new ARC4(key);

@@ -17,10 +17,7 @@ namespace LobbyServer.TCP
             for (int i = 0; i < buffer.Length; i++)
             {
                 tmp2 += (string.Format("{0:X2} ", buffer[i]));
-                if (((i + 1) % 16 == 0) && (i != 0))
-                {
-                    tmp2 += "\r\n";
-                }
+                if (((i + 1) % 16 == 0) && (i != 0)) tmp2 += "\r\n";
             }
             return tmp2;
         }

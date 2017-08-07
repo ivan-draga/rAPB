@@ -25,12 +25,10 @@ namespace LobbyServer
                     Out.WriteUInt32Reverse(info.Key);
                     Out.WriteParsedString(info.Value.Name, 32);
                     Out.WriteByte((byte)info.Value.Id);
-                    Out.WriteByte(info.Value.Population);
+                    Out.WriteByte(0); //m_nPopulation %d
                     Out.WriteByte(0); //m_nEnfFaction %d
                     Out.WriteByte(0); //m_nCrimFaction %d
                     Out.WriteByte(0); //m_nPremiumOnly %d
-
-                    //m_nPingIP
                     Out.WriteByte(info.Value.IP1);
                     Out.WriteByte(info.Value.IP2);
                     Out.WriteByte(info.Value.IP3);

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Security.Cryptography;
-using System.Globalization;
 
 namespace LobbyServer
 {
     public class Hash
     {
-        public Hash()
-        {
-        }
-
-        public string SHAHash(string text)
+        public static string SHA(string text)
         {
             SHA256 sha = new SHA256CryptoServiceProvider();
             sha.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));

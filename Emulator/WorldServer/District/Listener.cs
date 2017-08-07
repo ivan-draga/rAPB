@@ -125,6 +125,7 @@ namespace WorldServer.Districts
                     }
                 }
             }
+
             try
             {
                 lock (DistrictsTcp)

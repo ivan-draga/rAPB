@@ -10,35 +10,19 @@ namespace WorldServer
 {
     class Program
     {
-        static public Dictionary<UInt32, Acc> expectingAccounts = new Dictionary<UInt32, Acc>();
-        static public Districts.Listener districtsListener;
+        static public Dictionary<uint, Acc> expectingAccounts = new Dictionary<uint, Acc>();
+        static public Listener districtsListener;
         static public List<WorldClient> clients = new List<WorldClient>();
-
-        #region WorldData
-
         static public byte ID;
         static public uint WorldId;
         static public string WorldName;
         static public string Password;
-
-        #region IPAddress
-
         static public byte IP1;
         static public byte IP2;
         static public byte IP3;
         static public byte IP4;
-
-        #endregion
-
         static public int Port;
-
-        #endregion
-
-        #region WorldLobbyCommunication
-
         static public Client Lobby;
-
-        #endregion
 
         static void Main(string[] args)
         {

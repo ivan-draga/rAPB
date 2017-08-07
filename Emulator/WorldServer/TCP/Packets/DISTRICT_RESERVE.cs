@@ -40,6 +40,13 @@ namespace WorldServer.TCP.Packets
                             Out.WriteByte(0);
                             DISTRICT_ENTER.Send(cclient);
                         }
+                        else
+                        {
+                            Out.WriteUInt32Reverse((uint)ResponseCodes.RC_DISTRICT_RESERVE_FULL);
+                            Out.WriteUInt32(0);
+                            Out.WriteByte(0);
+                            Out.WriteByte(0);
+                        }
                     }
                     else
                     {
